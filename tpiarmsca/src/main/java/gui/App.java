@@ -88,7 +88,7 @@ public class App extends JFrame {
 		
 		
 		//--------------------------------------------//
-		JButton botonInicio = new JButton("INICIO");
+		JButton botonInicio = new JButton("MENU");
 		botonInicio.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
 		botonInicio.setBackground(new Color(192, 192, 192));
 		botonInicio.setFocusPainted(false);
