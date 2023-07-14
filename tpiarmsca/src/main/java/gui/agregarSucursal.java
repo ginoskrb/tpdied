@@ -8,11 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.Font;
+import sql.controllers.SucursalController;
+import sql.models.SucursalModel;
 
 public class agregarSucursal extends JFrame {
 
@@ -94,10 +97,10 @@ public class agregarSucursal extends JFrame {
 		horarioCierre.setBounds(70, 252, 90, 14);
 		contentPane.add(horarioCierre);
 		
-		JLabel lblNewLabel_2 = new JLabel("Estado");
-		lblNewLabel_2.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblNewLabel_2.setBounds(70, 332, 46, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel estado = new JLabel("Estado");
+		estado.setFont(new Font("Dialog", Font.BOLD, 13));
+		estado.setBounds(70, 332, 46, 14);
+		contentPane.add(estado);
 		
 		JComboBox<String> estadoTipo = new JComboBox<String>();
 		estadoTipo.setBounds(137, 329, 95, 22);
@@ -109,7 +112,9 @@ public class agregarSucursal extends JFrame {
 		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 13));
 		botonAgregar.setBounds(120, 389, 99, 35);
 		botonAgregar.addActionListener(e->{
-			dispose();
+					SucursalController sucursal = new SucursalController();
+					sucursal.createSucursal(Integer.parseInt(campoID.getText()), campoNombre.getText(), campoHorarioApertura.getText(), campoHorarioCierre.getText(),estadoTipo.getSelectedItem()=="Operativo");
+					dispose();
 		});
 		contentPane.add(botonAgregar);
 	}
