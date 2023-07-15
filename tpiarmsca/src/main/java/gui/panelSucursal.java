@@ -16,11 +16,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JScrollBar;
 import javax.swing.JEditorPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,25 +31,13 @@ public class panelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
 	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
-	private DefaultTableModel tablaBaseDeDatos= new SucursalController().generadorDeTabla();
+	private SucursalController suc = new SucursalController();
 	/**
 	 * Create the panel.
 	 */
 	public panelSucursal() {
 		setBounds(309,98,955,583);
 		setLayout(null);
-		
-		
-		//---------------------------------------------------------------//
-		JButton botonEliminar = new JButton("Eliminar");
-		botonEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonEliminar.setBackground(new Color(195, 207, 217));
-		botonEliminar.setBounds(357, 454, 143, 39);
-		botonEliminar.setFocusPainted(false);
-		botonEliminar.setBorder(new EmptyBorder(0,0,0,0));
-		add(botonEliminar);
-		//---------------------------------------------------------------//
-		
 		
 		//---------------------------------------------------------------//
 		JButton botonEditar = new JButton("Editar");
@@ -90,10 +80,10 @@ public class panelSucursal extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(151, 125, 624, 299);
 		add(scrollPane);
-		tablaSucursales.setModel(tablaBaseDeDatos);
 		tablaSucursales.setModel(new SucursalController().generadorDeTabla());
 		tablaSucursales.getColumnModel().getColumn(2).setPreferredWidth(115);
 		tablaSucursales.getColumnModel().getColumn(3).setPreferredWidth(99);
+		tablaSucursales.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tablaSucursales);
 		
 		//---------------------------------------------------------------//
@@ -108,7 +98,35 @@ public class panelSucursal extends JPanel {
 		});
 		add(botonAgregar);
 		//---------------------------------------------------------------//
-	
+		
+		JButton botonEliminar = new JButton("Eliminar");
+		botonEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonEliminar.setBackground(new Color(195, 207, 217));
+		botonEliminar.setBounds(357, 454, 143, 39);
+		botonEliminar.setFocusPainted(false);
+		botonEliminar.setBorder(new EmptyBorder(0,0,0,0));
+		botonEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int filaSeleccionada = tablaSucursales.getSelectedRow();
+				if (filaSeleccionada != -1) {
+					
+                    Object idSeleccionado = tablaSucursales.getValueAt(filaSeleccionada, 0);
+                    int op = JOptionPane.showOptionDialog(null,"Estas seguro que deseas eliminar esta sucursal?","Avertencia",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Si","No"},"Si");
+                    switch(op) {
+                    	case JOptionPane.YES_OPTION: 
+                    		suc.deleteSucursal(Integer.parseInt(idSeleccionado.toString()));
+                    		tablaSucursales.setModel(new SucursalController().generadorDeTabla());
+                    		break;
+                    	case JOptionPane.NO_OPTION: 
+                    		break;
+                    		
+                    }
+                    
+                    
+                } 
+            }
+		});
+		add(botonEliminar);
 		
 	
 		
@@ -121,12 +139,6 @@ public class panelSucursal extends JPanel {
 	}
 	public void setTablaSucursales(JTable tablaSucursales) {
 		this.tablaSucursales = tablaSucursales;
-	}
-	public DefaultTableModel getTablaBaseDeDatos() {
-		return tablaBaseDeDatos;
-	}
-	public void setTablaBaseDeDatos(DefaultTableModel tablaBaseDeDatos) {
-		this.tablaBaseDeDatos = tablaBaseDeDatos;
 	}
 	
 	
