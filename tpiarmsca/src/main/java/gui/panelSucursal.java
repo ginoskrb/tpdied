@@ -1,7 +1,9 @@
 package gui;
 
+import sql.controllers.SucursalController;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,30 +23,19 @@ import javax.swing.JEditorPane;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class panelSucursal extends JPanel {
 	private JTextField Buscador;
-
+	private JTable tablaSucursales = new JTable();
+	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
+	private DefaultTableModel tablaBaseDeDatos= new SucursalController().generadorDeTabla();
 	/**
 	 * Create the panel.
 	 */
 	public panelSucursal() {
 		setBounds(309,98,955,583);
 		setLayout(null);
-		
-		
-		//---------------------------------------------------------------//
-		JButton botonAgregar = new JButton("Agregar");
-		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonAgregar.setBackground(new Color(195, 207, 217));
-		botonAgregar.setBounds(167, 454, 143, 39);
-		botonAgregar.setFocusPainted(false);
-		botonAgregar.setBorder(new EmptyBorder(0,0,0,0));
-		botonAgregar.addActionListener(e->{
-			agregarSucursal.main(null);
-		});
-		add(botonAgregar);
-		//---------------------------------------------------------------//
 		
 		
 		//---------------------------------------------------------------//
@@ -86,21 +77,57 @@ public class panelSucursal extends JPanel {
 		botonBuscar.setFocusPainted(false);
 		botonBuscar.setBorder(new EmptyBorder(0,0,0,0));
 		add(botonBuscar);
-		//---------------------------------------------------------------//
-		
-		
-		//---------------------------------------------------------------//
-		JScrollPane tablaDeDatos = new JScrollPane();
-		tablaDeDatos.setBounds(151, 124, 636, 299);
-		tablaDeDatos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		add(tablaDeDatos);
 		
 		JLabel lblNewLabel = new JLabel("Buscar sucursal (Nombre sucursal)");
 		lblNewLabel.setForeground(new Color(128, 128, 128));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel.setBounds(151, 52, 257, 14);
 		add(lblNewLabel);
+		
+		
 		//---------------------------------------------------------------//
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(151, 125, 624, 299);
+		add(scrollPane);
+		tablaSucursales.setModel(tablaBaseDeDatos);
+		tablaSucursales.setModel(new SucursalController().generadorDeTabla());
+		tablaSucursales.getColumnModel().getColumn(2).setPreferredWidth(115);
+		tablaSucursales.getColumnModel().getColumn(3).setPreferredWidth(99);
+		scrollPane.setViewportView(tablaSucursales);
+		
+		//---------------------------------------------------------------//
+		JButton botonAgregar = new JButton("Agregar");
+		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonAgregar.setBackground(new Color(195, 207, 217));
+		botonAgregar.setBounds(167, 454, 143, 39);
+		botonAgregar.setFocusPainted(false);
+		botonAgregar.setBorder(new EmptyBorder(0,0,0,0));
+		botonAgregar.addActionListener(e->{
+			ventanaAgregarSucursal.main(null,this);
+		});
+		add(botonAgregar);
+		//---------------------------------------------------------------//
+	
+		
+	
+		
+		//---------------------------------------------------------------//
+		
+		
 	}
+	public JTable getTablaSucursales() {
+		return tablaSucursales;
+	}
+	public void setTablaSucursales(JTable tablaSucursales) {
+		this.tablaSucursales = tablaSucursales;
+	}
+	public DefaultTableModel getTablaBaseDeDatos() {
+		return tablaBaseDeDatos;
+	}
+	public void setTablaBaseDeDatos(DefaultTableModel tablaBaseDeDatos) {
+		this.tablaBaseDeDatos = tablaBaseDeDatos;
+	}
+	
+	
 }

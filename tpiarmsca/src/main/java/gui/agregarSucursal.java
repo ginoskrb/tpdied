@@ -25,14 +25,15 @@ public class agregarSucursal extends JFrame {
 	private JTextField campoHorarioApertura;
 	private JTextField campoHorarioCierre;
 
+
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args,panelSucursal panel) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					agregarSucursal frame = new agregarSucursal();
+					agregarSucursal frame = new agregarSucursal(panel);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +45,7 @@ public class agregarSucursal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public agregarSucursal() {
+	public agregarSucursal(panelSucursal panel) {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
@@ -114,8 +115,42 @@ public class agregarSucursal extends JFrame {
 		botonAgregar.addActionListener(e->{
 					SucursalController sucursal = new SucursalController();
 					sucursal.createSucursal(Integer.parseInt(campoID.getText()), campoNombre.getText(), campoHorarioApertura.getText(), campoHorarioCierre.getText(),estadoTipo.getSelectedItem()=="Operativo");
+					panel.getTablaSucursales().setModel(new SucursalController().generadorDeTabla());
 					dispose();
 		});
 		contentPane.add(botonAgregar);
 	}
+
+	public JTextField getCampoID() {
+		return campoID;
+	}
+
+	public void setCampoID(JTextField campoID) {
+		this.campoID = campoID;
+	}
+
+	public JTextField getCampoNombre() {
+		return campoNombre;
+	}
+
+	public void setCampoNombre(JTextField campoNombre) {
+		this.campoNombre = campoNombre;
+	}
+
+	public JTextField getCampoHorarioApertura() {
+		return campoHorarioApertura;
+	}
+
+	public void setCampoHorarioApertura(JTextField campoHorarioApertura) {
+		this.campoHorarioApertura = campoHorarioApertura;
+	}
+
+	public JTextField getCampoHorarioCierre() {
+		return campoHorarioCierre;
+	}
+
+	public void setCampoHorarioCierre(JTextField campoHorarioCierre) {
+		this.campoHorarioCierre = campoHorarioCierre;
+	}
+	
 }
