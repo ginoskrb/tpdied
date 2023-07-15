@@ -47,7 +47,7 @@ public class App extends JFrame {
 	 * Create the frame.
 	 */
 	public App() {
-		setTitle("Menu");
+		setTitle("Sistema de Gestión Logistico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -132,7 +132,7 @@ public class App extends JFrame {
 		
 		
 		//--------------------------------------------//
-		JButton botonCaminos = new JButton("CAMINOSS");
+		JButton botonCaminos = new JButton("CAMINOS");
 		botonCaminos.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
 		botonCaminos.setBackground(new Color(192, 192, 192));
 		botonCaminos.setFocusPainted(false);
