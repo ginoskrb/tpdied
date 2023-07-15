@@ -66,7 +66,11 @@ public class panelSucursal extends JPanel {
 		botonBuscar.setBounds(750, 69, 37, 34);
 		botonBuscar.setFocusPainted(false);
 		botonBuscar.setBorder(new EmptyBorder(0,0,0,0));
+		botonBuscar.addActionListener(e->{
+			tablaSucursales.setModel(new SucursalController().filtrarTablaPorNombre(Buscador.getText()));
+		});
 		add(botonBuscar);
+
 		
 		JLabel lblNewLabel = new JLabel("Buscar sucursal (Nombre sucursal)");
 		lblNewLabel.setForeground(new Color(128, 128, 128));
