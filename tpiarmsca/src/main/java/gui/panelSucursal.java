@@ -29,7 +29,6 @@ public class panelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
 	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
-	private DefaultTableModel tablaBaseDeDatos= new SucursalController().generadorDeTabla();
 	/**
 	 * Create the panel.
 	 */
@@ -76,7 +75,11 @@ public class panelSucursal extends JPanel {
 		botonBuscar.setBounds(750, 69, 37, 34);
 		botonBuscar.setFocusPainted(false);
 		botonBuscar.setBorder(new EmptyBorder(0,0,0,0));
+		botonBuscar.addActionListener(e->{
+			tablaSucursales.setModel(new SucursalController().filtrarTablaPorNombre(Buscador.getText()));
+		});
 		add(botonBuscar);
+
 		
 		JLabel lblNewLabel = new JLabel("Buscar sucursal (Nombre sucursal)");
 		lblNewLabel.setForeground(new Color(128, 128, 128));
@@ -90,7 +93,6 @@ public class panelSucursal extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(151, 125, 624, 299);
 		add(scrollPane);
-		tablaSucursales.setModel(tablaBaseDeDatos);
 		tablaSucursales.setModel(new SucursalController().generadorDeTabla());
 		tablaSucursales.getColumnModel().getColumn(2).setPreferredWidth(115);
 		tablaSucursales.getColumnModel().getColumn(3).setPreferredWidth(99);
@@ -121,12 +123,6 @@ public class panelSucursal extends JPanel {
 	}
 	public void setTablaSucursales(JTable tablaSucursales) {
 		this.tablaSucursales = tablaSucursales;
-	}
-	public DefaultTableModel getTablaBaseDeDatos() {
-		return tablaBaseDeDatos;
-	}
-	public void setTablaBaseDeDatos(DefaultTableModel tablaBaseDeDatos) {
-		this.tablaBaseDeDatos = tablaBaseDeDatos;
 	}
 	
 	
