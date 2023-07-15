@@ -132,7 +132,7 @@ public class App extends JFrame {
 		
 		
 		//--------------------------------------------//
-		JButton botonCaminos = new JButton("CAMINOS");
+		JButton botonCaminos = new JButton("CAMINOSS");
 		botonCaminos.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
 		botonCaminos.setBackground(new Color(192, 192, 192));
 		botonCaminos.setFocusPainted(false);
