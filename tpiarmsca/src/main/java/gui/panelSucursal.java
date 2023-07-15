@@ -30,7 +30,7 @@ public class panelSucursal extends JPanel {
 	private JTable tablaSucursales = new JTable();
 	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
 	/**
-	 * Create the panel.
+	 * CCreate the panel.
 	 */
 	public panelSucursal() {
 		setBounds(309,98,955,583);
