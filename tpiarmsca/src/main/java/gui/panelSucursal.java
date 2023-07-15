@@ -119,10 +119,7 @@ public class panelSucursal extends JPanel {
                     		break;
                     	case JOptionPane.NO_OPTION: 
                     		break;
-                    		
                     }
-                    
-                    
                 } 
             }
 		});
