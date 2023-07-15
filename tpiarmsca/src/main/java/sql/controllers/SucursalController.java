@@ -9,7 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import sql.models.SucursalModel;
-
+@SuppressWarnings("serial")
 public class SucursalController {
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
 			.addAnnotatedClass(SucursalModel.class).buildSessionFactory();
@@ -33,7 +33,6 @@ public class SucursalController {
 			session.beginTransaction();
 			SucursalModel sucursal = session.get(SucursalModel.class, id);
 			session.delete(sucursal);
-
 			session.getTransaction().commit();
 			sessionFactory.close();
 		} catch (Exception e) {
@@ -90,9 +89,10 @@ public class SucursalController {
 		return modelo;
 	}
 
+	
 	public DefaultTableModel filtrarTablaPorNombre(String nombre) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
-				new String[] { "ID", "NOMBRE", "HORARIO APERTURA", "HORARIO CIERRE", "ESTADO" }) {
+			new String[] { "ID", "NOMBRE", "HORARIO APERTURA", "HORARIO CIERRE", "ESTADO" }) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -102,7 +102,7 @@ public class SucursalController {
 			session.beginTransaction();
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel").list();
 			for (SucursalModel entidad : resultados) {
-				if(entidad.getNombre()==nombre) {
+				if(entidad.getNombre().equals(nombre) || nombre.isEmpty()) {
 					Object[] fila = { entidad.getId(), entidad.getNombre(), entidad.getHapertura(), entidad.getHcierre(),
 							entidad.isEstado() };
 					modelo.addRow(fila);

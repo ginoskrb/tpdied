@@ -47,11 +47,7 @@ public class App extends JFrame {
 	 * Create the frame.
 	 */
 	public App() {
-<<<<<<< HEAD
 		setTitle("Sistema de Gestión Logistico");
-=======
-		setTitle("Menu principal");
->>>>>>> refs/remotes/origin/Franco
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -209,7 +205,7 @@ public class App extends JFrame {
 		contentPane.repaint();
 	}
 	
-	private void mostrarPanel (JPanel panel) {
+	private void mostrarPanel(JPanel panel) {
 		if(panelActual != null) {
 			contentPane.remove(panelActual);
 		}

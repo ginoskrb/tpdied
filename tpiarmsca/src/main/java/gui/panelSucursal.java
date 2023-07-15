@@ -26,14 +26,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+@SuppressWarnings("serial")
 public class panelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
 	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
 	private SucursalController suc = new SucursalController();
+
 	/**
-	 * Create the panel.
+	 * CCreate the panel.
 	 */
 	public panelSucursal() {
 		setBounds(309,98,955,583);
@@ -66,7 +67,11 @@ public class panelSucursal extends JPanel {
 		botonBuscar.setBounds(750, 69, 37, 34);
 		botonBuscar.setFocusPainted(false);
 		botonBuscar.setBorder(new EmptyBorder(0,0,0,0));
+		botonBuscar.addActionListener(e->{
+			tablaSucursales.setModel(new SucursalController().filtrarTablaPorNombre(Buscador.getText()));
+		});
 		add(botonBuscar);
+
 		
 		JLabel lblNewLabel = new JLabel("Buscar sucursal (Nombre sucursal)");
 		lblNewLabel.setForeground(new Color(128, 128, 128));
