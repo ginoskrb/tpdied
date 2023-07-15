@@ -47,7 +47,7 @@ public class App extends JFrame {
 	 * Create the frame.
 	 */
 	public App() {
-		setTitle("Menu principal");
+		setTitle("Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
