@@ -31,6 +31,7 @@ public class panelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
 	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
+	private editarSucursal ventanaEditarSucursal;
 	private SucursalController suc = new SucursalController();
 
 	/**
@@ -39,16 +40,6 @@ public class panelSucursal extends JPanel {
 	public panelSucursal() {
 		setBounds(309, 98, 955, 583);
 		setLayout(null);
-
-		// ---------------------------------------------------------------//
-		JButton botonEditar = new JButton("Editar");
-		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonEditar.setBackground(new Color(195, 207, 217));
-		botonEditar.setBounds(632, 454, 143, 39);
-		botonEditar.setFocusPainted(false);
-		botonEditar.setBorder(new EmptyBorder(0, 0, 0, 0));
-		add(botonEditar);
-		// ---------------------------------------------------------------//
 
 		// ---------------------------------------------------------------//
 		Buscador = new JTextField();
@@ -129,7 +120,24 @@ public class panelSucursal extends JPanel {
 		add(botonEliminar);
 
 		// ---------------------------------------------------------------//
-
+		
+		// ---------------------------------------------------------------//
+		JButton botonEditar = new JButton("Editar");
+		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonEditar.setBackground(new Color(195, 207, 217));
+		botonEditar.setBounds(632, 454, 143, 39);
+		botonEditar.setFocusPainted(false);
+		botonEditar.setBorder(new EmptyBorder(0, 0, 0, 0));
+		botonEditar.addActionListener(e->{
+			int filaSeleccionada = tablaSucursales.getSelectedRow();
+			if (filaSeleccionada != -1) {
+				Object idSeleccionado = tablaSucursales.getValueAt(filaSeleccionada, 0);
+				ventanaEditarSucursal.main(null, this, Integer.parseInt(idSeleccionado.toString()));
+			}
+		});
+		add(botonEditar);
+		// ---------------------------------------------------------------//
+		
 	}
 
 	public JTable getTablaSucursales() {
