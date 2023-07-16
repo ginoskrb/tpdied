@@ -22,8 +22,6 @@ public class agregarSucursal extends JFrame {
 	private JPanel contentPane;
 	private JTextField campoID;
 	private JTextField campoNombre;
-	private JTextField campoHorarioApertura;
-	private JTextField campoHorarioCierre;
 
 
 	/**
@@ -59,24 +57,53 @@ public class agregarSucursal extends JFrame {
 		contentPane.setLayout(null);
 		
 		campoID = new JTextField();
-		campoID.setBounds(80, 68, 171, 20);
+		campoID.setBounds(70, 68, 171, 20);
 		contentPane.add(campoID);
 		campoID.setColumns(10);
 		
 		campoNombre = new JTextField();
 		campoNombre.setColumns(10);
-		campoNombre.setBounds(80, 138, 171, 20);
+		campoNombre.setBounds(70, 138, 171, 20);
 		contentPane.add(campoNombre);
+		//--------------------------------------------//
+		//array con las opciones de horas (00 a 23)
+        String[] horas = new String[24];
+        for (int i = 0; i < 24; i++) {
+            horas[i] = String.format("%02d", i);
+        }
+
+        //array con las opciones de minutos (00 a 59)
+        String[] minutos = new String[60];
+        for (int i = 0; i < 60; i++) {
+            minutos[i] = String.format("%02d", i);
+        }
 		
-		campoHorarioApertura = new JTextField();
-		campoHorarioApertura.setColumns(10);
-		campoHorarioApertura.setBounds(80, 208, 171, 20);
-		contentPane.add(campoHorarioApertura);
+		//--------------------------------------------//
+		JComboBox<String> comboHoras = new JComboBox<>(horas);
+		comboHoras.setBounds(70, 219, 42, 22);
+		contentPane.add(comboHoras);
 		
-		campoHorarioCierre = new JTextField();
-		campoHorarioCierre.setColumns(10);
-		campoHorarioCierre.setBounds(80, 277, 171, 20);
-		contentPane.add(campoHorarioCierre);
+		JComboBox<String> comboMinutos = new JComboBox<>(minutos);
+		comboMinutos.setBounds(122, 219, 47, 22);
+		contentPane.add(comboMinutos);
+		
+		final String[] horaApertura = { "00:00" };
+		
+		comboHoras.addActionListener(e -> actualizarHora(horaApertura, comboHoras, comboMinutos));
+		comboMinutos.addActionListener(e -> actualizarHora(horaApertura, comboHoras, comboMinutos));
+		
+		JComboBox<String> comboHoras2 = new JComboBox<>(horas);
+		comboHoras2.setBounds(70, 277, 42, 22);
+		contentPane.add(comboHoras2);
+		
+		JComboBox<String> comboMinutos2 = new JComboBox<>(minutos);
+		comboMinutos2.setBounds(122, 277, 47, 22);
+		contentPane.add(comboMinutos2);
+		
+		final String[] horaCierre = { "00:00" };
+		comboHoras2.addActionListener(e -> actualizarHora(horaCierre, comboHoras2, comboMinutos2));
+		comboMinutos2.addActionListener(e -> actualizarHora(horaCierre, comboHoras2, comboMinutos2));
+		
 		
 		JLabel ID = new JLabel("ID");
 		ID.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -100,11 +127,11 @@ public class agregarSucursal extends JFrame {
 		
 		JLabel estado = new JLabel("Estado");
 		estado.setFont(new Font("Dialog", Font.BOLD, 13));
-		estado.setBounds(70, 332, 46, 14);
+		estado.setBounds(70, 310, 46, 14);
 		contentPane.add(estado);
 		
 		JComboBox<String> estadoTipo = new JComboBox<String>();
-		estadoTipo.setBounds(137, 329, 95, 22);
+		estadoTipo.setBounds(70, 331, 95, 22);
 		estadoTipo.addItem("Operativo");
 		estadoTipo.addItem("No operativo");
 		contentPane.add(estadoTipo);
@@ -114,11 +141,20 @@ public class agregarSucursal extends JFrame {
 		botonAgregar.setBounds(120, 389, 99, 35);
 		botonAgregar.addActionListener(e->{
 					SucursalController sucursal = new SucursalController();
-					sucursal.createSucursal(Integer.parseInt(campoID.getText()), campoNombre.getText(), campoHorarioApertura.getText(), campoHorarioCierre.getText(),estadoTipo.getSelectedItem()=="Operativo");
+					sucursal.createSucursal(Integer.parseInt(campoID.getText()), campoNombre.getText(), horaApertura[0], horaCierre[0],estadoTipo.getSelectedItem()=="Operativo");
 					panel.getTablaSucursales().setModel(new SucursalController().generadorDeTabla());
 					dispose();
 		});
 		contentPane.add(botonAgregar);
+		
+		
+	}
+	
+	private void actualizarHora(String[] hora, JComboBox<String> comboHoras, JComboBox<String> comboMinutos) {
+	    String horaSeleccionada = comboHoras.getSelectedItem().toString();
+	    String minutosSeleccionados = comboMinutos.getSelectedItem().toString();
+	    hora[0] = String.format("%02d:%02d", Integer.parseInt(horaSeleccionada), Integer.parseInt(minutosSeleccionados));
+	    System.out.println(hora[0]);
 	}
 
 	public JTextField getCampoID() {
@@ -137,20 +173,7 @@ public class agregarSucursal extends JFrame {
 		this.campoNombre = campoNombre;
 	}
 
-	public JTextField getCampoHorarioApertura() {
-		return campoHorarioApertura;
-	}
+	
 
-	public void setCampoHorarioApertura(JTextField campoHorarioApertura) {
-		this.campoHorarioApertura = campoHorarioApertura;
-	}
-
-	public JTextField getCampoHorarioCierre() {
-		return campoHorarioCierre;
-	}
-
-	public void setCampoHorarioCierre(JTextField campoHorarioCierre) {
-		this.campoHorarioCierre = campoHorarioCierre;
-	}
 	
 }
