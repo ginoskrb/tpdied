@@ -30,9 +30,8 @@ import javax.swing.JTable;
 public class panelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
-	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
-	private editarSucursal ventanaEditarSucursal;
-	private SucursalController suc = new SucursalController();
+	
+	
 
 	/**
 	 * CCreate the panel.
@@ -86,7 +85,7 @@ public class panelSucursal extends JPanel {
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonAgregar.addActionListener(e -> {
-			ventanaAgregarSucursal.main(null, this);
+			agregarSucursal.main(null, this);
 		});
 		add(botonAgregar);
 		// ---------------------------------------------------------------//
@@ -106,7 +105,7 @@ public class panelSucursal extends JPanel {
                     int op = JOptionPane.showOptionDialog(null,"Estas seguro que deseas eliminar esta sucursal?","Avertencia",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Si","No"},"Si");
                     switch(op) {
                     	case JOptionPane.YES_OPTION: 
-                    		suc.deleteSucursal(Integer.parseInt(idSeleccionado.toString()));
+                    		new SucursalController().deleteSucursal(Integer.parseInt(idSeleccionado.toString()));
                     		tablaSucursales.setModel(new SucursalController().generadorDeTabla());
                     		break;
                     	case JOptionPane.NO_OPTION: 
@@ -130,7 +129,7 @@ public class panelSucursal extends JPanel {
 			int filaSeleccionada = tablaSucursales.getSelectedRow();
 			if (filaSeleccionada != -1) {
 				Object idSeleccionado = tablaSucursales.getValueAt(filaSeleccionada, 0);
-				ventanaEditarSucursal.main(null, this, Integer.parseInt(idSeleccionado.toString()));
+				editarSucursal.main(null, this, Integer.parseInt(idSeleccionado.toString()));
 			}
 		});
 		add(botonEditar);
