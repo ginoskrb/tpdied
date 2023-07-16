@@ -154,7 +154,6 @@ public class agregarSucursal extends JFrame {
 	    String horaSeleccionada = comboHoras.getSelectedItem().toString();
 	    String minutosSeleccionados = comboMinutos.getSelectedItem().toString();
 	    hora[0] = String.format("%02d:%02d", Integer.parseInt(horaSeleccionada), Integer.parseInt(minutosSeleccionados));
-	    System.out.println(hora[0]);
 	}
 
 	public JTextField getCampoID() {
