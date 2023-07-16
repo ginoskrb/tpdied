@@ -31,7 +31,7 @@ public class panelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
 	private agregarSucursal ventanaAgregarSucursal = new agregarSucursal(this);
-	//private editarSucursal ventanaEditarSucursal;
+	private editarSucursal ventanaEditarSucursal;
 	private SucursalController suc = new SucursalController();
 
 	/**
@@ -130,7 +130,7 @@ public class panelSucursal extends JPanel {
 			int filaSeleccionada = tablaSucursales.getSelectedRow();
 			if (filaSeleccionada != -1) {
 				Object idSeleccionado = tablaSucursales.getValueAt(filaSeleccionada, 0);
-				//ventanaEditarSucursal.main(null, this, Integer.parseInt(idSeleccionado.toString()));
+				ventanaEditarSucursal.main(null, this, Integer.parseInt(idSeleccionado.toString()));
 			}
 		});
 		add(botonEditar);
