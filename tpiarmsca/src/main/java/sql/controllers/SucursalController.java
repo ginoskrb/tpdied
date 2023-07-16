@@ -13,10 +13,10 @@ import sql.models.SucursalModel;
 public class SucursalController {
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
 			.addAnnotatedClass(SucursalModel.class).buildSessionFactory();
-	Session session = sessionFactory.openSession();
 
 	public void createSucursal(int id, String nombre, String hapertura, String hcierre, boolean estado) {
 		try {
+			Session session = sessionFactory.openSession();
 			SucursalModel sucursal = new SucursalModel(id, nombre, hapertura, hcierre, estado);
 			session.beginTransaction();
 			session.save(sucursal);
@@ -30,6 +30,7 @@ public class SucursalController {
 
 	public void deleteSucursal(int id) {
 		try {
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			SucursalModel sucursal = session.get(SucursalModel.class, id);
 			session.delete(sucursal);
@@ -42,6 +43,7 @@ public class SucursalController {
 
 	public void updateSucursal(int id, String atributo, String valor) {
 		try {
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			SucursalModel sucursal = session.get(SucursalModel.class, id);
 			if (atributo == "nombre") {
@@ -65,6 +67,33 @@ public class SucursalController {
 		}
 	}
 
+	
+	public String getAtributoSucursal(int id,String atributo) {
+		try {
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			SucursalModel sucursal = session.get(SucursalModel.class, id);
+			if (atributo.equals("nombre") ) {
+				return sucursal.getNombre();
+			}
+			if (atributo.equals("hapertura")) {
+				return sucursal.getHapertura();
+			}
+			if (atributo == "hcierre") {
+				return sucursal.getHcierre();
+			}
+			if (atributo == "estado") {
+				return "true";
+			}
+			session.getTransaction().commit();
+			sessionFactory.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "s";
+	}
+	
+	
 	public DefaultTableModel generadorDeTabla() {
 
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
@@ -75,6 +104,7 @@ public class SucursalController {
 			}
 		};
 		try {
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel").list();
 			for (SucursalModel entidad : resultados) {
@@ -89,22 +119,22 @@ public class SucursalController {
 		return modelo;
 	}
 
-	
 	public DefaultTableModel filtrarTablaPorNombre(String nombre) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
-			new String[] { "ID", "NOMBRE", "HORARIO APERTURA", "HORARIO CIERRE", "ESTADO" }) {
+				new String[] { "ID", "NOMBRE", "HORARIO APERTURA", "HORARIO CIERRE", "ESTADO" }) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
 		try {
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel").list();
 			for (SucursalModel entidad : resultados) {
-				if(entidad.getNombre().equals(nombre) || nombre.isEmpty()) {
-					Object[] fila = { entidad.getId(), entidad.getNombre(), entidad.getHapertura(), entidad.getHcierre(),
-							entidad.isEstado() };
+				if (entidad.getNombre().equals(nombre) || nombre.isEmpty()) {
+					Object[] fila = { entidad.getId(), entidad.getNombre(), entidad.getHapertura(),
+							entidad.getHcierre(), entidad.isEstado() };
 					modelo.addRow(fila);
 				}
 			}
