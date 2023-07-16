@@ -3,6 +3,8 @@ package gui;
 import sql.controllers.SucursalController;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.BorderLayout;
@@ -31,7 +33,6 @@ public class panelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
 	
-	
 
 	/**
 	 * CCreate the panel.
@@ -42,34 +43,36 @@ public class panelSucursal extends JPanel {
 
 		// ---------------------------------------------------------------//
 		Buscador = new JTextField();
-		Buscador.setBounds(151, 76, 582, 27);
+		Buscador.setBounds(231, 76, 627, 27);
 		add(Buscador);
 		Buscador.setColumns(10);
+		
+		Buscador.getDocument().addDocumentListener(new DocumentListener() {
+			public void insertUpdate(DocumentEvent e) {
+				filterTable();
+			}
+			public void removeUpdate(DocumentEvent e) {
+				filterTable();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
 		// ---------------------------------------------------------------//
 
 		// ---------------------------------------------------------------//
-		JButton botonBuscar = new JButton("");
-		botonBuscar.setIcon(new ImageIcon("C:\\Users\\Franco\\Downloads\\buscar (1).png"));
-		botonBuscar.setFont(new Font("Microsoft JhengHei", Font.BOLD, 15));
-		botonBuscar.setBackground(new Color(240, 240, 240));
-		botonBuscar.setBounds(750, 69, 37, 34);
-		botonBuscar.setFocusPainted(false);
-		botonBuscar.setBorder(new EmptyBorder(0, 0, 0, 0));
-		botonBuscar.addActionListener(e -> {
-			tablaSucursales.setModel(new SucursalController().filtrarTablaPorNombre(Buscador.getText()));
-		});
-		add(botonBuscar);
 
 		JLabel lblNewLabel = new JLabel("Buscar sucursal (Nombre sucursal)");
 		lblNewLabel.setForeground(new Color(128, 128, 128));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel.setBounds(151, 52, 257, 14);
+		lblNewLabel.setBounds(231, 52, 257, 14);
 		add(lblNewLabel);
 
 		// ---------------------------------------------------------------//
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(151, 125, 624, 299);
+		scrollPane.setBounds(234, 126, 624, 299);
 		add(scrollPane);
 		tablaSucursales.setModel(new SucursalController().generadorDeTabla());
 		tablaSucursales.getColumnModel().getColumn(2).setPreferredWidth(115);
@@ -81,7 +84,7 @@ public class panelSucursal extends JPanel {
 		JButton botonAgregar = new JButton("Agregar");
 		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonAgregar.setBackground(new Color(195, 207, 217));
-		botonAgregar.setBounds(167, 454, 143, 39);
+		botonAgregar.setBounds(60, 160, 143, 39);
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonAgregar.addActionListener(e -> {
@@ -93,7 +96,7 @@ public class panelSucursal extends JPanel {
 		JButton botonEliminar = new JButton("Eliminar");
 		botonEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonEliminar.setBackground(new Color(195, 207, 217));
-		botonEliminar.setBounds(357, 454, 143, 39);
+		botonEliminar.setBounds(60, 247, 143, 39);
 		botonEliminar.setFocusPainted(false);
 		botonEliminar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonEliminar.addActionListener(new ActionListener() {
@@ -122,7 +125,7 @@ public class panelSucursal extends JPanel {
 		JButton botonEditar = new JButton("Editar");
 		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonEditar.setBackground(new Color(195, 207, 217));
-		botonEditar.setBounds(632, 454, 143, 39);
+		botonEditar.setBounds(60, 345, 143, 39);
 		botonEditar.setFocusPainted(false);
 		botonEditar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonEditar.addActionListener(e->{
@@ -133,10 +136,30 @@ public class panelSucursal extends JPanel {
 			}
 		});
 		add(botonEditar);
+		
+		JButton botonStock = new JButton("Consultar stock");
+		botonStock.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonStock.setFocusPainted(false);
+		botonStock.setBorder(new EmptyBorder(0, 0, 0, 0));
+		botonStock.setBackground(new Color(195, 207, 217));
+		botonStock.setBounds(311, 458, 143, 39);
+		add(botonStock);
+		
+		JButton botonOrden = new JButton("Crear orden");
+		botonOrden.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonOrden.setFocusPainted(false);
+		botonOrden.setBorder(new EmptyBorder(0, 0, 0, 0));
+		botonOrden.setBackground(new Color(195, 207, 217));
+		botonOrden.setBounds(497, 458, 143, 39);
+		add(botonOrden);
 		// ---------------------------------------------------------------//
 		
 	}
 
+	private void filterTable() {
+		tablaSucursales.setModel(new SucursalController().filtrarTablaPorNombre(Buscador.getText()));
+	}
+	
 	public JTable getTablaSucursales() {
 		return tablaSucursales;
 	}
@@ -144,5 +167,4 @@ public class panelSucursal extends JPanel {
 	public void setTablaSucursales(JTable tablaSucursales) {
 		this.tablaSucursales = tablaSucursales;
 	}
-
 }

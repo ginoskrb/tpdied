@@ -131,11 +131,14 @@ public class SucursalController {
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel").list();
-			for (SucursalModel entidad : resultados) {
-				if (entidad.getNombre().equals(nombre) || nombre.isEmpty()) {
-					Object[] fila = { entidad.getId(), entidad.getNombre(), entidad.getHapertura(),
-							entidad.getHcierre(), entidad.isEstado() };
-					modelo.addRow(fila);
+			int tamNombre = nombre.length();
+			for (SucursalModel entidad : resultados ) {
+				if(entidad.getNombre().length()>=tamNombre) {
+					if(entidad.getNombre().substring(0, tamNombre).equals(nombre) || nombre.isEmpty()){
+						Object[] fila = { entidad.getId(), entidad.getNombre(), entidad.getHapertura(),
+								entidad.getHcierre(), entidad.isEstado() };
+						modelo.addRow(fila);
+					}
 				}
 			}
 			return modelo;
