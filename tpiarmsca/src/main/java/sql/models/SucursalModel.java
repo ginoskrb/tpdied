@@ -62,7 +62,7 @@ public class SucursalModel {
 	public boolean isEstado() {
 		return estado;
 	}
-	public void setEstado(boolean estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 	@Override
