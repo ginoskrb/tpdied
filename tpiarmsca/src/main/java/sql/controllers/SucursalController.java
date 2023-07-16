@@ -14,10 +14,10 @@ public class SucursalController {
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
 			.addAnnotatedClass(SucursalModel.class).buildSessionFactory();
 
-	public void createSucursal(int id, String nombre, String hapertura, String hcierre, boolean estado) {
+	public void createSucursal(String nombre, String hapertura, String hcierre, boolean estado) {
 		try {
 			Session session = sessionFactory.openSession();
-			SucursalModel sucursal = new SucursalModel(id, nombre, hapertura, hcierre, estado);
+			SucursalModel sucursal = new SucursalModel(nombre, hapertura, hcierre, estado);
 			session.beginTransaction();
 			session.save(sucursal);
 			session.getTransaction().commit();

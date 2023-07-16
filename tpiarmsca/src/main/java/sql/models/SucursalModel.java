@@ -2,6 +2,8 @@ package sql.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 
@@ -10,6 +12,8 @@ import jakarta.persistence.Id;
 public class SucursalModel {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	@Column(name="id")
 	private int id;
 	
@@ -27,8 +31,7 @@ public class SucursalModel {
 	
 	public SucursalModel() {}
 	
-	public SucursalModel(int id, String nombre, String hapertura, String hcierre, boolean estado) {
-		this.id = id;
+	public SucursalModel(String nombre, String hapertura, String hcierre, boolean estado) {
 		this.nombre = nombre;
 		this.hapertura = hapertura;
 		this.hcierre = hcierre;
@@ -38,9 +41,7 @@ public class SucursalModel {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getNombre() {
 		return nombre;
 	}
