@@ -1,5 +1,6 @@
 package sql.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -41,23 +42,15 @@ public class SucursalController {
 		}
 	}
 
-	public void updateSucursal(int id, String atributo, String valor) {
+	public void updateSucursal(int id, String[] valores) {
 		try {
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			SucursalModel sucursal = session.get(SucursalModel.class, id);
-			if (atributo == "nombre") {
-				sucursal.setNombre(valor);
-			}
-			if (atributo == "hapertura") {
-				sucursal.setHapertura(valor);
-			}
-			if (atributo == "hcierre") {
-				sucursal.setHcierre(valor);
-			}
-			if (atributo == "estado") {
-				sucursal.setEstado(Boolean.parseBoolean(valor));
-			}
+			sucursal.setNombre(valores[0]);
+			sucursal.setHapertura(valores[1]);
+			sucursal.setHcierre(valores[2]);
+			sucursal.setEstado(Boolean.parseBoolean(valores[3]));
 			session.update(sucursal);
 
 			session.getTransaction().commit();
@@ -171,4 +164,29 @@ public class SucursalController {
 	        }
 	    }
 
+	public DefaultTableModel editarFilaTablaSucursal(int id,String nombre, String hapertura, String hcierre, boolean estado) {
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
+				new String[] { "ID", "NOMBRE", "HORARIO APERTURA", "HORARIO CIERRE", "ESTADO" }) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		try {
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel").list();
+			this.updateSucursal(id,new String[] {nombre,hapertura,hcierre,String.valueOf(estado)});
+			for (SucursalModel entidad : resultados ) {
+				Object[] fila = { entidad.getId(), entidad.getNombre(), entidad.getHapertura(), entidad.getHcierre(),
+						entidad.isEstado() };
+				modelo.addRow(fila);
+				}
+			return  modelo;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return modelo;
+	}
+  
 }
