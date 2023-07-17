@@ -24,9 +24,9 @@ public class CaminoController {
             session.save(camino);
             session.getTransaction().commit();
             session.close();
-            JOptionPane.showMessageDialog(null, "Camino creado correctamente", "Correct", JOptionPane.CLOSED_OPTION);
+            JOptionPane.showMessageDialog(null, "Camino creado correctamente", "ACEPTADO", JOptionPane.CLOSED_OPTION);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingreso de datos incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ingreso de datos incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }

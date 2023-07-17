@@ -20,7 +20,6 @@ public class panelCamino extends JPanel {
 		setBounds(309,98,955,583);
 		setLayout(null);
 		
-		
 		//---------------------------------------------------------------//
 		JButton botonAgregar = new JButton("Agregar");
 		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));

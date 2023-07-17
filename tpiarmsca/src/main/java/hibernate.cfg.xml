@@ -17,6 +17,6 @@
         
         <mapping class="sql.models.CaminoModel" />
         <mapping class="sql.models.SucursalModel" />
-
+		<mapping class="sql.models.ProductoModel" />
     </session-factory>
 </hibernate-configuration>
