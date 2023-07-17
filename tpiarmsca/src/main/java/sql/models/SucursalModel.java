@@ -68,8 +68,7 @@ public class SucursalModel {
 	}
 	@Override
 	public String toString() {
-		return "Sucursal [id=" + id + ", nombre=" + nombre + ", hapertura=" + hapertura + ", hcierre=" + hcierre
-				+ ", estado=" + estado + "]";
+		return "Sucursal "+nombre;
 	}
 	
 	

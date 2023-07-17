@@ -147,5 +147,28 @@ public class SucursalController {
 		}
 		return modelo;
 	}
+	
+	public List<SucursalModel> obtenerTodasLasSucursales() {
+        try {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            List<SucursalModel> sucursales = session.createQuery("FROM SucursalModel", SucursalModel.class).list();
+            session.close();
+            
+            return sucursales;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+	
+	 public SucursalModel obtenerSucursalPorId(int id) {
+	        try (Session session = sessionFactory.openSession()) {
+	            return session.get(SucursalModel.class, id);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
 
 }
