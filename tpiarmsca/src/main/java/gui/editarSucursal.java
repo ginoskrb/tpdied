@@ -134,8 +134,10 @@ public class editarSucursal extends JFrame {
 		botonEditar.setFont(new Font("Dialog", Font.BOLD, 13));
 		botonEditar.setBounds(120, 389, 99, 35);
 		botonEditar.addActionListener(e -> {
+			sucEditar.updateSucursal(id, new String[] { campoNombre.getText(), horaApertura[0],horaCierre[0],String.valueOf(estadoTipo.getSelectedItem()=="Operativo")});
 			panel.getTablaSucursales().setModel(new SucursalController().generadorDeTabla());
 			dispose();
+			
 		});
 		contentPane.add(botonEditar);
 	}
