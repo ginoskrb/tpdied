@@ -141,6 +141,29 @@ public class SucursalController {
 		return modelo;
 	}
 	
+	public List<SucursalModel> obtenerTodasLasSucursales() {
+        try {
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            List<SucursalModel> sucursales = session.createQuery("FROM SucursalModel", SucursalModel.class).list();
+            session.close();
+            
+            return sucursales;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+	
+	 public SucursalModel obtenerSucursalPorId(int id) {
+	        try (Session session = sessionFactory.openSession()) {
+	            return session.get(SucursalModel.class, id);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
+
 	public DefaultTableModel editarFilaTablaSucursal(int id,String nombre, String hapertura, String hcierre, boolean estado) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "ID", "NOMBRE", "HORARIO APERTURA", "HORARIO CIERRE", "ESTADO" }) {
@@ -165,7 +188,5 @@ public class SucursalController {
 		}
 		return modelo;
 	}
-	
-	
-
+  
 }
