@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,9 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import gui.camino.PanelCamino;
 import gui.producto.PanelProducto;
 import gui.sucursal.PanelSucursal;
+import sql.models.CaminoModel;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -33,6 +38,7 @@ public class App extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,7 +69,7 @@ public class App extends JFrame {
 		
 		//--------------------------------------------//
 		JPanel header = new JPanel();
-		header.setBackground(new Color(91, 133, 168));
+		header.setBackground(new Color(0, 64, 128));
 		header.setBounds(0, 0, 1264, 98);
 		header.setLayout(new BorderLayout(0, 0));
 		getContentPane().add(header);
@@ -77,7 +83,7 @@ public class App extends JFrame {
 		
 		//--------------------------------------------//
 		JPanel menuInicio = new JPanel();
-		menuInicio.setBackground(new Color(192, 192, 192));
+		menuInicio.setBackground(new Color(212, 212, 212));
 		menuInicio.setBounds(0, 98, 310, 583);
 		getContentPane().add(menuInicio);
 		menuInicio.setLayout(new GridLayout(4, 1, 0, 0));
@@ -99,10 +105,12 @@ public class App extends JFrame {
 		botonInicio.setBorder(new EmptyBorder(0,0,0,0));
 		botonInicio.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
-				botonInicio.setBackground(new Color(162,175,185));
+				botonInicio.setBackground(new Color(0,64,128));
+				botonInicio.setForeground(Color.white);
 			}
 			public void mouseExited(MouseEvent e) {
 				botonInicio.setBackground(new Color(192, 192, 192));
+				botonInicio.setForeground(Color.black);
 			}
 		});
 		botonInicio.addActionListener(e->{
@@ -121,10 +129,12 @@ public class App extends JFrame {
 		botonSucursales.setBorder(new EmptyBorder(0,0,0,0));
 		botonSucursales.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
-				botonSucursales.setBackground(new Color(162,175,185));
+				botonSucursales.setBackground(new Color(0,64,128));
+				botonSucursales.setForeground(Color.white);
 			}
 			public void mouseExited(MouseEvent e) {
 				botonSucursales.setBackground(new Color(192, 192, 192));
+				botonSucursales.setForeground(Color.black);
 			}
 		});
 		botonSucursales.addActionListener(e->{
@@ -142,10 +152,12 @@ public class App extends JFrame {
 		botonCaminos.setBorder(new EmptyBorder(0,0,0,0));
 		botonCaminos.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
-				botonCaminos.setBackground(new Color(162,175,185));
+				botonCaminos.setBackground(new Color(0,64,128));
+				botonCaminos.setForeground(Color.white);
 			}
 			public void mouseExited(MouseEvent e) {
 				botonCaminos.setBackground(new Color(192, 192, 192));
+				botonCaminos.setForeground(Color.black);
 			}
 		});
 		botonCaminos.addActionListener(e->{
@@ -164,10 +176,12 @@ public class App extends JFrame {
 		botonProductos.setBorder(new EmptyBorder(0,0,0,0));
 		botonProductos.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
-				botonProductos.setBackground(new Color(162,175,185));
+				botonProductos.setBackground(new Color(0,64,128));
+				botonProductos.setForeground(Color.white);
 			}
 			public void mouseExited(MouseEvent e) {
 				botonProductos.setBackground(new Color(192, 192, 192));
+				botonProductos.setForeground(Color.black);
 			}
 		});
 		botonProductos.addActionListener(e->{
