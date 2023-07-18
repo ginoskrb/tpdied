@@ -168,19 +168,19 @@ public class EditarSucursal extends JFrame {
 	    hora[0] = String.format("%02d:%02d", Integer.parseInt(horaSeleccionada), Integer.parseInt(minutosSeleccionados));
 	}
 	
-	private void establecerHora(String horaAperturaDB, JComboBox<String> comboHoras, JComboBox<String> comboMinutos,String[] horas,String[] minutos) {
+	private void establecerHora(String horaDB, JComboBox<String> comboHoras, JComboBox<String> comboMinutos,String[] horas,String[] minutos) {
 	    int horaSeleccionadaIndex = -1;
 	    int minutosSeleccionadosIndex = -1;
 
 	    for (int i = 0; i < horas.length; i++) {
-	        if (horas[i].equals(horaAperturaDB.substring(0, 2))) {
+	        if (horas[i].equals(horaDB.substring(0, 2))) {
 	            horaSeleccionadaIndex = i;
 	            break;
 	        }
 	    }
 
 	    for (int i = 0; i < minutos.length; i++) {
-	        if (minutos[i].equals(horaAperturaDB.substring(3, 5))) {
+	        if (minutos[i].equals(horaDB.substring(3, 5))) {
 	            minutosSeleccionadosIndex = i;
 	            break;
 	        }

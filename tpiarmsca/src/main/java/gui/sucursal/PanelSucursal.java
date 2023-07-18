@@ -19,7 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import sql.controllers.SucursalController;
-
+@SuppressWarnings("serial")
 public class PanelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
