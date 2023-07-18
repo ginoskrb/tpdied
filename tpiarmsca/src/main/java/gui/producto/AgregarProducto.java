@@ -48,7 +48,7 @@ public class AgregarProducto extends JFrame {
 		setTitle("Registro");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(214, 214, 214));
+		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(350,500);
 		setResizable(false);
@@ -58,48 +58,58 @@ public class AgregarProducto extends JFrame {
 		contentPane.setLayout(null);
 		
 		campoNombre = new JTextField();
+		campoNombre.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoNombre.setColumns(10);
 		campoNombre.setBounds(80, 79, 171, 20);
 		contentPane.add(campoNombre);
 		
 		campoPrecioUnitario = new JTextField();
+		campoPrecioUnitario.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoPrecioUnitario.setColumns(10);
 		campoPrecioUnitario.setBounds(80, 256, 171, 20);
 		contentPane.add(campoPrecioUnitario);
 		
 		campoPesoKilogramos = new JTextField();
+		campoPesoKilogramos.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoPesoKilogramos.setColumns(10);
 		campoPesoKilogramos.setBounds(80, 312, 171, 20);
 		contentPane.add(campoPesoKilogramos);
 		
 		JLabel pesoKilogramos = new JLabel("Peso en kilogramos");
-		pesoKilogramos.setFont(new Font("Dialog", Font.BOLD, 13));
+		pesoKilogramos.setForeground(new Color(255, 255, 255));
+		pesoKilogramos.setFont(new Font("Dialog", Font.BOLD, 15));
 		pesoKilogramos.setBounds(70, 287, 135, 14);
 		contentPane.add(pesoKilogramos);
 		
 		JTextArea campoDescripcion = new JTextArea();
+		campoDescripcion.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoDescripcion.setBounds(80, 135, 171, 75);
 		campoDescripcion.setLineWrap(true);
 		campoDescripcion.setWrapStyleWord(true);
 		contentPane.add(campoDescripcion);
 		
 		JLabel nombreProducto = new JLabel("Nombre");
-		nombreProducto.setFont(new Font("Dialog", Font.BOLD, 13));
+		nombreProducto.setForeground(new Color(255, 255, 255));
+		nombreProducto.setFont(new Font("Dialog", Font.BOLD, 15));
 		nombreProducto.setBounds(70, 54, 149, 14);
 		contentPane.add(nombreProducto);
 		
 		JLabel descripcion = new JLabel("Descripcion");
-		descripcion.setFont(new Font("Dialog", Font.BOLD, 13));
+		descripcion.setForeground(new Color(255, 255, 255));
+		descripcion.setFont(new Font("Dialog", Font.BOLD, 15));
 		descripcion.setBounds(70, 110, 114, 14);
 		contentPane.add(descripcion);
 		
 		JLabel precioUnitario = new JLabel("Precio unitario");
-		precioUnitario.setFont(new Font("Dialog", Font.BOLD, 13));
+		precioUnitario.setForeground(new Color(255, 255, 255));
+		precioUnitario.setFont(new Font("Dialog", Font.BOLD, 15));
 		precioUnitario.setBounds(70, 231, 114, 14);
 		contentPane.add(precioUnitario);
 		
 		JButton botonAgregar = new JButton("Agregar");
-		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 13));
+		botonAgregar.setForeground(new Color(0, 64, 128));
+		botonAgregar.setBackground(new Color(255, 255, 255));
+		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonAgregar.setBounds(120, 378, 99, 35);
 		botonAgregar.addActionListener(e->{
 			ProductoController producto = new ProductoController();

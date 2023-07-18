@@ -50,7 +50,8 @@ public class EditarProducto extends JFrame {
 		setTitle("EDITAR PRODUCTO #"+id);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(214, 214, 214));
+		contentPane.setForeground(new Color(255, 255, 255));
+		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(350, 500);
 		setResizable(false);
@@ -78,7 +79,8 @@ public class EditarProducto extends JFrame {
 		contentPane.add(campoPesoKilogramos);
 		
 		JLabel pesoKilogramos = new JLabel("Peso en kilogramos");
-		pesoKilogramos.setFont(new Font("Dialog", Font.BOLD, 13));
+		pesoKilogramos.setForeground(new Color(255, 255, 255));
+		pesoKilogramos.setFont(new Font("Dialog", Font.BOLD, 15));
 		pesoKilogramos.setBounds(70, 287, 135, 14);
 		contentPane.add(pesoKilogramos);
 		
@@ -90,23 +92,28 @@ public class EditarProducto extends JFrame {
 		contentPane.add(campoDescripcion);
 		
 		JLabel nombreProducto = new JLabel("Nombre");
-		nombreProducto.setFont(new Font("Dialog", Font.BOLD, 13));
+		nombreProducto.setForeground(new Color(255, 255, 255));
+		nombreProducto.setFont(new Font("Dialog", Font.BOLD, 15));
 		nombreProducto.setBounds(70, 54, 149, 14);
 		contentPane.add(nombreProducto);
 		
 		JLabel descripcion = new JLabel("Descripcion");
-		descripcion.setFont(new Font("Dialog", Font.BOLD, 13));
+		descripcion.setForeground(new Color(255, 255, 255));
+		descripcion.setFont(new Font("Dialog", Font.BOLD, 15));
 		descripcion.setBounds(70, 110, 114, 14);
 		contentPane.add(descripcion);
 		
 		JLabel precioUnitario = new JLabel("Precio unitario");
-		precioUnitario.setFont(new Font("Dialog", Font.BOLD, 13));
+		precioUnitario.setForeground(new Color(255, 255, 255));
+		precioUnitario.setFont(new Font("Dialog", Font.BOLD, 15));
 		precioUnitario.setBounds(70, 231, 114, 14);
 		contentPane.add(precioUnitario);
 		
 		JButton botonEditar = new JButton("Editar");
-		botonEditar.setFont(new Font("Dialog", Font.BOLD, 13));
-		botonEditar.setBounds(120, 378, 99, 35);
+		botonEditar.setBackground(new Color(255, 255, 255));
+		botonEditar.setForeground(new Color(0, 64, 128));
+		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonEditar.setBounds(106, 362, 99, 35);
 		botonEditar.addActionListener(e->{
 			prodEditar.updateProducto(id, new Object[] { campoNombre.getText(), campoDescripcion.getText(),Float.parseFloat(campoPrecioUnitario.getText()),Float.parseFloat(campoPesoKilogramos.getText())});
 			panel.getTablaProductos().setModel(new ProductoController().generadorDeTabla());
