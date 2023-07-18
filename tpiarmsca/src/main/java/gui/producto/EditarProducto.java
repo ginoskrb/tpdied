@@ -1,38 +1,40 @@
-package gui;
+package gui.producto;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
+import java.awt.Font;
 import sql.controllers.ProductoController;
 import sql.controllers.SucursalController;
+import sql.models.ProductoModel;
 
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
-
-public class agregarProducto extends JFrame {
+public class EditarProducto extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField campoNombre;
 	private JTextField campoPrecioUnitario;
 	private JTextField campoPesoKilogramos;
+	private ProductoController prodEditar = new ProductoController();
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, panelProducto panel) {
+	public static void main(String[] args, PanelProducto panel, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					agregarProducto frame = new agregarProducto(panel);
+					EditarProducto frame = new EditarProducto(panel, id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,32 +46,35 @@ public class agregarProducto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public agregarProducto(panelProducto panel) {
-		setTitle("Registro");
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	public EditarProducto(PanelProducto panel, int id) {
+		setTitle("EDITAR PRODUCTO #"+id);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(214, 214, 214));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setSize(350,500);
+		setSize(350, 500);
 		setResizable(false);
 		setLocationRelativeTo(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		campoNombre = new JTextField();
 		campoNombre.setColumns(10);
 		campoNombre.setBounds(80, 79, 171, 20);
+		campoNombre.setText(prodEditar.getAtributoProducto(id, "nombre"));
 		contentPane.add(campoNombre);
 		
 		campoPrecioUnitario = new JTextField();
 		campoPrecioUnitario.setColumns(10);
 		campoPrecioUnitario.setBounds(80, 256, 171, 20);
+		campoPrecioUnitario.setText(prodEditar.getAtributoProducto(id, "precio_unitario"));
 		contentPane.add(campoPrecioUnitario);
 		
 		campoPesoKilogramos = new JTextField();
 		campoPesoKilogramos.setColumns(10);
 		campoPesoKilogramos.setBounds(80, 312, 171, 20);
+		campoPesoKilogramos.setText(prodEditar.getAtributoProducto(id, "peso_kg"));
 		contentPane.add(campoPesoKilogramos);
 		
 		JLabel pesoKilogramos = new JLabel("Peso en kilogramos");
@@ -81,6 +86,7 @@ public class agregarProducto extends JFrame {
 		campoDescripcion.setBounds(80, 135, 171, 75);
 		campoDescripcion.setLineWrap(true);
 		campoDescripcion.setWrapStyleWord(true);
+		campoDescripcion.setText(prodEditar.getAtributoProducto(id, "descripcion"));
 		contentPane.add(campoDescripcion);
 		
 		JLabel nombreProducto = new JLabel("Nombre");
@@ -98,16 +104,17 @@ public class agregarProducto extends JFrame {
 		precioUnitario.setBounds(70, 231, 114, 14);
 		contentPane.add(precioUnitario);
 		
-		JButton botonAgregar = new JButton("Agregar");
-		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 13));
-		botonAgregar.setBounds(120, 378, 99, 35);
-		botonAgregar.addActionListener(e->{
-			ProductoController producto = new ProductoController();
-			producto.createProducto(campoNombre.getText(),campoDescripcion.getText(),Float.parseFloat(campoPrecioUnitario.getText()),Float.parseFloat(campoPesoKilogramos.getText()));
+		JButton botonEditar = new JButton("Editar");
+		botonEditar.setFont(new Font("Dialog", Font.BOLD, 13));
+		botonEditar.setBounds(120, 378, 99, 35);
+		botonEditar.addActionListener(e->{
+			prodEditar.updateProducto(id, new Object[] { campoNombre.getText(), campoDescripcion.getText(),Float.parseFloat(campoPrecioUnitario.getText()),Float.parseFloat(campoPesoKilogramos.getText())});
 			panel.getTablaProductos().setModel(new ProductoController().generadorDeTabla());
 			dispose();
 		});
-		contentPane.add(botonAgregar);
-		
+		contentPane.add(botonEditar);
+
+
 	}
+
 }

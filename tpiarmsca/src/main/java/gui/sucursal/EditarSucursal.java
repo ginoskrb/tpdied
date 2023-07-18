@@ -1,4 +1,4 @@
-package gui;
+package gui.sucursal;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -17,7 +17,7 @@ import java.awt.Font;
 import sql.controllers.SucursalController;
 import sql.models.SucursalModel;
 
-public class editarSucursal extends JFrame {
+public class EditarSucursal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField campoNombre;
@@ -26,11 +26,11 @@ public class editarSucursal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, panelSucursal panel, int id) {
+	public static void main(String[] args, PanelSucursal panel, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					editarSucursal frame = new editarSucursal(panel, id);
+					EditarSucursal frame = new EditarSucursal(panel, id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class editarSucursal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public editarSucursal(panelSucursal panel, int id) {
+	public EditarSucursal(PanelSucursal panel, int id) {
 		setTitle("EDITAR SUCURSAL #"+id);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();

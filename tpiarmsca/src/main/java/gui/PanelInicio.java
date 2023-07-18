@@ -14,12 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 
-public class panelInicio extends JPanel {
+public class PanelInicio extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public panelInicio() {
+	public PanelInicio() {
 		setBackground(new Color(255, 255, 255));
 		setBounds(309,98,955,583);
 		setLayout(null);

@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gui.camino.PanelCamino;
+import gui.producto.PanelProducto;
+import gui.sucursal.PanelSucursal;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -22,10 +25,10 @@ import javax.swing.JTable;
 public class App extends JFrame {
 
 	private JPanel contentPane;
-	private panelSucursal panelSuc;
-	private panelInicio panelIni;
-	private panelCamino panelCam;
-	private panelProducto panelProd;
+	private PanelSucursal panelSuc;
+	private PanelInicio panelIni;
+	private PanelCamino panelCam;
+	private PanelProducto panelProd;
 	private JPanel panelActual;
 	/**
 	 * Launch the application.
@@ -175,23 +178,23 @@ public class App extends JFrame {
 		
 	}
 	
-	private panelSucursal getPanelSucursal() {
-		if(this.panelSuc==null) this.panelSuc = new panelSucursal();
+	private PanelSucursal getPanelSucursal() {
+		if(this.panelSuc==null) this.panelSuc = new PanelSucursal();
 		return  panelSuc;
 	}
 	
-	private panelInicio getPanelInicio() {
-		if(this.panelSuc==null) this.panelIni = new panelInicio();
+	private PanelInicio getPanelInicio() {
+		if(this.panelSuc==null) this.panelIni = new PanelInicio();
 		return  panelIni;
 	}
 	
-	private panelCamino getPanelCamino() {
-		if(this.panelCam==null) this.panelCam = new panelCamino();
+	private PanelCamino getPanelCamino() {
+		if(this.panelCam==null) this.panelCam = new PanelCamino();
 		return  panelCam;
 	}
 	
-	private panelProducto getPanelProducto() {
-		if(this.panelProd==null) this.panelProd = new panelProducto();
+	private PanelProducto getPanelProducto() {
+		if(this.panelProd==null) this.panelProd = new PanelProducto();
 		return  panelProd;
 	}
 	
