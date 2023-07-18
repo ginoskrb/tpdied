@@ -1,4 +1,4 @@
-package gui;
+package gui.producto;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -21,14 +21,14 @@ import javax.swing.event.DocumentListener;
 import sql.controllers.ProductoController;
 import sql.controllers.SucursalController;
 
-public class panelProducto extends JPanel {
+public class PanelProducto extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaProductos = new JTable();
 
 	/**
 	 * Create the panel.
 	 */
-	public panelProducto() {
+	public PanelProducto() {
 		setBounds(309, 98, 955, 583);
 		setLayout(null);
 		
@@ -77,7 +77,7 @@ public class panelProducto extends JPanel {
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonAgregar.addActionListener(e -> {
-			agregarProducto.main(null,this);
+			AgregarProducto.main(null,this);
 		});
 		add(botonAgregar);
 		// ---------------------------------------------------------------//
@@ -121,7 +121,7 @@ public class panelProducto extends JPanel {
 			int filaSeleccionada = tablaProductos.getSelectedRow();
 			if (filaSeleccionada != -1) {
 				Object idSeleccionado = tablaProductos.getValueAt(filaSeleccionada, 0);
-				editarProducto.main(null, this, Integer.parseInt(idSeleccionado.toString()));
+				EditarProducto.main(null, this, Integer.parseInt(idSeleccionado.toString()));
 			}
 		});
 		add(botonEditar);

@@ -1,4 +1,4 @@
-package gui;
+package gui.camino;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JSlider;
 
 @SuppressWarnings("serial")
-public class agregarCamino extends JFrame {
+public class AgregarCamino extends JFrame {
 
 	private JPanel contentPane;
 	private SucursalController suc = new SucursalController();
@@ -34,7 +34,7 @@ public class agregarCamino extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					agregarCamino frame = new agregarCamino();
+					AgregarCamino frame = new AgregarCamino();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +46,7 @@ public class agregarCamino extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public agregarCamino() {
+	public AgregarCamino() {
 		setTitle("Agregar Camino");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();

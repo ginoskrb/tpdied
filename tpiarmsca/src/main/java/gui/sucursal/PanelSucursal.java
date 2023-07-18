@@ -1,4 +1,4 @@
-package gui;
+package gui.sucursal;
 
 import sql.controllers.SucursalController;
 import javax.swing.JPanel;
@@ -29,7 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 @SuppressWarnings("serial")
-public class panelSucursal extends JPanel {
+public class PanelSucursal extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaSucursales = new JTable();
 	
@@ -37,7 +37,7 @@ public class panelSucursal extends JPanel {
 	/**
 	 * CCreate the panel.
 	 */
-	public panelSucursal() {
+	public PanelSucursal() {
 		setBounds(309, 98, 955, 583);
 		setLayout(null);
 
@@ -88,7 +88,7 @@ public class panelSucursal extends JPanel {
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonAgregar.addActionListener(e -> {
-			agregarSucursal.main(null, this);
+			AgregarSucursal.main(null, this);
 		});
 		add(botonAgregar);
 		// ---------------------------------------------------------------//
@@ -132,7 +132,7 @@ public class panelSucursal extends JPanel {
 			int filaSeleccionada = tablaSucursales.getSelectedRow();
 			if (filaSeleccionada != -1) {
 				Object idSeleccionado = tablaSucursales.getValueAt(filaSeleccionada, 0);
-				editarSucursal.main(null, this, Integer.parseInt(idSeleccionado.toString()));
+				EditarSucursal.main(null, this, Integer.parseInt(idSeleccionado.toString()));
 			}
 		});
 		add(botonEditar);

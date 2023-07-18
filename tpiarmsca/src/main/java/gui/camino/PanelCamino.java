@@ -1,4 +1,4 @@
-package gui;
+package gui.camino;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -11,12 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
-public class panelCamino extends JPanel {
+public class PanelCamino extends JPanel {
 	private JTextField Buscador;
 	/**
 	 * Create the panel.
 	 */
-	public panelCamino() {
+	public PanelCamino() {
 		setBounds(309,98,955,583);
 		setLayout(null);
 		
@@ -28,7 +28,7 @@ public class panelCamino extends JPanel {
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0,0,0,0));
 		botonAgregar.addActionListener(e->{
-			agregarCamino.main(null);
+			AgregarCamino.main(null);
 		});
 		add(botonAgregar);
 		//---------------------------------------------------------------//
