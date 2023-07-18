@@ -46,7 +46,7 @@ public class AgregarSucursal extends JFrame {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(214, 214, 214));
+		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(350,500);
 		setResizable(false);
@@ -74,10 +74,12 @@ public class AgregarSucursal extends JFrame {
 		
 		//--------------------------------------------//
 		JComboBox<String> comboHoras = new JComboBox<>(horas);
+		comboHoras.setFont(new Font("Dialog", Font.PLAIN, 15));
 		comboHoras.setBounds(70, 138, 42, 22);
 		contentPane.add(comboHoras);
 		
 		JComboBox<String> comboMinutos = new JComboBox<>(minutos);
+		comboMinutos.setFont(new Font("Dialog", Font.PLAIN, 15));
 		comboMinutos.setBounds(122, 138, 47, 22);
 		contentPane.add(comboMinutos);
 		
@@ -87,10 +89,12 @@ public class AgregarSucursal extends JFrame {
 		comboMinutos.addActionListener(e -> actualizarHora(horaApertura, comboHoras, comboMinutos));
 		
 		JComboBox<String> comboHoras2 = new JComboBox<>(horas);
+		comboHoras2.setFont(new Font("Dialog", Font.PLAIN, 15));
 		comboHoras2.setBounds(70, 225, 42, 22);
 		contentPane.add(comboHoras2);
 		
 		JComboBox<String> comboMinutos2 = new JComboBox<>(minutos);
+		comboMinutos2.setFont(new Font("Dialog", Font.PLAIN, 15));
 		comboMinutos2.setBounds(122, 225, 47, 22);
 		contentPane.add(comboMinutos2);
 		
@@ -99,34 +103,41 @@ public class AgregarSucursal extends JFrame {
 		comboMinutos2.addActionListener(e -> actualizarHora(horaCierre, comboHoras2, comboMinutos2));
 		
 		JLabel nombreSucursal = new JLabel("Nombre");
-		nombreSucursal.setFont(new Font("Dialog", Font.BOLD, 13));
+		nombreSucursal.setForeground(new Color(255, 255, 255));
+		nombreSucursal.setFont(new Font("Dialog", Font.BOLD, 15));
 		nombreSucursal.setBounds(70, 38, 58, 14);
 		contentPane.add(nombreSucursal);
 		
 		JLabel horarioApertura = new JLabel("Horario apertura");
-		horarioApertura.setFont(new Font("Dialog", Font.BOLD, 13));
-		horarioApertura.setBounds(70, 113, 114, 14);
+		horarioApertura.setForeground(new Color(255, 255, 255));
+		horarioApertura.setFont(new Font("Dialog", Font.BOLD, 15));
+		horarioApertura.setBounds(70, 113, 141, 14);
 		contentPane.add(horarioApertura);
 		
 		JLabel horarioCierre = new JLabel("Horario cierre");
-		horarioCierre.setFont(new Font("Dialog", Font.BOLD, 13));
-		horarioCierre.setBounds(70, 190, 90, 14);
+		horarioCierre.setForeground(new Color(255, 255, 255));
+		horarioCierre.setFont(new Font("Dialog", Font.BOLD, 15));
+		horarioCierre.setBounds(70, 190, 114, 14);
 		contentPane.add(horarioCierre);
 		
 		JLabel estado = new JLabel("Estado");
-		estado.setFont(new Font("Dialog", Font.BOLD, 13));
-		estado.setBounds(70, 270, 46, 14);
+		estado.setForeground(new Color(255, 255, 255));
+		estado.setFont(new Font("Dialog", Font.BOLD, 15));
+		estado.setBounds(70, 270, 90, 14);
 		contentPane.add(estado);
 		
 		JComboBox<String> estadoTipo = new JComboBox<String>();
+		estadoTipo.setFont(new Font("Dialog", Font.PLAIN, 15));
 		estadoTipo.setBounds(70, 295, 95, 22);
 		estadoTipo.addItem("Operativo");
 		estadoTipo.addItem("No operativo");
 		contentPane.add(estadoTipo);
 		
 		JButton botonAgregar = new JButton("Agregar");
+		botonAgregar.setBackground(new Color(255, 255, 255));
+		botonAgregar.setForeground(new Color(0, 64, 128));
 		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 13));
-		botonAgregar.setBounds(142, 355, 99, 35);
+		botonAgregar.setBounds(112, 357, 99, 35);
 		botonAgregar.addActionListener(e->{
 					SucursalController sucursal = new SucursalController();
 					sucursal.createSucursal(campoNombre.getText(), horaApertura[0], horaCierre[0],estadoTipo.getSelectedItem()=="Operativo");
