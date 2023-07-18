@@ -68,7 +68,7 @@ public class SucursalModel {
 	}
 	@Override
 	public String toString() {
-		return "Sucursal "+nombre;
+		return nombre;
 	}
 	
 	

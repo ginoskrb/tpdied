@@ -2,11 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,19 +12,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import javax.swing.JButton;
 
 import gui.camino.PanelCamino;
 import gui.producto.PanelProducto;
 import gui.sucursal.PanelSucursal;
-import sql.models.CaminoModel;
-
-import javax.swing.JButton;
-import javax.swing.JTable;
 
 
+
+
+
+
+@SuppressWarnings("serial")
 public class App extends JFrame {
 
 	private JPanel contentPane;
@@ -221,7 +218,7 @@ public class App extends JFrame {
 		contentPane.validate();
 		contentPane.repaint();
 	}
-	
+	/*
 	private void mostrarPanel(JPanel panel) {
 		if(panelActual != null) {
 			contentPane.remove(panelActual);
@@ -231,4 +228,5 @@ public class App extends JFrame {
 		contentPane.validate();
 		contentPane.repaint();
 	}
+	*/
 }

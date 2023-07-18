@@ -1,93 +1,150 @@
 package gui.camino;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import sql.controllers.CaminoController;
 
 @SuppressWarnings("serial")
 public class PanelCamino extends JPanel {
 	private JTextField Buscador;
+	private JTable tablaCaminos = new JTable();
+
 	/**
 	 * Create the panel.
 	 */
 	public PanelCamino() {
-		setBounds(309,98,955,583);
+		setBounds(309, 98, 955, 583);
 		setLayout(null);
-		
-		//---------------------------------------------------------------//
-		JButton botonAgregar = new JButton("Agregar");
-		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonAgregar.setBackground(new Color(195, 207, 217));
-		botonAgregar.setBounds(167, 454, 143, 39);
-		botonAgregar.setFocusPainted(false);
-		botonAgregar.setBorder(new EmptyBorder(0,0,0,0));
-		botonAgregar.addActionListener(e->{
-			AgregarCamino.main(null);
-		});
-		add(botonAgregar);
-		//---------------------------------------------------------------//
-		
-		
-		//---------------------------------------------------------------//
-		JButton botonEliminar = new JButton("Eliminar");
-		botonEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonEliminar.setBackground(new Color(195, 207, 217));
-		botonEliminar.setBounds(357, 454, 143, 39);
-		botonEliminar.setFocusPainted(false);
-		botonEliminar.setBorder(new EmptyBorder(0,0,0,0));
-		add(botonEliminar);
-		//---------------------------------------------------------------//
-		
-		
-		//---------------------------------------------------------------//
-		JButton botonEditar = new JButton("Editar");
-		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonEditar.setBackground(new Color(195, 207, 217));
-		botonEditar.setBounds(632, 454, 143, 39);
-		botonEditar.setFocusPainted(false);
-		botonEditar.setBorder(new EmptyBorder(0,0,0,0));
-		add(botonEditar);
-		//---------------------------------------------------------------//
-		
-		
-		//---------------------------------------------------------------//
+
+		// Buscador
 		Buscador = new JTextField();
-		Buscador.setBounds(151, 76, 582, 27);
+		Buscador.setBounds(275, 79, 483, 27);
 		add(Buscador);
 		Buscador.setColumns(10);
-		//---------------------------------------------------------------//
-		
-		
-		//---------------------------------------------------------------//
-		JButton botonBuscar = new JButton("");
-		botonBuscar.setIcon(new ImageIcon("C:\\Users\\Franco\\Downloads\\buscar (1).png"));
-		botonBuscar.setFont(new Font("Microsoft JhengHei", Font.BOLD, 15));
-		botonBuscar.setBackground(new Color(240, 240, 240));
-		botonBuscar.setBounds(750, 69, 37, 34);
-		botonBuscar.setFocusPainted(false);
-		botonBuscar.setBorder(new EmptyBorder(0,0,0,0));
-		add(botonBuscar);
-		//---------------------------------------------------------------//
-		
-		
-		//---------------------------------------------------------------//
-		JScrollPane tablaDeDatos = new JScrollPane();
-		tablaDeDatos.setBounds(151, 124, 636, 299);
-		tablaDeDatos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		add(tablaDeDatos);
-		
-		JLabel lblNewLabel = new JLabel("Buscar camino (Nombre camino)");
-		lblNewLabel.setForeground(new Color(128, 128, 128));
+
+		Buscador.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				filterTable();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				filterTable();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
+
+		// Etiqueta de búsqueda
+		JLabel lblNewLabel = new JLabel("Buscar camino (Nombre):");
+		lblNewLabel.setForeground(new Color(0, 64, 128));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel.setBounds(151, 52, 257, 14);
+		lblNewLabel.setBounds(275, 54, 257, 14);
 		add(lblNewLabel);
-		//---------------------------------------------------------------//
-		
+
+		// Tabla de caminos
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(275, 129, 624, 299);
+		add(scrollPane);
+		tablaCaminos = new JTable();
+		tablaCaminos.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tablaCaminos.setModel(new CaminoController().generadorDeTabla());
+		tablaCaminos.getColumnModel().getColumn(2).setPreferredWidth(115);
+		tablaCaminos.getColumnModel().getColumn(3).setPreferredWidth(99);
+		tablaCaminos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tablaCaminos.getTableHeader().setBackground(new Color(0, 64, 128));
+		tablaCaminos.getTableHeader().setForeground(Color.white);
+		scrollPane.setViewportView(tablaCaminos);
+
+		// Botón Agregar
+		JButton botonAgregar = new JButton("Agregar");
+		botonAgregar.setForeground(new Color(255, 255, 255));
+		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonAgregar.setBackground(new Color(0, 64, 128));
+		botonAgregar.setBounds(74, 164, 158, 51);
+		botonAgregar.setFocusPainted(false);
+		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
+		botonAgregar.addActionListener(e -> {
+			AgregarCamino.main(null, this);
+		});
+		add(botonAgregar);
+
+		// Botón Eliminar
+		JButton botonEliminar = new JButton("Eliminar");
+		botonEliminar.setForeground(new Color(255, 255, 255));
+		botonEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonEliminar.setBackground(new Color(0, 64, 128));
+		botonEliminar.setBounds(74, 243, 158, 51);
+		botonEliminar.setFocusPainted(false);
+		botonEliminar.setBorder(new EmptyBorder(0, 0, 0, 0));
+		botonEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int filaSeleccionada = tablaCaminos.getSelectedRow();
+				if (filaSeleccionada != -1) {
+					Object idSeleccionado = tablaCaminos.getValueAt(filaSeleccionada, 0);
+					int op = JOptionPane.showOptionDialog(null, "Estas seguro que deseas eliminar este camino?",
+							"Avertencia", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+							new Object[] { "Si", "No" }, "Si");
+					switch (op) {
+					case JOptionPane.YES_OPTION:
+						new CaminoController().deleteCamino(Integer.parseInt(idSeleccionado.toString()));
+						tablaCaminos.setModel(new CaminoController().generadorDeTabla());
+						break;
+					case JOptionPane.NO_OPTION:
+						break;
+					}
+				}
+			}
+		});
+		add(botonEliminar);
+
+		// Botón Editar
+		JButton botonEditar = new JButton("Editar");
+		botonEditar.setForeground(new Color(255, 255, 255));
+		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonEditar.setBackground(new Color(0, 64, 128));
+		botonEditar.setBounds(74, 325, 158, 51);
+		botonEditar.setFocusPainted(false);
+		botonEditar.setBorder(new EmptyBorder(0, 0, 0, 0));
+		botonEditar.addActionListener(e -> {
+			int filaSeleccionada = tablaCaminos.getSelectedRow();
+			if (filaSeleccionada != -1) {
+				Object idSeleccionado = tablaCaminos.getValueAt(filaSeleccionada, 0);
+				EditarCamino.main(null, this, Integer.parseInt(idSeleccionado.toString()));
+			}
+		});
+		add(botonEditar);
 	}
+
+	private void filterTable() {
+		tablaCaminos.setModel(new CaminoController().filtrarTablaPorNombre(Buscador.getText()));
+	}
+
+	public JTable getTablaCaminos() {
+		return tablaCaminos;
+	}
+
+	public void setTablaCaminos(JTable tablaCaminos) {
+		this.tablaCaminos = tablaCaminos;
+	}
+
 }

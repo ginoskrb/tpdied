@@ -6,35 +6,37 @@ import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import gui.sucursal.EditarSucursal;
+import gui.sucursal.PanelSucursal;
 import sql.controllers.CaminoController;
 import sql.controllers.SucursalController;
 import sql.models.SucursalModel;
-
-import javax.swing.JComboBox;
-import javax.swing.JSlider;
-
 @SuppressWarnings("serial")
-public class AgregarCamino extends JFrame {
+public class EditarCamino extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField campoNombre;
+	private CaminoController camEditar = new CaminoController();
 	private SucursalController suc = new SucursalController();
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, PanelCamino panel) {
+	public static void main(String[] args, PanelCamino panel, int id) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarCamino frame = new AgregarCamino(panel);
+					EditarCamino frame = new EditarCamino(panel, id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,9 +48,9 @@ public class AgregarCamino extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgregarCamino(PanelCamino panel) {
-		setTitle("Agregar Camino");
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	public EditarCamino(PanelCamino panel, int id) {
+		setTitle("EDITAR CAMINO #" + id);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(214, 214, 214));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,6 +61,7 @@ public class AgregarCamino extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		// --------------------------------------------//
 		// Lista de todas las sucursales
 		List<SucursalModel> sucursales = suc.obtenerTodasLasSucursales();
 
@@ -100,6 +103,8 @@ public class AgregarCamino extends JFrame {
 		tHoras.addActionListener(e -> actualizarHora(tiempo, tHoras, tMinutos));
 		tMinutos.addActionListener(e -> actualizarHora(tiempo, tHoras, tMinutos));
 
+		establecerHora(camEditar.getAtributoCamino(id, "tiempoTransito"), tHoras, tMinutos, horas, minutos);
+
 		JComboBox<String> estadoTipo = new JComboBox<String>();
 		estadoTipo.setBounds(100, 315, 95, 22);
 		estadoTipo.addItem("Operativo");
@@ -109,6 +114,8 @@ public class AgregarCamino extends JFrame {
 		JSlider capMaxima = new JSlider(0, 5000, 100);
 		capMaxima.setBounds(100, 243, 95, 26);
 		contentPane.add(capMaxima);
+
+		// --------------------------------------------//
 
 		JLabel lblSucursalOrigen = new JLabel("Sucursal origen");
 		lblSucursalOrigen.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -139,33 +146,36 @@ public class AgregarCamino extends JFrame {
 		lblKg.setBounds(203, 247, 46, 22);
 		contentPane.add(lblKg);
 
+		// --------------------------------------------//
+
 		capMaxima.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				lblKg.setText(capMaxima.getValue() + " kg");
 			}
 		});
-		JButton botonAgregar = new JButton("Agregar");
-		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 13));
-		botonAgregar.setBounds(123, 390, 99, 35);
-		botonAgregar.addActionListener(e -> {
-			CaminoController cam = new CaminoController();
+
+		JButton botonEditar = new JButton("Editar");
+		botonEditar.setFont(new Font("Dialog", Font.BOLD, 13));
+		botonEditar.setBounds(123, 390, 99, 35);
+		botonEditar.addActionListener(e -> {
 			SucursalModel sucursalOrigen = (SucursalModel) sucOrigen.getSelectedItem();
 			SucursalModel sucursalDestino = (SucursalModel) sucDestino.getSelectedItem();
-
-			if (sucursalOrigen.getId() == sucursalDestino.getId()) {
-				JOptionPane.showMessageDialog(null, "No se puede crear un camino desde una sucursal a si misma",
-						"ERROR", JOptionPane.ERROR_MESSAGE);
-			} else {
-				cam.createCamino(sucursalOrigen, sucursalDestino, tiempo[0], capMaxima.getValue(),
-						estadoTipo.getSelectedItem() == "Operativo");
-				panel.getTablaCaminos().setModel(new CaminoController().generadorDeTabla());
-				dispose();
-			}
+			camEditar.updateCamino(id, sucursalOrigen, sucursalDestino, tiempo[0],
+				capMaxima.getValue(), estadoTipo.getSelectedItem() == "Operativo");
+			panel.getTablaCaminos().setModel(new CaminoController().generadorDeTabla());
+			dispose();
 
 		});
-		contentPane.add(botonAgregar);
+		contentPane.add(botonEditar);
+	}
 
+	public JTextField getCampoNombre() {
+		return campoNombre;
+	}
+
+	public void setCampoNombre(JTextField campoNombre) {
+		this.campoNombre = campoNombre;
 	}
 
 	private void actualizarHora(String[] hora, JComboBox<String> comboHoras, JComboBox<String> comboMinutos) {
@@ -174,4 +184,32 @@ public class AgregarCamino extends JFrame {
 		hora[0] = String.format("%02d:%02d", Integer.parseInt(horaSeleccionada),
 				Integer.parseInt(minutosSeleccionados));
 	}
+
+	private void establecerHora(String tiempoActual, JComboBox<String> comboHoras, JComboBox<String> comboMinutos,
+			String[] horas, String[] minutos) {
+		int horaSeleccionadaIndex = -1;
+		int minutosSeleccionadosIndex = -1;
+
+		for (int i = 0; i < horas.length; i++) {
+			if (horas[i].equals(tiempoActual.substring(0, 2))) {
+				horaSeleccionadaIndex = i;
+				break;
+			}
+		}
+
+		for (int i = 0; i < minutos.length; i++) {
+			if (minutos[i].equals(tiempoActual.substring(3, 5))) {
+				minutosSeleccionadosIndex = i;
+				break;
+			}
+		}
+
+		if (horaSeleccionadaIndex != -1 && minutosSeleccionadosIndex != -1) {
+			comboHoras.setSelectedIndex(horaSeleccionadaIndex);
+			comboMinutos.setSelectedIndex(minutosSeleccionadosIndex);
+		}
+	}
+	
+	
+
 }
