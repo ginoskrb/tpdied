@@ -77,6 +77,9 @@ public class EditarCamino extends JFrame {
 			sucOrigen.addItem(sucursal);
 			sucDestino.addItem(sucursal);
 		}
+		
+		establecerSucursal(camEditar.getSucursalCamino(id, "sucOrigen"),sucOrigen,sucursales);
+		establecerSucursal(camEditar.getSucursalCamino(id, "sucDestino"),sucDestino,sucursales);
 
 		// array para las horas
 		String[] horas = new String[73];
@@ -111,9 +114,13 @@ public class EditarCamino extends JFrame {
 		estadoTipo.addItem("No operativo");
 		contentPane.add(estadoTipo);
 
+		establecerEstado(Boolean.parseBoolean(camEditar.getAtributoCamino(id, "estado")),estadoTipo);
+		
 		JSlider capMaxima = new JSlider(0, 5000, 100);
 		capMaxima.setBounds(100, 243, 95, 26);
 		contentPane.add(capMaxima);
+		
+		establecerCapacidad(Integer.parseInt(camEditar.getAtributoCamino(id, "capacidadMaxima")),capMaxima);
 
 		// --------------------------------------------//
 
@@ -210,6 +217,29 @@ public class EditarCamino extends JFrame {
 		}
 	}
 	
+	private void establecerSucursal (SucursalModel sucActual, JComboBox<SucursalModel> comboSuc, List<SucursalModel> sucursales) {
+		int sucSeleccionadaIndex = -1;
+		for(int i=0;i<sucursales.size();i++) {
+			if (sucActual.equals(sucursales.get(i))) {
+				sucSeleccionadaIndex = i;
+				break;
+			}
+		}
+		if(sucSeleccionadaIndex != -1 ) {
+			comboSuc.setSelectedIndex(sucSeleccionadaIndex);
+		}
+	}
 	
+	private void establecerEstado(boolean estadoActual, JComboBox<String> estadoTipo) {
+		if(estadoActual) {
+			estadoTipo.setSelectedIndex(0);
+		} else {
+			estadoTipo.setSelectedIndex(1);
+		}
+	}
+	
+	private void establecerCapacidad(int capActual, JSlider capMax) {
+		capMax.setValue(capActual);
+	}
 
 }

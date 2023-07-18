@@ -55,7 +55,7 @@ public class PanelCamino extends JPanel {
 		});
 
 		// Etiqueta de búsqueda
-		JLabel lblNewLabel = new JLabel("Buscar camino (Nombre):");
+		JLabel lblNewLabel = new JLabel("Buscar camino (Origen):");
 		lblNewLabel.setForeground(new Color(0, 64, 128));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel.setBounds(275, 54, 257, 14);

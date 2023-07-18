@@ -69,7 +69,7 @@ public class CaminoController {
 		
 		
 		public DefaultTableModel generadorDeTabla() {
-		    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "SUCURSAL ORIGEN", "SUCURSAL DESTINO", "TIEMPO DE TRANSITO", "CAPACIDAD MAXIMA", "ESTADO" }) {
+		    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "ORIGEN", "DESTINO", "DURACION", "CAPACIDAD (KG)", "ESTADO" }) {
 		        @Override
 		        public boolean isCellEditable(int row, int column) {
 		            return false;
@@ -93,7 +93,7 @@ public class CaminoController {
 		
 		public DefaultTableModel filtrarTablaPorNombre(String nombre) {
 		    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
-		            new String[] { "ID", "SUCURSAL ORIGEN", "SUCURSAL DESTINO", "TIEMPO DE TRANSITO", "CAPACIDAD MAXIMA", "ESTADO" }) {
+		            new String[] { "ID", "ORIGEN", "DESTINO", "DURACION", "CAPACIDAD (KG)", "ESTADO" }) {
 		        @Override
 		        public boolean isCellEditable(int row, int column) {
 		            return false;
@@ -146,7 +146,7 @@ public class CaminoController {
 
 		public DefaultTableModel editarFilaTablaCamino(int id, int idSucursalOrigen, int idSucursalDestino, String tiempoTransito, int capacidadMaxima, boolean estado) {
 		    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
-		            new String[] { "ID", "SUCURSAL ORIGEN", "SUCURSAL DESTINO", "TIEMPO DE TRÁNSITO", "CAPACIDAD MÁXIMA", "ESTADO" }) {
+		            new String[] { "ID", "ORIGEN", "DESTINO", "DURACION", "CAPACIDAD (KG)", "ESTADO" }) {
 		        @Override
 		        public boolean isCellEditable(int row, int column) {
 		            return false;
@@ -184,12 +184,36 @@ public class CaminoController {
 				if (atributo == "estado") {
 					return Boolean.toString(camino.getEstado());
 				}
+				
+				if(atributo == "capacidadMaxima") {
+					return String.valueOf(camino.getCapacidadMaxima());
+				}
 				session.getTransaction().commit();
 				sessionFactory.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return "s";
+		}
+		
+		public SucursalModel getSucursalCamino(int id, String atributo) {
+			try {
+				Session session = sessionFactory.openSession();
+				session.beginTransaction();
+				CaminoModel camino = session.get(CaminoModel.class, id);
+				if(atributo == "sucOrigen") {
+					return camino.getSucursalOrigen();
+				}
+				if(atributo == "sucDestino") {
+					return camino.getSucursalDestino();
+				}
+				session.getTransaction().commit();
+				sessionFactory.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
 
 }
