@@ -26,7 +26,6 @@ public class PanelInicio extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBackground(new Color(255, 255, 255));
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Franco\\Desktop\\SH9q-yOc_400x400.jpg"));
 		lblNewLabel.setBounds(276, 121, 389, 336);
 		add(lblNewLabel);
 	}

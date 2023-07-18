@@ -33,7 +33,7 @@ public class PanelProducto extends JPanel {
 		setLayout(null);
 		
 		Buscador = new JTextField();
-		Buscador.setBounds(151, 77, 627, 27);
+		Buscador.setBounds(272, 77, 627, 27);
 		add(Buscador);
 		Buscador.setColumns(10);
 		
@@ -52,28 +52,32 @@ public class PanelProducto extends JPanel {
 
 		// ---------------------------------------------------------------//
 		JLabel lblNewLabel = new JLabel("Buscar producto (Nombre producto)");
-		lblNewLabel.setForeground(new Color(128, 128, 128));
+		lblNewLabel.setForeground(new Color(0, 64, 128));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel.setBounds(151, 52, 257, 14);
+		lblNewLabel.setBounds(272, 52, 257, 14);
 		add(lblNewLabel);
 		// ---------------------------------------------------------------//
 		
 		// ---------------------------------------------------------------//
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(151, 125, 624, 299);
+		scrollPane.setBounds(275, 129, 624, 299);
 		add(scrollPane);
+		tablaProductos.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tablaProductos.setModel(new ProductoController().generadorDeTabla());
 		tablaProductos.getColumnModel().getColumn(2).setPreferredWidth(115);
 		tablaProductos.getColumnModel().getColumn(3).setPreferredWidth(99);
 		tablaProductos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tablaProductos.getTableHeader().setBackground(new Color(0,64,128));
+		tablaProductos.getTableHeader().setForeground(Color.white);
 		scrollPane.setViewportView(tablaProductos);
 		// ---------------------------------------------------------------//
 
 		// ---------------------------------------------------------------//
 		JButton botonAgregar = new JButton("Agregar");
+		botonAgregar.setForeground(new Color(255, 255, 255));
 		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonAgregar.setBackground(new Color(195, 207, 217));
-		botonAgregar.setBounds(167, 454, 143, 39);
+		botonAgregar.setBackground(new Color(0, 64, 128));
+		botonAgregar.setBounds(74, 164, 158, 51);
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonAgregar.addActionListener(e -> {
@@ -84,9 +88,10 @@ public class PanelProducto extends JPanel {
 
 		// ---------------------------------------------------------------//
 		JButton botonEliminar = new JButton("Eliminar");
+		botonEliminar.setForeground(new Color(255, 255, 255));
 		botonEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonEliminar.setBackground(new Color(195, 207, 217));
-		botonEliminar.setBounds(357, 454, 143, 39);
+		botonEliminar.setBackground(new Color(0, 64, 128));
+		botonEliminar.setBounds(74, 243, 158, 51);
 		botonEliminar.setFocusPainted(false);
 		botonEliminar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonEliminar.addActionListener(new ActionListener() {
@@ -112,9 +117,10 @@ public class PanelProducto extends JPanel {
 
 		// ---------------------------------------------------------------//
 		JButton botonEditar = new JButton("Editar");
+		botonEditar.setForeground(new Color(255, 255, 255));
 		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
-		botonEditar.setBackground(new Color(195, 207, 217));
-		botonEditar.setBounds(632, 454, 143, 39);
+		botonEditar.setBackground(new Color(0, 64, 128));
+		botonEditar.setBounds(74, 325, 158, 51);
 		botonEditar.setFocusPainted(false);
 		botonEditar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonEditar.addActionListener(e->{
