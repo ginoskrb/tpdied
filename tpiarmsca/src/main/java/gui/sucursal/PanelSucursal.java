@@ -51,10 +51,10 @@ public class PanelSucursal extends JPanel {
 		});
 
 		// ---------------------------------------------------------------//
-		JLabel lblNewLabel = new JLabel("Buscar sucursal (Nombre sucursal)");
+		JLabel lblNewLabel = new JLabel("Buscar sucursal (Nombre sucursal):");
 		lblNewLabel.setForeground(new Color(0, 64, 128));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel.setBounds(275, 54, 257, 14);
+		lblNewLabel.setBounds(275, 41, 263, 27);
 		add(lblNewLabel);
 		// ---------------------------------------------------------------//
 		
