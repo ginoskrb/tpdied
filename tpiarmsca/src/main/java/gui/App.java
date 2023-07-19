@@ -43,10 +43,7 @@ public class App extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public App() {
 		setTitle("Sistema de Gestión Logistico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
