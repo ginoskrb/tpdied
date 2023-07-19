@@ -182,7 +182,7 @@ public class CaminoController {
 				}
 				
 				if (atributo == "estado") {
-					return Boolean.toString(camino.getEstado());
+					return camino.getEstado();
 				}
 				
 				if(atributo == "capacidadMaxima") {

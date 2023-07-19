@@ -91,5 +91,28 @@ public class StockController {
 		}
 	}
 	
+	public DefaultTableModel filtrarTablaPorNombre(String nombre, int idSucursal) {
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
+				new String[] { "ID", "PRODUCTO", "SUCURSAL", "STOCK" }) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "FROM StockModel WHERE producto.nombre LIKE :nombreProducto AND sucursal.id = :idSucursal";
+			List<StockModel> resultados = session.createQuery(hql, StockModel.class)
+					.setParameter("nombreProducto", "%" + nombre + "%").setParameter("idSucursal", idSucursal).list();
+			for (StockModel entidad : resultados) {
+				Object[] fila = { entidad.getId(), entidad.getProducto(), entidad.getSucursal(), entidad.getStock() };
+				modelo.addRow(fila);	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return modelo;
+	}
+	
 	
 }

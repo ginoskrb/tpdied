@@ -89,8 +89,12 @@ public class CaminoModel {
 		this.capacidadMaxima = capacidadMaxima;
 	}
 
-	public boolean getEstado() {
-		return estado;
+	public String getEstado() {
+		if(estado) {
+			return "OPERATIVO";
+		}else {
+			return "NO OPERATIVO";
+		}
 	}
 
 	public void setEstado(boolean estado) {
