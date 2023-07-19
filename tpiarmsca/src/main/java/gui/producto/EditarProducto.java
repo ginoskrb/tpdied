@@ -61,18 +61,21 @@ public class EditarProducto extends JFrame {
 		contentPane.setLayout(null);
 
 		campoNombre = new JTextField();
+		campoNombre.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoNombre.setColumns(10);
 		campoNombre.setBounds(80, 79, 171, 20);
 		campoNombre.setText(prodEditar.getAtributoProducto(id, "nombre"));
 		contentPane.add(campoNombre);
 		
 		campoPrecioUnitario = new JTextField();
+		campoPrecioUnitario.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoPrecioUnitario.setColumns(10);
 		campoPrecioUnitario.setBounds(80, 256, 171, 20);
 		campoPrecioUnitario.setText(prodEditar.getAtributoProducto(id, "precio_unitario"));
 		contentPane.add(campoPrecioUnitario);
 		
 		campoPesoKilogramos = new JTextField();
+		campoPesoKilogramos.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoPesoKilogramos.setColumns(10);
 		campoPesoKilogramos.setBounds(80, 312, 171, 20);
 		campoPesoKilogramos.setText(prodEditar.getAtributoProducto(id, "peso_kg"));
@@ -85,6 +88,7 @@ public class EditarProducto extends JFrame {
 		contentPane.add(pesoKilogramos);
 		
 		JTextArea campoDescripcion = new JTextArea();
+		campoDescripcion.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoDescripcion.setBounds(80, 135, 171, 75);
 		campoDescripcion.setLineWrap(true);
 		campoDescripcion.setWrapStyleWord(true);

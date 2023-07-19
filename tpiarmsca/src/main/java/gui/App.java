@@ -18,11 +18,6 @@ import gui.camino.PanelCamino;
 import gui.producto.PanelProducto;
 import gui.sucursal.PanelSucursal;
 
-
-
-
-
-
 @SuppressWarnings("serial")
 public class App extends JFrame {
 
@@ -98,6 +93,7 @@ public class App extends JFrame {
 		JButton botonInicio = new JButton("INICIO");
 		botonInicio.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
 		botonInicio.setBackground(new Color(192, 192, 192));
+		botonInicio.setForeground(Color.black);
 		botonInicio.setFocusPainted(false);
 		botonInicio.setBorder(new EmptyBorder(0,0,0,0));
 		botonInicio.addMouseListener(new MouseAdapter() {
@@ -123,6 +119,7 @@ public class App extends JFrame {
 		botonSucursales.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
 		botonSucursales.setBackground(new Color(192, 192, 192));
 		botonSucursales.setFocusPainted(false);
+		botonSucursales.setForeground(Color.black);
 		botonSucursales.setBorder(new EmptyBorder(0,0,0,0));
 		botonSucursales.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -146,6 +143,7 @@ public class App extends JFrame {
 		botonCaminos.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
 		botonCaminos.setBackground(new Color(192, 192, 192));
 		botonCaminos.setFocusPainted(false);
+		botonCaminos.setForeground(Color.black);
 		botonCaminos.setBorder(new EmptyBorder(0,0,0,0));
 		botonCaminos.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -171,6 +169,7 @@ public class App extends JFrame {
 		botonProductos.setBackground(new Color(192, 192, 192));
 		botonProductos.setFocusPainted(false);
 		botonProductos.setBorder(new EmptyBorder(0,0,0,0));
+		botonProductos.setForeground(Color.black);
 		botonProductos.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
 				botonProductos.setBackground(new Color(0,64,128));

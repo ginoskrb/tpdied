@@ -95,7 +95,7 @@ public class SucursalController {
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel", SucursalModel.class).list();
 			for (SucursalModel entidad : resultados) {
 				Object[] fila = { entidad.getId(), entidad.getNombre(), entidad.getHapertura(), entidad.getHcierre(),
-						entidad.isEstado() };
+						entidad.isEstado()};
 				modelo.addRow(fila);
 			}
 		} catch (Exception e) {

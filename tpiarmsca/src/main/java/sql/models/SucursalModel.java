@@ -60,8 +60,10 @@ public class SucursalModel {
 	public void setHcierre(String hcierre) {
 		this.hcierre = hcierre;
 	}
-	public boolean isEstado() {
-		return estado;
+	public String isEstado() {
+		if(estado) {
+			return "OPERATIVO";
+		}else return "NO OPERATIVO";
 	}
 	public void setEstado(Boolean estado) {
 		this.estado = estado;

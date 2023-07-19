@@ -56,6 +56,7 @@ public class AgregarSucursal extends JFrame {
 		contentPane.setLayout(null);
 		
 		campoNombre = new JTextField();
+		campoNombre.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoNombre.setColumns(10);
 		campoNombre.setBounds(70, 63, 171, 20);
 		contentPane.add(campoNombre);
@@ -136,7 +137,7 @@ public class AgregarSucursal extends JFrame {
 		JButton botonAgregar = new JButton("Agregar");
 		botonAgregar.setBackground(new Color(255, 255, 255));
 		botonAgregar.setForeground(new Color(0, 64, 128));
-		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 13));
+		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonAgregar.setBounds(112, 357, 99, 35);
 		botonAgregar.addActionListener(e->{
 					SucursalController sucursal = new SucursalController();
