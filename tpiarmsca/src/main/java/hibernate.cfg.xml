@@ -17,6 +17,7 @@
 
         
         <mapping class="sql.models.CaminoModel" />
+        <mapping class="sql.models.StockModel" />
         <mapping class="sql.models.SucursalModel" />
 		<mapping class="sql.models.ProductoModel" />
 		

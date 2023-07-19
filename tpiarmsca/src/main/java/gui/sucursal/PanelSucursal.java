@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import gui.stock.StockSucursal;
 import sql.controllers.SucursalController;
 @SuppressWarnings("serial")
 public class PanelSucursal extends JPanel {
@@ -32,7 +33,7 @@ public class PanelSucursal extends JPanel {
 		setLayout(null);
 		
 		Buscador = new JTextField();
-		Buscador.setBounds(275, 79, 483, 27);
+		Buscador.setBounds(275, 79, 624, 27);
 		add(Buscador);
 		Buscador.setColumns(10);
 		
@@ -130,6 +131,22 @@ public class PanelSucursal extends JPanel {
 			}
 		});
 		add(botonEditar);
+		
+		JButton botonStock = new JButton("Consultar/Modificar stock");
+		botonStock.setForeground(Color.WHITE);
+		botonStock.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonStock.setFocusPainted(false);
+		botonStock.setBorder(new EmptyBorder(0, 0, 0, 0));
+		botonStock.setBackground(new Color(0, 64, 128));
+		botonStock.setBounds(312, 465, 237, 51);
+		botonStock.addActionListener(e->{
+			int filaSeleccionada = tablaSucursales.getSelectedRow();
+			if (filaSeleccionada != -1) {
+				Object idSeleccionado = tablaSucursales.getValueAt(filaSeleccionada, 0);
+				StockSucursal.main(null, Integer.parseInt(idSeleccionado.toString()));
+			}
+		});
+		add(botonStock);
 		// ---------------------------------------------------------------//
 
 	}
@@ -145,7 +162,4 @@ public class PanelSucursal extends JPanel {
 	public void setTablaSucursales(JTable tablaSucursales) {
 		this.tablaSucursales = tablaSucursales;
 	}
-	
-	
-
 }

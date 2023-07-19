@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import sql.models.ProductoModel;
+import sql.models.SucursalModel;
 
 @SuppressWarnings("serial")
 public class ProductoController {
@@ -127,5 +128,16 @@ public class ProductoController {
 			e.printStackTrace();
 		}
 		return "s";
+	}
+	
+	public List<ProductoModel> obtenerTodosLosProductos() {
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			List<ProductoModel> productos = session.createQuery("FROM ProductoModel", ProductoModel.class).list();
+			return productos;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

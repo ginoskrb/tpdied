@@ -33,7 +33,7 @@ public class PanelCamino extends JPanel {
 
 		// Buscador
 		Buscador = new JTextField();
-		Buscador.setBounds(275, 79, 483, 27);
+		Buscador.setBounds(275, 79, 624, 27);
 		add(Buscador);
 		Buscador.setColumns(10);
 

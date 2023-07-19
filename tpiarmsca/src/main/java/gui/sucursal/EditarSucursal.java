@@ -141,6 +141,7 @@ public class EditarSucursal extends JFrame {
 		contentPane.add(estadoTipo);
 
 		JButton botonEditar = new JButton("Editar");
+		botonEditar.setBackground(new Color(255, 255, 255));
 		botonEditar.setForeground(new Color(0, 64, 128));
 		botonEditar.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonEditar.setBounds(113, 366, 99, 35);

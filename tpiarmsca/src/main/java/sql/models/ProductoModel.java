@@ -73,6 +73,11 @@ public class ProductoModel {
 	public void setPesoKg(float pesoKg) {
 		this.pesoKg = pesoKg;
 	}
+
+	@Override
+	public String toString() {
+		return  nombre;
+	}
 	
 	
 	
