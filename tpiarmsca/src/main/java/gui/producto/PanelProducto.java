@@ -51,10 +51,10 @@ public class PanelProducto extends JPanel {
 		});
 
 		// ---------------------------------------------------------------//
-		JLabel lblNewLabel = new JLabel("Buscar producto (Nombre producto)");
+		JLabel lblNewLabel = new JLabel("Buscar producto (Nombre producto):");
 		lblNewLabel.setForeground(new Color(0, 64, 128));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNewLabel.setBounds(272, 52, 257, 14);
+		lblNewLabel.setBounds(272, 39, 266, 27);
 		add(lblNewLabel);
 		// ---------------------------------------------------------------//
 		

@@ -72,7 +72,7 @@ public class StockModel {
 	}
 
 
-	public void setStock(int stock) {
+	public void setCantidad(int stock) {
 		this.stock = stock;
 	}
 
