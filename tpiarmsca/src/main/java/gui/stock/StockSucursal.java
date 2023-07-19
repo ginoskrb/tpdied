@@ -87,14 +87,17 @@ public class StockSucursal extends JFrame {
 		botonEditar.setBounds(288, 396, 99, 35);
 		contentPane.add(botonEditar);
 		botonEditar.addActionListener(e->{
-			EditarStock.main(null);
+			int filaSeleccionada = tablaStock.getSelectedRow();
+			if (filaSeleccionada != -1) {
+				
+                Object idSeleccionado = tablaStock.getValueAt(filaSeleccionada, 0);
+                EditarStock.main(null,this,Integer.parseInt(idSeleccionado.toString()),suc);
+                }
+			
 		});
 		
 		JButton botonEliminar = new JButton("Eliminar");
-		botonEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		botonEliminar.setForeground(new Color(0, 64, 128));
 		botonEliminar.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonEliminar.setBackground(Color.WHITE);

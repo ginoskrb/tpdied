@@ -67,4 +67,29 @@ public class StockController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void updateStock(int id, int cantidad) {
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			StockModel stock = session.get(StockModel.class, id);
+			if (stock != null) {
+				stock.setCantidad(cantidad);
+				session.update(stock);
+				session.getTransaction().commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public StockModel obtenerStockPorId(int id) {
+		try (Session session = sessionFactory.openSession()) {
+			return session.get(StockModel.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 }

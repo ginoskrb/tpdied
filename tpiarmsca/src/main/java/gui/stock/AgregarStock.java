@@ -47,7 +47,7 @@ public class AgregarStock extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgregarStock(StockSucursal menuPrincipal, int id) {
+	public AgregarStock(StockSucursal menuPrincipal, int idSucursal) {
 		setTitle("Agregar stock");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
@@ -80,7 +80,7 @@ public class AgregarStock extends JFrame {
 
 		List<ProductoModel> productos = prod.obtenerTodosLosProductos();
 
-		JComboBox<ProductoModel> comboBoxProductos = new JComboBox();
+		JComboBox<ProductoModel> comboBoxProductos = new JComboBox<ProductoModel>();
 		comboBoxProductos.setBounds(128, 20, 116, 19);
 		contentPane.add(comboBoxProductos);
 
@@ -95,8 +95,8 @@ public class AgregarStock extends JFrame {
 		botonAgregar.setBounds(453, 13, 99, 35);
 		botonAgregar.addActionListener(e -> {
 			st.createStock((ProductoModel) comboBoxProductos.getSelectedItem(),
-					new SucursalController().obtenerSucursalPorId(id), Integer.parseInt(campoCantidadStock.getText()));
-			menuPrincipal.getTablaStock().setModel(new StockController().generadorDeTabla(id));
+					new SucursalController().obtenerSucursalPorId(idSucursal), Integer.parseInt(campoCantidadStock.getText()));
+			menuPrincipal.getTablaStock().setModel(new StockController().generadorDeTabla(idSucursal));
 			dispose();
 		});
 		contentPane.add(botonAgregar);

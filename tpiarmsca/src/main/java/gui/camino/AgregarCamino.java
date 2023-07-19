@@ -50,7 +50,7 @@ public class AgregarCamino extends JFrame {
 		setTitle("Agregar Camino");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(214, 214, 214));
+		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setSize(350, 500);
 		setResizable(false);
@@ -111,32 +111,39 @@ public class AgregarCamino extends JFrame {
 		contentPane.add(capMaxima);
 
 		JLabel lblSucursalOrigen = new JLabel("Sucursal origen");
-		lblSucursalOrigen.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblSucursalOrigen.setBounds(100, 43, 149, 14);
+		lblSucursalOrigen.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblSucursalOrigen.setBounds(100, 35, 149, 22);
+		lblSucursalOrigen.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblSucursalOrigen);
 
 		JLabel lblSucursalDestino = new JLabel("Sucursal destino");
-		lblSucursalDestino.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblSucursalDestino.setBounds(100, 101, 114, 14);
+		lblSucursalDestino.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblSucursalDestino.setBounds(100, 101, 135, 16);
+		lblSucursalDestino.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblSucursalDestino);
 
 		JLabel lblTiempo = new JLabel("Tiempo transito");
-		lblTiempo.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblTiempo.setBounds(100, 161, 114, 14);
+		lblTiempo.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblTiempo.setBounds(100, 153, 114, 22);
+		lblTiempo.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblTiempo);
 
 		JLabel lblEstado = new JLabel("Estado");
-		lblEstado.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblEstado.setBounds(100, 290, 46, 14);
+		lblEstado.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblEstado.setBounds(100, 280, 95, 24);
+		lblEstado.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblEstado);
 
 		JLabel lblCapacidadMaxima = new JLabel("Capacidad maxima");
-		lblCapacidadMaxima.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblCapacidadMaxima.setBounds(100, 218, 135, 14);
+		lblCapacidadMaxima.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblCapacidadMaxima.setBounds(100, 210, 135, 22);
+		lblCapacidadMaxima.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblCapacidadMaxima);
 
 		JLabel lblKg = new JLabel(capMaxima.getValue() + " kg");
-		lblKg.setBounds(203, 247, 46, 22);
+		lblKg.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblKg.setBounds(203, 247, 72, 22);
+		lblKg.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblKg);
 
 		capMaxima.addChangeListener(new ChangeListener() {
@@ -146,7 +153,8 @@ public class AgregarCamino extends JFrame {
 			}
 		});
 		JButton botonAgregar = new JButton("Agregar");
-		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 13));
+		botonAgregar.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonAgregar.setForeground(new Color(0, 64, 128));
 		botonAgregar.setBounds(123, 390, 99, 35);
 		botonAgregar.addActionListener(e -> {
 			CaminoController cam = new CaminoController();
