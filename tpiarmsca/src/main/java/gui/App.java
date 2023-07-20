@@ -17,16 +17,21 @@ import javax.swing.JButton;
 import gui.camino.PanelCamino;
 import gui.producto.PanelProducto;
 import gui.sucursal.PanelSucursal;
+import sql.controllers.MapaController;
+import gui.grafo.PanelOrdenProvision;
+import gui.grafo.MapaSucursales;
 
 @SuppressWarnings("serial")
 public class App extends JFrame {
 
 	private JPanel contentPane;
 	private PanelSucursal panelSuc;
-	private PanelInicio panelIni;
+	private	MapaSucursales mapa = new MapaSucursales();
+	private PanelOrdenProvision panelOrden;
 	private PanelCamino panelCam;
 	private PanelProducto panelProd;
 	private JPanel panelActual;
+	private MapaController map = new MapaController(mapa);
 	/**
 	 * Launch the application.
 	 */
@@ -80,7 +85,7 @@ public class App extends JFrame {
 		
 		
 		//--------------------------------------------//
-		JPanel cuerpoMenu = this.getPanelInicio();
+		JPanel cuerpoMenu = this.getPanelOrden();
 		contentPane.add(cuerpoMenu);
 		this.panelActual = cuerpoMenu;
 		//--------------------------------------------//
@@ -104,7 +109,7 @@ public class App extends JFrame {
 			}
 		});
 		botonInicio.addActionListener(e->{
-			this.mostrarPanelMenu(getPanelInicio());
+			this.mostrarPanelMenu(getPanelOrden());
 		});
 		
 		menuInicio.add(botonInicio);
@@ -182,21 +187,22 @@ public class App extends JFrame {
 		});
 		menuInicio.add(botonProductos);
 		//--------------------------------------------//
-		
+		map.crearVertices();
+		map.crearAristas();
 	}
 	
 	private PanelSucursal getPanelSucursal() {
-		if(this.panelSuc==null) this.panelSuc = new PanelSucursal();
+		if(this.panelSuc==null) this.panelSuc = new PanelSucursal(map);
 		return  panelSuc;
 	}
 	
-	private PanelInicio getPanelInicio() {
-		if(this.panelSuc==null) this.panelIni = new PanelInicio();
-		return  panelIni;
+	private PanelOrdenProvision getPanelOrden() {
+		if(this.panelOrden==null) this.panelOrden = new PanelOrdenProvision(mapa);
+		return  panelOrden;
 	}
 	
 	private PanelCamino getPanelCamino() {
-		if(this.panelCam==null) this.panelCam = new PanelCamino();
+		if(this.panelCam==null) this.panelCam = new PanelCamino(map);
 		return  panelCam;
 	}
 	
@@ -214,15 +220,4 @@ public class App extends JFrame {
 		contentPane.validate();
 		contentPane.repaint();
 	}
-	/*
-	private void mostrarPanel(JPanel panel) {
-		if(panelActual != null) {
-			contentPane.remove(panelActual);
-		}
-		contentPane.add(panel);
-		panelActual = panel;
-		contentPane.validate();
-		contentPane.repaint();
-	}
-	*/
 }

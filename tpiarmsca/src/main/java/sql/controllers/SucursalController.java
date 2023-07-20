@@ -8,10 +8,13 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import gui.grafo.MapaSucursales;
 import sql.models.SucursalModel;
 
 @SuppressWarnings("serial")
 public class SucursalController {
+	
 	private static final SessionFactory sessionFactory = new Configuration()
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(SucursalModel.class)

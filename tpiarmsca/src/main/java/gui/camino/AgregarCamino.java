@@ -15,6 +15,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import sql.controllers.CaminoController;
+import sql.controllers.MapaController;
 import sql.controllers.SucursalController;
 import sql.models.SucursalModel;
 
@@ -30,11 +31,11 @@ public class AgregarCamino extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, PanelCamino panel) {
+	public static void main(String[] args, PanelCamino panel,MapaController mapa) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarCamino frame = new AgregarCamino(panel);
+					AgregarCamino frame = new AgregarCamino(panel,mapa);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +47,7 @@ public class AgregarCamino extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgregarCamino(PanelCamino panel) {
+	public AgregarCamino(PanelCamino panel,MapaController mapa) {
 		setTitle("Agregar Camino");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
@@ -160,7 +161,6 @@ public class AgregarCamino extends JFrame {
 			CaminoController cam = new CaminoController();
 			SucursalModel sucursalOrigen = (SucursalModel) sucOrigen.getSelectedItem();
 			SucursalModel sucursalDestino = (SucursalModel) sucDestino.getSelectedItem();
-
 			if (sucursalOrigen.getId() == sucursalDestino.getId()) {
 				JOptionPane.showMessageDialog(null, "No se puede crear un camino desde una sucursal a si misma",
 						"ERROR", JOptionPane.ERROR_MESSAGE);
@@ -168,6 +168,7 @@ public class AgregarCamino extends JFrame {
 				cam.createCamino(sucursalOrigen, sucursalDestino, tiempo[0], capMaxima.getValue(),
 						estadoTipo.getSelectedItem() == "Operativo");
 				panel.getTablaCaminos().setModel(new CaminoController().generadorDeTabla());
+				mapa.crearAristas();
 				dispose();
 			}
 

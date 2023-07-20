@@ -18,6 +18,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import sql.controllers.CaminoController;
+import sql.controllers.MapaController;
 
 @SuppressWarnings("serial")
 public class PanelCamino extends JPanel {
@@ -27,7 +28,7 @@ public class PanelCamino extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelCamino() {
+	public PanelCamino(MapaController mapa) {
 		setBounds(309, 98, 955, 583);
 		setLayout(null);
 
@@ -84,7 +85,7 @@ public class PanelCamino extends JPanel {
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonAgregar.addActionListener(e -> {
-			AgregarCamino.main(null, this);
+			AgregarCamino.main(null, this,mapa);
 		});
 		add(botonAgregar);
 
@@ -106,6 +107,8 @@ public class PanelCamino extends JPanel {
 							new Object[] { "Si", "No" }, "Si");
 					switch (op) {
 					case JOptionPane.YES_OPTION:
+						mapa.borrarArista(Integer.parseInt(idSeleccionado.toString()));
+						System.out.println(mapa.getMapa().getMapa().edgeSet());
 						new CaminoController().deleteCamino(Integer.parseInt(idSeleccionado.toString()));
 						tablaCaminos.setModel(new CaminoController().generadorDeTabla());
 						break;
