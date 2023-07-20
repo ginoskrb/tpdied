@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.grafo.MapaSucursales;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.Font;
+
+import sql.controllers.MapaController;
 import sql.controllers.SucursalController;
 import sql.models.SucursalModel;
 
@@ -26,11 +31,11 @@ public class AgregarSucursal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args,PanelSucursal panel) {
+	public static void main(String[] args,PanelSucursal panel, MapaController mapa) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarSucursal frame = new AgregarSucursal(panel);
+					AgregarSucursal frame = new AgregarSucursal(panel, mapa);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +47,7 @@ public class AgregarSucursal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgregarSucursal(PanelSucursal panel) {
+	public AgregarSucursal(PanelSucursal panel, MapaController mapa) {
 		setTitle("Registro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
@@ -143,10 +148,10 @@ public class AgregarSucursal extends JFrame {
 					SucursalController sucursal = new SucursalController();
 					sucursal.createSucursal(campoNombre.getText(), horaApertura[0], horaCierre[0],estadoTipo.getSelectedItem()=="Operativo");
 					panel.getTablaSucursales().setModel(new SucursalController().generadorDeTabla());
+					mapa.crearVertices();
 					dispose();
 		});
 		contentPane.add(botonAgregar);
-		
 		
 	}
 	

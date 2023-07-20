@@ -18,7 +18,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import gui.grafo.MapaSucursales;
 import gui.stock.StockSucursal;
+import sql.controllers.MapaController;
 import sql.controllers.SucursalController;
 @SuppressWarnings("serial")
 public class PanelSucursal extends JPanel {
@@ -28,7 +30,7 @@ public class PanelSucursal extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelSucursal() {
+	public PanelSucursal(MapaController mapa) {
 		setBounds(309, 98, 955, 583);
 		setLayout(null);
 		
@@ -81,7 +83,7 @@ public class PanelSucursal extends JPanel {
 		botonAgregar.setFocusPainted(false);
 		botonAgregar.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonAgregar.addActionListener(e -> {
-			AgregarSucursal.main(null,this);
+			AgregarSucursal.main(null,this,mapa);
 		});
 		add(botonAgregar);
 		// ---------------------------------------------------------------//
@@ -103,8 +105,10 @@ public class PanelSucursal extends JPanel {
                     int op = JOptionPane.showOptionDialog(null,"Estas seguro que deseas eliminar esta sucursal?","Avertencia",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,new Object[] {"Si","No"},"Si");
                     switch(op) {
                     	case JOptionPane.YES_OPTION: 
+                    		mapa.borrarVertice(idSeleccionado.toString());
                     		new SucursalController().deleteSucursal(Integer.parseInt(idSeleccionado.toString()));
                     		tablaSucursales.setModel(new SucursalController().generadorDeTabla());
+                    		mapa.crearVertices();
                     		break;
                     	case JOptionPane.NO_OPTION: 
                     		break;
