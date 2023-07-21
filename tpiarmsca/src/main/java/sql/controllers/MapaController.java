@@ -20,6 +20,9 @@ public class MapaController {
 			.buildSessionFactory();
 	private MapaSucursales mapa;
 	
+	public MapaController () {
+		
+	}
 	public MapaController(MapaSucursales mapa) {
 		this.mapa = mapa;
 	}
