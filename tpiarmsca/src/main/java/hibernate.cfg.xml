@@ -16,10 +16,12 @@
         <property name="hibernate.format_sql">true</property>
 
         
+      	<mapping class="sql.models.DetalleOrdenModel" />
         <mapping class="sql.models.CaminoModel" />
         <mapping class="sql.models.StockModel" />
         <mapping class="sql.models.SucursalModel" />
 		<mapping class="sql.models.ProductoModel" />
+		
 		
 		
     </session-factory>
