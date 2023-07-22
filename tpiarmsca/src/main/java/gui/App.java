@@ -18,8 +18,8 @@ import gui.camino.PanelCamino;
 import gui.producto.PanelProducto;
 import gui.sucursal.PanelSucursal;
 import sql.controllers.MapaController;
-import gui.grafo.PanelOrdenProvision;
 import gui.grafo.MapaSucursales;
+import gui.orden.PanelOrdenProvision;
 
 @SuppressWarnings("serial")
 public class App extends JFrame {
@@ -92,7 +92,7 @@ public class App extends JFrame {
 		
 		
 		//--------------------------------------------//
-		JButton botonInicio = new JButton("INICIO");
+		JButton botonInicio = new JButton("ORDEN");
 		botonInicio.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
 		botonInicio.setBackground(new Color(192, 192, 192));
 		botonInicio.setForeground(Color.black);

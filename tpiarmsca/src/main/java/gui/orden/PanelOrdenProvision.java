@@ -1,4 +1,4 @@
-package gui.grafo;
+package gui.orden;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +10,9 @@ import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
+import gui.grafo.MapaSucursales;
+import gui.grafo.Mapa;
+
 public class PanelOrdenProvision extends JPanel {
 	
 	/**
@@ -17,10 +20,10 @@ public class PanelOrdenProvision extends JPanel {
 	 */
 	public PanelOrdenProvision(MapaSucursales mapa) {
 		setBounds(309, 98, 955, 583);
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(255, 255, 230));
 		setLayout(null);
-		Mapa m = new Mapa(mapa);
-		add(m);
+		add(new Mapa(mapa));
+		add(new PanelTablaDetalleOrden());
 	}
 	
 	
