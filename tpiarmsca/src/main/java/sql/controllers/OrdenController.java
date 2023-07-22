@@ -12,6 +12,7 @@ import org.hibernate.cfg.Configuration;
 
 import sql.models.DetalleOrdenModel;
 import sql.models.OrdenModel;
+import sql.models.ProductoModel;
 //import sql.models.ProductoModel;
 import sql.models.SucursalModel;
 
@@ -20,9 +21,9 @@ public class OrdenController {
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(OrdenModel.class)
 			.buildSessionFactory();
-	public void createOrden(Timestamp fechaOrden, SucursalModel sucDestino, int tiempoEstimado, String estadoOrden, List<DetalleOrdenModel> detalles) {
+	public OrdenModel createOrden(Timestamp fechaOrden, SucursalModel sucDestino, int tiempoEstimado, String estadoOrden) {
+		OrdenModel orden = new OrdenModel(fechaOrden, sucDestino, tiempoEstimado, estadoOrden);
 		try (Session session = sessionFactory.openSession()) {
-			OrdenModel orden = new OrdenModel(fechaOrden, sucDestino, tiempoEstimado, estadoOrden, detalles);
 			session.beginTransaction();
 			session.save(orden);
 			session.getTransaction().commit();
@@ -30,6 +31,39 @@ public class OrdenController {
 					JOptionPane.CLOSED_OPTION);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ingreso de datos incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+		return orden;
+	}
+	
+	public void updateOrden(OrdenModel orden) {
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			if (orden != null) {
+				session.update(orden);
+				session.getTransaction().commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<OrdenModel> obtenerTodasLasOrdenes() {
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			List<OrdenModel> ordenes = session.createQuery("FROM OrdenModel", OrdenModel.class).list();
+			return ordenes;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public OrdenModel obtenerOrdenPorId(int id) {
+		try (Session session = sessionFactory.openSession()) {
+			return session.get(OrdenModel.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
