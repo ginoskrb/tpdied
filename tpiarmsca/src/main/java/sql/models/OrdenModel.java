@@ -17,6 +17,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import sql.models.DetalleOrdenModel;
+
 @Entity
 @Table(name = "orden_provision")
 public class OrdenModel {
@@ -44,14 +46,16 @@ public class OrdenModel {
 	@OneToMany(mappedBy = "ordenProvision", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleOrdenModel> detalles = new ArrayList<DetalleOrdenModel>();
 	
-
+	public OrdenModel() {
+		
+	}
 	public OrdenModel(Timestamp fechaOrden, SucursalModel sucursalDestino, int tiempoMaximo,
-			String estadoOrden, List<DetalleOrdenModel> detalles) {
+			String estadoOrden) {
 		this.fechaOrden = fechaOrden;
 		SucursalDestino = sucursalDestino;
 		this.tiempoMaximo = tiempoMaximo;
 		this.estadoOrden = estadoOrden;
-		this.detalles = detalles;
+		this.detalles = new ArrayList<DetalleOrdenModel>();
 	}
 
 	public int getId() {

@@ -1,6 +1,15 @@
 package sql.models; // DetallerOrdenModel
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import sql.models.ProductoModel;
+import sql.models.OrdenModel;
 
 @Entity
 @Table(name = "detalle_orden_provision")
@@ -11,14 +20,25 @@ public class DetalleOrdenModel {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "orden_provision_id")
+    @JoinColumn(name = "id_orden_provision", referencedColumnName = "id")
     private OrdenModel ordenProvision;
 
-    @Column(name = "producto_id")
-    private Long productoId;
+    @ManyToOne
+    @JoinColumn(name = "id_producto", referencedColumnName = "id")
+    private ProductoModel producto;
 
-    @Column(name = "cantidad")
+    @Column(name = "cantidad_requerida")
     private int cantidad;
+
+    public DetalleOrdenModel() {
+    	
+    }
+    
+	public DetalleOrdenModel(OrdenModel ordenProvision, ProductoModel producto, int cantidad) {
+		this.ordenProvision = ordenProvision;
+		this.producto = producto;
+		this.cantidad = cantidad;
+	}
 
 	public int getId() {
 		return id;
@@ -36,12 +56,12 @@ public class DetalleOrdenModel {
 		this.ordenProvision = ordenProvision;
 	}
 
-	public Long getProductoId() {
-		return productoId;
+	public ProductoModel getProducto() {
+		return producto;
 	}
 
-	public void setProductoId(Long productoId) {
-		this.productoId = productoId;
+	public void setProductoId(ProductoModel producto) {
+		this.producto = producto;
 	}
 
 	public int getCantidad() {

@@ -140,4 +140,14 @@ public class ProductoController {
 			return null;
 		}
 	}
+	
+	public ProductoModel obtenerProductoPorId(int id) {
+		try (Session session = sessionFactory.openSession()) {
+			return session.get(ProductoModel.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }

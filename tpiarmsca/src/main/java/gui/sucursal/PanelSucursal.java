@@ -19,9 +19,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import gui.grafo.MapaSucursales;
+import gui.orden.GenerarOrden;
 import gui.stock.StockSucursal;
 import sql.controllers.MapaController;
 import sql.controllers.SucursalController;
+import sql.models.SucursalModel;
 @SuppressWarnings("serial")
 public class PanelSucursal extends JPanel {
 	private JTextField Buscador;
@@ -142,7 +144,7 @@ public class PanelSucursal extends JPanel {
 		botonStock.setFocusPainted(false);
 		botonStock.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonStock.setBackground(new Color(0, 64, 128));
-		botonStock.setBounds(312, 465, 237, 51);
+		botonStock.setBounds(318, 465, 237, 51);
 		botonStock.addActionListener(e->{
 			int filaSeleccionada = tablaSucursales.getSelectedRow();
 			if (filaSeleccionada != -1) {
@@ -151,6 +153,23 @@ public class PanelSucursal extends JPanel {
 			}
 		});
 		add(botonStock);
+		
+		JButton btnGenerarOrdenDe = new JButton("Generar Orden");
+		btnGenerarOrdenDe.setForeground(Color.WHITE);
+		btnGenerarOrdenDe.setFont(new Font("Dialog", Font.BOLD, 15));
+		btnGenerarOrdenDe.setFocusPainted(false);
+		btnGenerarOrdenDe.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnGenerarOrdenDe.setBackground(new Color(0, 64, 128));
+		btnGenerarOrdenDe.setBounds(697, 465, 149, 51);
+		btnGenerarOrdenDe.addActionListener(e -> {
+			int filaSeleccionada = tablaSucursales.getSelectedRow();
+			if (filaSeleccionada != -1) {
+				Object idSeleccionado = tablaSucursales.getValueAt(filaSeleccionada, 0);
+				SucursalModel sucDest = new SucursalController().obtenerSucursalPorId(Integer.parseInt(idSeleccionado.toString()));
+				GenerarOrden.main(null, sucDest);
+			}
+		});
+		add(btnGenerarOrdenDe);
 		// ---------------------------------------------------------------//
 
 	}
