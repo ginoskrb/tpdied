@@ -33,6 +33,7 @@ import sql.models.OrdenModel;
 import sql.models.ProductoModel;
 import sql.models.SucursalModel;
 import java.sql.Timestamp;
+import java.awt.Color;
 @SuppressWarnings("serial")
 public class GenerarOrden extends JFrame {
 
@@ -63,9 +64,10 @@ public class GenerarOrden extends JFrame {
 	 */
 	public GenerarOrden(SucursalModel sucDestino) {
 		setTitle("Generar Orden");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(1024,576);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 64, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -89,6 +91,7 @@ public class GenerarOrden extends JFrame {
 		
 		
 		JLabel lblFecha = new JLabel("Fecha:");
+		lblFecha.setForeground(new Color(255, 255, 255));
 		lblFecha.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblFecha.setBounds(10, 11, 60, 17);
 		contentPane.add(lblFecha);
@@ -99,6 +102,7 @@ public class GenerarOrden extends JFrame {
 		textTiempo.setColumns(10);
 		
 		JLabel lblTiempo = new JLabel("Tiempo estimado:");
+		lblTiempo.setForeground(new Color(255, 255, 255));
 		lblTiempo.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblTiempo.setBounds(241, 11, 127, 17);
 		contentPane.add(lblTiempo);
@@ -113,17 +117,21 @@ public class GenerarOrden extends JFrame {
 		contentPane.add(scrollListaProductosDis);
 		tablaProductosDis.setModel(new ProductoController().generadorDeTabla());
 		tablaProductosDis.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tablaProductosDis.getTableHeader().setBackground(new Color(0,64,128));
+		tablaProductosDis.getTableHeader().setForeground(Color.white);
 		scrollListaProductosDis.setViewportView(tablaProductosDis);
 		
 		
 		
 		
 		JLabel lblListaProductosReq = new JLabel("Lista de productos requeridos:");
+		lblListaProductosReq.setForeground(new Color(255, 255, 255));
 		lblListaProductosReq.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblListaProductosReq.setBounds(10, 52, 226, 20);
 		contentPane.add(lblListaProductosReq);
 		
 		JButton btnAgregar = new JButton("<- Agregar a la lista");
+		btnAgregar.setBackground(new Color(255, 255, 255));
 		btnAgregar.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnAgregar.setBounds(350, 443, 167, 27);
 		btnAgregar.addActionListener(e -> {
@@ -135,17 +143,22 @@ public class GenerarOrden extends JFrame {
 				ProductoCantidad prodcant = new ProductoCantidad(prodSeleccionado,Integer.parseInt(input));
 				productosRequeridos.add(prodcant);
 				tablaProductosReq.setModel(this.generadorDeTabla(productosRequeridos));
+				tablaProductosReq.getTableHeader().setBackground(new Color(0,64,128));
+				tablaProductosReq.getTableHeader().setForeground(Color.white);
 
 			}
 		});
 		contentPane.add(btnAgregar);
 		
 		JLabel lblListaProductosDis = new JLabel("Lista de productos disponibles:");
+		lblListaProductosDis.setForeground(new Color(255, 255, 255));
+		lblListaProductosDis.setBackground(new Color(255, 255, 255));
 		lblListaProductosDis.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblListaProductosDis.setBounds(538, 52, 226, 20);
 		contentPane.add(lblListaProductosDis);
 		
 		JButton btnGenerarOrden = new JButton("GENERAR ORDEN");
+		btnGenerarOrden.setBackground(new Color(255, 255, 255));
 		btnGenerarOrden.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnGenerarOrden.setBounds(831, 499, 167, 27);
 		btnGenerarOrden.addActionListener(e -> {
@@ -159,6 +172,7 @@ public class GenerarOrden extends JFrame {
 					orden_prov.addDetalle(new DetalleOrdenModel(orden_prov,prodcant.getProducto(),prodcant.getCantidad()));
 				}
 				new OrdenController().updateOrden(orden_prov);
+				dispose();
 			}catch (Exception s) {
 				s.printStackTrace();
 			}
