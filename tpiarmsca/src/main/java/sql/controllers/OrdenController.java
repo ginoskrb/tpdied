@@ -5,11 +5,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import sql.models.CaminoModel;
 import sql.models.DetalleOrdenModel;
 import sql.models.OrdenModel;
 import sql.models.ProductoModel;
@@ -67,5 +69,28 @@ public class OrdenController {
 		}
 	}
 	
+	
+	public DefaultTableModel generadorDeTabla() {
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "FECHA", "DESTINO", "TIEMPO MAXIMO", "ESTADO" }) {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+	    try {
+	        Session session = sessionFactory.openSession();
+	        session.beginTransaction();
+	        List<OrdenModel> resultados = session.createQuery("FROM OrdenModel").list();
+	        for (OrdenModel entidad : resultados) {
+	            Object[] fila = { entidad.getId(), entidad.getFechaOrden(), entidad.getSucursalDestino().getNombre(), entidad.getTiempoMaximo(),
+	                    entidad.getEstadoOrden() };
+	            modelo.addRow(fila);
+	        }
+	        return modelo;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return modelo;
+	}
 	
 }
