@@ -1,10 +1,11 @@
 package sql.models; //OrdenModel
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -28,29 +29,28 @@ public class OrdenModel {
 
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "fecha_orden")
 	private Timestamp fechaOrden;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_sucursal_destino", referencedColumnName = "id")
 	private SucursalModel SucursalDestino;
-	
+
 	@Column(name = "tiempo_maximo_horas")
 	private int tiempoMaximo;
-	
+
 	@Column(name = "estado")
 	String estadoOrden;
-	
-	
+
 	@OneToMany(mappedBy = "ordenProvision", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DetalleOrdenModel> detalles = new ArrayList<DetalleOrdenModel>();
-	
+	private List<DetalleOrdenModel> detalles = new ArrayList<DetalleOrdenModel>();
+
 	public OrdenModel() {
-		
+
 	}
-	public OrdenModel(Timestamp fechaOrden, SucursalModel sucursalDestino, int tiempoMaximo,
-			String estadoOrden) {
+
+	public OrdenModel(Timestamp fechaOrden, SucursalModel sucursalDestino, int tiempoMaximo, String estadoOrden) {
 		this.fechaOrden = fechaOrden;
 		SucursalDestino = sucursalDestino;
 		this.tiempoMaximo = tiempoMaximo;
@@ -66,7 +66,21 @@ public class OrdenModel {
 		this.id = id;
 	}
 
-	
+	public String getFechaOrden() {
+
+		
+		LocalDate localDate = this.fechaOrden.toLocalDateTime().toLocalDate();
+
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		
+		return localDate.format(formatter);
+	}
+
+	public void setFechaOrden(Timestamp fechaOrden) {
+		this.fechaOrden = fechaOrden;
+	}
 
 	public SucursalModel getSucursalDestino() {
 		return SucursalDestino;
@@ -91,15 +105,15 @@ public class OrdenModel {
 	public void setEstadoOrden(String estadoOrden) {
 		this.estadoOrden = estadoOrden;
 	}
-	
-	public void addDetalle(DetalleOrdenModel detalle) {
-        detalles.add(detalle);
-        detalle.setOrdenProvision(this);
-    }
 
-    public void removeDetalle(DetalleOrdenModel detalle) {
-        detalles.remove(detalle);
-        detalle.setOrdenProvision(null);
-    }
-	
+	public void addDetalle(DetalleOrdenModel detalle) {
+		detalles.add(detalle);
+		detalle.setOrdenProvision(this);
+	}
+
+	public void removeDetalle(DetalleOrdenModel detalle) {
+		detalles.remove(detalle);
+		detalle.setOrdenProvision(null);
+	}
+
 }
