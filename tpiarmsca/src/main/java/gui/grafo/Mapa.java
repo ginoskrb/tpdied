@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 
 public class Mapa extends JPanel {
 
@@ -74,7 +75,7 @@ public class Mapa extends JPanel {
 		
 		Graphics2D grafico2d = (Graphics2D) g;
 			
-		for(DefaultEdge arista: mapa.getMapa().edgeSet()) {
+		for(DefaultWeightedEdge arista: mapa.getMapa().edgeSet()) {
 			String origen = mapa.getMapa().getEdgeSource(arista);
 			String destino = mapa.getMapa().getEdgeTarget(arista);
 			
