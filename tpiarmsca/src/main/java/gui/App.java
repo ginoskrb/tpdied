@@ -189,8 +189,7 @@ public class App extends JFrame {
 		//--------------------------------------------//
 		map.crearVertices();
 		map.crearAristas();
-		System.out.println(map.getMapa().getMapa().vertexSet());
-		System.out.println(mapa.getMapa().edgeSet());
+		System.out.println(mapa.caminos("6", "7"));
 	}
 	
 	private PanelSucursal getPanelSucursal() {

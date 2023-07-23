@@ -1,10 +1,12 @@
 package gui.grafo;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
@@ -68,5 +70,29 @@ public class MapaSucursales {
 		return Graphs.neighborListOf(mapa, nombreVertice);
 	}
 	
+	public List<List<String>> caminos(String v1, String v2){
+		List<List<String>> salida = new ArrayList<List<String>>();
+		List<String> marcados = new ArrayList<String>();
+		marcados.add(v1);
+		buscarCaminosAux(v1,v2,marcados,salida);
+		return salida;
+	}
+	
+	private void buscarCaminosAux(String v1, String v2, List<String> marcados, List<List<String>> todos) {
+		List<String> adyacentes = this.verticesAdyacentes(v1);
+		List<String> copiaMarcados = null;
+		for(String ady: adyacentes) {
+			copiaMarcados = marcados.stream().collect(Collectors.toList());
+			if(ady.equals(v2)) {
+				copiaMarcados.add(v2);
+				todos.add(new ArrayList<String>(copiaMarcados));
+				}else {
+					if(!copiaMarcados.contains(ady)) {
+						copiaMarcados.add(ady);
+						this.buscarCaminosAux(ady,v2,copiaMarcados,todos);
+					}
+			}
+		}
+	}
 	
 }
