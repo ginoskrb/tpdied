@@ -2,6 +2,7 @@ package gui.grafo;
 
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -61,6 +62,10 @@ public class MapaSucursales {
 
 	public void setPosicionesVertices(Map<String, Point> posicionesVertices) {
 		this.posicionesVertices = posicionesVertices;
+	}
+	
+	public List<String> verticesAdyacentes (String nombreVertice){
+		return Graphs.neighborListOf(mapa, nombreVertice);
 	}
 	
 	
