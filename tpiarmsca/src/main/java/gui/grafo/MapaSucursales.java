@@ -8,14 +8,16 @@ import java.util.Random;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.graph.SimpleWeightedGraph;
 
 public class MapaSucursales {
-	private Graph<String, DefaultEdge>mapa;
+	private Graph<String, DefaultWeightedEdge> mapa;
 	private Map<String,Point> posicionesVertices;
 	
 	public MapaSucursales() {
-		mapa = new SimpleGraph<>(DefaultEdge.class);
+		mapa = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 		posicionesVertices = new HashMap<>();
 	}
 	
@@ -31,8 +33,9 @@ public class MapaSucursales {
 		this.mapa.removeEdge(idOrigen,idDestino);
 	}
 	
-	public void agregarArista(String nombreVerticeA, String nombreVerticeB) {
+	public void agregarArista(String nombreVerticeA, String nombreVerticeB, int peso) {
 		this.mapa.addEdge(nombreVerticeA, nombreVerticeB);
+		this.mapa.setEdgeWeight(nombreVerticeA, nombreVerticeB, peso);
 	}
 	
 	public void posicionInicialVertice(String nombreVertice) {
@@ -44,11 +47,11 @@ public class MapaSucursales {
 		this.posicionesVertices.put(nombreVertice, new Point(random.nextInt(maxX-minX+1)+minX,random.nextInt(maxY-minY+1)+minY));
 	}
 
-	public Graph<String, DefaultEdge> getMapa() {
+	public Graph<String, DefaultWeightedEdge> getMapa() {
 		return mapa;
 	}
 
-	public void setMapa(Graph<String, DefaultEdge> mapa) {
+	public void setMapa(Graph<String, DefaultWeightedEdge> mapa) {
 		this.mapa = mapa;
 	}
 
