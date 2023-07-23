@@ -48,9 +48,9 @@ public class MapaController {
 			for (CaminoModel entidad : resultados) {
 				mapa.getMapa().addEdge(String.valueOf(entidad.getSucursalOrigen().getId())
 						, String.valueOf(entidad.getSucursalDestino().getId()));
-				mapa.getMapa().setEdgeWeight(String.valueOf(entidad.getSucursalOrigen().getId()),
-						String.valueOf(entidad.getSucursalDestino().getId())
-						,Integer.parseInt(entidad.getTiempoTransito()));
+				//mapa.getMapa().setEdgeWeight(String.valueOf(entidad.getSucursalOrigen().getId()),
+						//String.valueOf(entidad.getSucursalDestino().getId())
+						//,Integer.parseInt(entidad.getTiempoTransito()));
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
