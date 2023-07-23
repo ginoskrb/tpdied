@@ -191,7 +191,7 @@ public class App extends JFrame {
 		map.crearAristas();
 		System.out.println(mapa.caminos("6", "7"));
 	}
-	
+	//fg
 	private PanelSucursal getPanelSucursal() {
 		if(this.panelSuc==null) this.panelSuc = new PanelSucursal(map);
 		return  panelSuc;
