@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
+import gui.grafo.MapaSucursales;
 import sql.controllers.OrdenController;
 import sql.controllers.ProductoController;
 
@@ -26,7 +27,7 @@ public class PanelTablaOrden extends JPanel {
 	 * Create the panel.
 	 */
 
-	public PanelTablaOrden() {
+	public PanelTablaOrden(MapaSucursales mapa) {
 		setBounds(480, 22, 452, 538);
 		setBackground(new Color(255, 255, 128));
 		
@@ -38,6 +39,7 @@ public class PanelTablaOrden extends JPanel {
 		botonAsignarRuta.setForeground(new Color(255, 255, 255));
 		botonAsignarRuta.setBackground(new Color(0, 64, 128));
 		botonAsignarRuta.addActionListener(e->{
+			new VentanaCaminosPosibles(mapa).main(null,mapa);
 		});
 		setLayout(null);
 		add(botonAsignarRuta);

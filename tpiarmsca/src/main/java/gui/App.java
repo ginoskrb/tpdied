@@ -52,6 +52,9 @@ public class App extends JFrame {
 	public App() {
 		setTitle("Sistema de Gestión Logistico");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//--------------------------------------------//
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,7 +64,6 @@ public class App extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		//--------------------------------------------//
 		JPanel header = new JPanel();
 		header.setBackground(new Color(0, 64, 128));
 		header.setBounds(0, 0, 1264, 98);
@@ -189,7 +191,6 @@ public class App extends JFrame {
 		//--------------------------------------------//
 		map.crearVertices();
 		map.crearAristas();
-		System.out.println(mapa.caminos("6", "7"));
 	}
 	//fg
 	private PanelSucursal getPanelSucursal() {
