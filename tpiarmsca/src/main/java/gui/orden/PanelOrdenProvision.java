@@ -23,7 +23,7 @@ public class PanelOrdenProvision extends JPanel {
 		setBackground(new Color(255, 255, 230));
 		setLayout(null);
 		add(new Mapa(mapa));
-		add(new PanelTablaOrden());
+		add(new PanelTablaOrden(mapa));
 	}
 	
 	
