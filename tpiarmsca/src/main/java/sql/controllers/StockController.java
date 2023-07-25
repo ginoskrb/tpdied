@@ -1,6 +1,10 @@
 package sql.controllers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -9,6 +13,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import jakarta.persistence.TypedQuery;
+import sql.models.DetalleOrdenModel;
 import sql.models.ProductoModel;
 import sql.models.StockModel;
 import sql.models.SucursalModel;
@@ -115,4 +121,25 @@ public class StockController {
 	}
 	
 	
+	public HashMap<Integer,HashMap<Integer,Integer>> obtenerSucursalesYListaStock() {
+		HashMap<Integer,HashMap<Integer,Integer>> sucursalesYStock = new HashMap<>();
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			String hql = "FROM StockModel";
+			List<StockModel> resultados = session.createQuery(hql, StockModel.class).list();
+			for(StockModel entidad : resultados) {
+				HashMap<Integer,Integer> stock = new HashMap<>();
+				for (StockModel entidad2 : resultados) {
+					if(entidad2.getSucursal().getId()==entidad.getSucursal().getId()) {
+						stock.put(entidad2.getProducto().getId(), entidad2.getStock());
+					}
+				}
+				sucursalesYStock.put(entidad.getSucursal().getId(),stock);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sucursalesYStock;
+	}
+
 }

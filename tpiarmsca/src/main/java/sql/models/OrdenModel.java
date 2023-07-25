@@ -116,4 +116,9 @@ public class OrdenModel {
 		detalle.setOrdenProvision(null);
 	}
 
+	public List<DetalleOrdenModel> getDetalles() {
+		return detalles;
+	}
+	
+
 }

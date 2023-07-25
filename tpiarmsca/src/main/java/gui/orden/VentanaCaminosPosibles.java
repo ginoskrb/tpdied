@@ -19,14 +19,16 @@ public class VentanaCaminosPosibles extends JFrame {
 
 	private JPanel contentPane;
 	private PanelOpciones panelSeleccionado = null;
+	private ArrayList<String> origenes;
+	private String destino;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, MapaSucursales mapa) {
+	public static void main(String[] args, MapaSucursales mapa,String destino, ArrayList<String> origenes) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaCaminosPosibles frame = new VentanaCaminosPosibles(mapa);
+					VentanaCaminosPosibles frame = new VentanaCaminosPosibles(mapa,destino,origenes);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,23 +40,26 @@ public class VentanaCaminosPosibles extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaCaminosPosibles(MapaSucursales mapa) {
+	public VentanaCaminosPosibles(MapaSucursales mapa, String destino, ArrayList<String> origenes) {
+		this.origenes = origenes;
+		this.destino = destino;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setTitle("Recorridos");
 		
-		List<List<String>> recorridos = mapa.caminos("6", "7");
 		List<PanelOpciones> opciones = new ArrayList<PanelOpciones>();
 		PanelOpciones op;
-		
-		for(int i = 0; i<recorridos.size(); i++) {
-			op = new PanelOpciones(recorridos.get(i));
-			op.addMouseListener(new OpcionListener(op,this));
-			opciones.add(op);
+		for(int i = 0; i<origenes.size();i++) {
+			List<List<String>> recorridos = mapa.caminos(origenes.get(i), destino);
+			for(int j = 0; j<recorridos.size(); j++) {
+				op = new PanelOpciones(recorridos.get(j));
+				op.addMouseListener(new OpcionListener(op,this));
+				opciones.add(op);
+			}
 		}
-		
+	
 		JPanel contenedorDeOpciones = new JPanel();
 		contenedorDeOpciones.setLayout(new BoxLayout(contenedorDeOpciones, BoxLayout.Y_AXIS));
 		for(int i = 0; i<opciones.size();i++) {
@@ -67,7 +72,6 @@ public class VentanaCaminosPosibles extends JFrame {
 		asignar.setFont(new Font("Dialog", Font.BOLD, 15));
 		asignar.setFocusPainted(false);
 		asignar.addActionListener(e->{
-			System.out.println(this.panelSeleccionado.getRecorrido());
 		});
 		contenedorDeOpciones.add(asignar);
 		getContentPane().add(contenedorDeOpciones);

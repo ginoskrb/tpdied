@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 
 import gui.grafo.MapaSucursales;
 import gui.grafo.Mapa;
@@ -18,12 +19,17 @@ public class PanelOrdenProvision extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelOrdenProvision(MapaSucursales mapa) {
+	private PanelTablaOrden pto;
+	public PanelOrdenProvision(MapaSucursales mapa, DefaultTableModel modeloTabla) {
 		setBounds(309, 98, 955, 583);
-		setBackground(new Color(255, 255, 230));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		add(new Mapa(mapa));
-		add(new PanelTablaOrden(mapa));
+		pto = new PanelTablaOrden(mapa,modeloTabla);
+		add(pto);
+	}
+	public PanelTablaOrden getPto() {
+		return pto;
 	}
 	
 	

@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
+import org.jgrapht.graph.DefaultDirectedWeightedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
@@ -20,7 +22,7 @@ public class MapaSucursales {
 	private Map<String,Point> posicionesVertices;
 	
 	public MapaSucursales() {
-		mapa = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
+		mapa = new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class);
 		posicionesVertices = new HashMap<>();
 	}
 	
@@ -67,7 +69,13 @@ public class MapaSucursales {
 	}
 	
 	public List<String> verticesAdyacentes (String nombreVertice){
-		return Graphs.neighborListOf(mapa, nombreVertice);
+		ArrayList<String> vertices = new ArrayList<>();
+		Set<DefaultWeightedEdge> aristas = mapa.outgoingEdgesOf(nombreVertice);
+		for(DefaultWeightedEdge a: aristas) {
+			String verticeDestino= mapa.getEdgeTarget(a);
+			vertices.add(verticeDestino);
+		}
+		return vertices;
 	}
 	
 	public List<List<String>> caminos(String v1, String v2){
