@@ -12,12 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
 import gui.camino.PanelCamino;
 import gui.producto.PanelProducto;
 import gui.sucursal.PanelSucursal;
 import sql.controllers.MapaController;
+import sql.controllers.OrdenController;
 import gui.grafo.MapaSucursales;
 import gui.orden.PanelOrdenProvision;
 
@@ -198,9 +200,13 @@ public class App extends JFrame {
 		return  panelSuc;
 	}
 	
-	private PanelOrdenProvision getPanelOrden() {
-		if(this.panelOrden==null) this.panelOrden = new PanelOrdenProvision(mapa);
-		return  panelOrden;
+	private PanelOrdenProvision getPanelOrden( ) {
+		if(this.panelOrden==null) {
+		    this.panelOrden = new PanelOrdenProvision(mapa,new OrdenController().generadorDeTabla());
+		}else {
+			this.panelOrden.getPto().getTablaOrden().setModel(new OrdenController().generadorDeTabla());
+		}
+		return panelOrden;
 	}
 	
 	private PanelCamino getPanelCamino() {

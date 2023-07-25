@@ -2,6 +2,7 @@ package sql.controllers; //OrdenController
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -11,12 +12,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import jakarta.persistence.TypedQuery;
 import sql.models.CaminoModel;
 import sql.models.DetalleOrdenModel;
 import sql.models.OrdenModel;
 import sql.models.ProductoModel;
 //import sql.models.ProductoModel;
 import sql.models.SucursalModel;
+
 
 public class OrdenController {
 	private static final SessionFactory sessionFactory = new Configuration()
@@ -92,5 +95,19 @@ public class OrdenController {
 	    }
 	    return modelo;
 	}
+	
+	public List<DetalleOrdenModel> obtenerProductosSolicitados(int idOrden) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM DetalleOrdenModel WHERE ordenProvision.id = :idOrden";
+            TypedQuery<DetalleOrdenModel> query = session.createQuery(hql, DetalleOrdenModel.class);
+            query.setParameter("idOrden", idOrden);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+	
+	
 	
 }

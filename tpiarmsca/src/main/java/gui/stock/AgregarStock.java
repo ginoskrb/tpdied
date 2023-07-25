@@ -65,7 +65,7 @@ public class AgregarStock extends JFrame {
 		campoCantidadStock.setBounds(341, 20, 86, 20);
 		contentPane.add(campoCantidadStock);
 		campoCantidadStock.setColumns(10);
-
+		
 		JLabel lblNewLabel = new JLabel("STOCK");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));

@@ -71,7 +71,6 @@ public class StockModel {
 		return stock;
 	}
 
-
 	public void setCantidad(int stock) {
 		this.stock = stock;
 	}
