@@ -11,9 +11,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import gui.grafo.MapaSucursales;
+import sql.controllers.OrdenController;
+import sql.models.OrdenModel;
 
 public class VentanaCaminosPosibles extends JFrame {
 
@@ -24,11 +27,11 @@ public class VentanaCaminosPosibles extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args, MapaSucursales mapa,String destino, ArrayList<String> origenes) {
+	public static void main(String[] args, MapaSucursales mapa,String destino, ArrayList<String> origenes,Integer tiempoMaximo, Integer idOrden, JTable tablaOrden) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaCaminosPosibles frame = new VentanaCaminosPosibles(mapa,destino,origenes);
+					VentanaCaminosPosibles frame = new VentanaCaminosPosibles(mapa,destino,origenes,tiempoMaximo,idOrden,tablaOrden);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +43,7 @@ public class VentanaCaminosPosibles extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaCaminosPosibles(MapaSucursales mapa, String destino, ArrayList<String> origenes) {
+	public VentanaCaminosPosibles(MapaSucursales mapa, String destino, ArrayList<String> origenes,Integer tiempoMaximo,Integer idOrden, JTable tablaOrden) {
 		this.origenes = origenes;
 		this.destino = destino;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,10 +52,13 @@ public class VentanaCaminosPosibles extends JFrame {
 		setContentPane(contentPane);
 		setTitle("Recorridos");
 		
+		
+		Double pesoOrden = new OrdenController().obtenerPesoTotalDeOrden(idOrden);
+		System.out.println(pesoOrden);
 		List<PanelOpciones> opciones = new ArrayList<PanelOpciones>();
 		PanelOpciones op;
 		for(int i = 0; i<origenes.size();i++) {
-			List<List<String>> recorridos = mapa.caminos(origenes.get(i), destino);
+			List<List<String>> recorridos = mapa.caminos(origenes.get(i), destino,tiempoMaximo,pesoOrden);
 			for(int j = 0; j<recorridos.size(); j++) {
 				op = new PanelOpciones(recorridos.get(j));
 				op.addMouseListener(new OpcionListener(op,this));
@@ -66,14 +72,20 @@ public class VentanaCaminosPosibles extends JFrame {
 			contenedorDeOpciones.add(opciones.get(i));
 		}
 		
-		JButton asignar = new JButton("Seleccionar");
-		asignar.setBackground(new Color(0, 64, 128));
-		asignar.setForeground(new Color(255, 255, 255));
-		asignar.setFont(new Font("Dialog", Font.BOLD, 15));
-		asignar.setFocusPainted(false);
-		asignar.addActionListener(e->{
+		JButton seleccionar = new JButton("Seleccionar");
+		seleccionar.setBackground(new Color(0, 64, 128));
+		seleccionar.setForeground(new Color(255, 255, 255));
+		seleccionar.setFont(new Font("Dialog", Font.BOLD, 15));
+		seleccionar.setFocusPainted(false);
+		seleccionar.addActionListener(e->{
+			OrdenController odc = new OrdenController();
+			OrdenModel odm = odc.obtenerOrdenPorId(idOrden);
+			odm.setEstadoOrden("EN PROCESO");
+			odc.updateOrden(odm);
+			tablaOrden.setModel(odc.generadorDeTabla());
+			dispose();
 		});
-		contenedorDeOpciones.add(asignar);
+		contenedorDeOpciones.add(seleccionar);
 		getContentPane().add(contenedorDeOpciones);
 		pack();
 		setResizable(false);
