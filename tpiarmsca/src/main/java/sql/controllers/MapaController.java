@@ -1,5 +1,6 @@
 package sql.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -40,23 +41,38 @@ public class MapaController {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void crearAristas() {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
 			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel", CaminoModel.class).list();
 			for (CaminoModel entidad : resultados) {
-				mapa.getMapa().addEdge(String.valueOf(entidad.getSucursalOrigen().getId())
-						, String.valueOf(entidad.getSucursalDestino().getId()));
-				//mapa.getMapa().setEdgeWeight(String.valueOf(entidad.getSucursalOrigen().getId()),
-						//String.valueOf(entidad.getSucursalDestino().getId())
-						//,Integer.parseInt(entidad.getTiempoTransito()));
+				mapa.agregarArista(String.valueOf(entidad.getSucursalOrigen().getId())
+						, String.valueOf(entidad.getSucursalDestino().getId())
+						, Integer.parseInt(entidad.getTiempoTransito().substring(0, 2)));
 			}
+			mapa.generarCapacidadVertices(this.getCapacidad());
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public HashMap<String,Double> getCapacidad() {
+		HashMap<String,Double> capacidades = new HashMap<>();
+		try (Session session = sessionFactory.openSession()) {
+			session.beginTransaction();
+			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel", CaminoModel.class).list();
+			for (CaminoModel entidad : resultados) {
+				capacidades.put(String.valueOf(entidad.getSucursalDestino().getId()),(double)entidad.getCapacidadMaxima());
+			}
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return capacidades;
+	}
+	
 	
 	
 	public void borrarVertice(String nombreVertice) {

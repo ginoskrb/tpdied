@@ -19,6 +19,7 @@ import javax.swing.event.ChangeListener;
 import gui.sucursal.EditarSucursal;
 import gui.sucursal.PanelSucursal;
 import sql.controllers.CaminoController;
+import sql.controllers.MapaController;
 import sql.controllers.SucursalController;
 import sql.models.SucursalModel;
 @SuppressWarnings("serial")

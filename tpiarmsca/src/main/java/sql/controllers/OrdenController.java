@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import jakarta.persistence.TypedQuery;
 import sql.models.CaminoModel;
@@ -105,6 +106,24 @@ public class OrdenController {
         } catch (Exception e) {
             e.printStackTrace();
             return Collections.emptyList();
+        }
+    }
+	
+	public double obtenerPesoTotalDeOrden(int idOrden) {
+        try (Session session = sessionFactory.openSession()) {
+            String sql = "SELECT SUM(d.cantidad_requerida * prod.peso_kg) " +
+                         "FROM detalle_orden_provision d " +
+                         "JOIN producto prod ON d.id_producto = prod.id " +
+                         "WHERE d.id_orden_provision = :idOrden";
+
+            Query<Double> query = session.createNativeQuery(sql, Double.class);
+            query.setParameter("idOrden", idOrden);
+
+            Double pesoTotal = query.uniqueResult();
+            return pesoTotal != null ? pesoTotal : 0.0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0.0;
         }
     }
 	

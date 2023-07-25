@@ -2,6 +2,7 @@ package gui.grafo;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,39 +18,48 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
+import sql.controllers.CaminoController;
+import sql.controllers.MapaController;
+
 public class MapaSucursales {
 	private Graph<String, DefaultWeightedEdge> mapa;
-	private Map<String,Point> posicionesVertices;
-	
+	private Map<String, Point> posicionesVertices;
+	private Map<String,Double> capacidadVertices;
+
 	public MapaSucursales() {
-		mapa = new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class);
-		posicionesVertices = new HashMap<>();
+		this.mapa = new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class);
+		this.posicionesVertices = new HashMap<>();
 	}
-	
+
 	public void agregarVertice(String nombreVertice) {
 		this.mapa.addVertex(nombreVertice);
 	}
-	
+
 	public void eliminarVertice(String nombreVertice) {
 		this.mapa.removeVertex(nombreVertice);
 	}
-	
+
 	public void eliminarArista(String idOrigen, String idDestino) {
-		this.mapa.removeEdge(idOrigen,idDestino);
+		this.mapa.removeEdge(idOrigen, idDestino);
 	}
-	
+
+	public void eliminarTodasLasAristas(Collection listaAristas) {
+		this.mapa.removeAllEdges(listaAristas);
+	}
+
 	public void agregarArista(String nombreVerticeA, String nombreVerticeB, int peso) {
 		this.mapa.addEdge(nombreVerticeA, nombreVerticeB);
 		this.mapa.setEdgeWeight(nombreVerticeA, nombreVerticeB, peso);
 	}
-	
+
 	public void posicionInicialVertice(String nombreVertice) {
 		Random random = new Random();
 		int minX = 100;
-		int maxX =336;
+		int maxX = 336;
 		int minY = 100;
 		int maxY = 438;
-		this.posicionesVertices.put(nombreVertice, new Point(random.nextInt(maxX-minX+1)+minX,random.nextInt(maxY-minY+1)+minY));
+		this.posicionesVertices.put(nombreVertice,
+				new Point(random.nextInt(maxX - minX + 1) + minX, random.nextInt(maxY - minY + 1) + minY));
 	}
 
 	public Graph<String, DefaultWeightedEdge> getMapa() {
@@ -68,39 +78,63 @@ public class MapaSucursales {
 		this.posicionesVertices = posicionesVertices;
 	}
 	
-	public List<String> verticesAdyacentes (String nombreVertice){
+	public Map<String, Double> getCapacidadVertices() {
+		return capacidadVertices;
+	}
+
+	public List<String> verticesAdyacentes(String nombreVertice) {
 		ArrayList<String> vertices = new ArrayList<>();
 		Set<DefaultWeightedEdge> aristas = mapa.outgoingEdgesOf(nombreVertice);
-		for(DefaultWeightedEdge a: aristas) {
-			String verticeDestino= mapa.getEdgeTarget(a);
+		for (DefaultWeightedEdge a : aristas) {
+			String verticeDestino = mapa.getEdgeTarget(a);
 			vertices.add(verticeDestino);
 		}
 		return vertices;
 	}
 	
-	public List<List<String>> caminos(String v1, String v2){
-		List<List<String>> salida = new ArrayList<List<String>>();
-		List<String> marcados = new ArrayList<String>();
-		marcados.add(v1);
-		buscarCaminosAux(v1,v2,marcados,salida);
-		return salida;
+
+	public void generarCapacidadVertices(HashMap<String,Double> cv) {
+		this.capacidadVertices =cv;
 	}
 	
-	private void buscarCaminosAux(String v1, String v2, List<String> marcados, List<List<String>> todos) {
+	public List<List<String>> caminos(String v1, String v2, Integer tiempoMaximo, Double pesoOrden) {
+		List<List<String>> salida = new ArrayList<List<String>>();
+		List<String> marcados = new ArrayList<String>();
+		Integer tiempoCamino = 0;
+		Double pesoMinimoCamino = 10000.0;
+		marcados.add(v1);
+		System.out.println("nuevo camino");
+		buscarCaminosAux(v1, v2, marcados, salida, tiempoMaximo, tiempoCamino, pesoOrden, pesoMinimoCamino);
+		return salida;
+	}
+
+	private void buscarCaminosAux(String v1, String v2, List<String> marcados, List<List<String>> todos,
+			Integer tiempoMaximo, Integer tiempoCamino, Double pesoOrden, Double pesoMinimoCamino) {
 		List<String> adyacentes = this.verticesAdyacentes(v1);
 		List<String> copiaMarcados = null;
-		for(String ady: adyacentes) {
+		for (String ady : adyacentes) {
 			copiaMarcados = marcados.stream().collect(Collectors.toList());
-			if(ady.equals(v2)) {
-				copiaMarcados.add(v2);
-				todos.add(new ArrayList<String>(copiaMarcados));
-				}else {
-					if(!copiaMarcados.contains(ady)) {
-						copiaMarcados.add(ady);
-						this.buscarCaminosAux(ady,v2,copiaMarcados,todos);
+			if (ady.equals(v2)) {
+				tiempoCamino += (int) this.mapa.getEdgeWeight(mapa.getEdge(v1, v2));
+				if (pesoMinimoCamino >= this.getCapacidadVertices().get(v2)) {
+					pesoMinimoCamino = this.getCapacidadVertices().get(v2);
+				}
+				if (tiempoCamino <= tiempoMaximo && pesoMinimoCamino >= pesoOrden) {
+					copiaMarcados.add(v2);
+					todos.add(new ArrayList<String>(copiaMarcados));
+				}
+			} else {
+				if (!copiaMarcados.contains(ady)) {
+					if (pesoMinimoCamino >= this.getCapacidadVertices().get(ady)) {
+						pesoMinimoCamino = this.getCapacidadVertices().get(ady);
 					}
+					tiempoCamino += (int) this.mapa.getEdgeWeight(mapa.getEdge(v1, ady));
+					copiaMarcados.add(ady);
+					this.buscarCaminosAux(ady, v2, copiaMarcados, todos, tiempoMaximo, tiempoCamino, pesoOrden,
+							pesoMinimoCamino);
+				}
 			}
 		}
 	}
-	
+
 }
