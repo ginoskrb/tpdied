@@ -35,7 +35,7 @@ public class PanelTablaOrden extends JPanel {
 
 	public PanelTablaOrden(MapaSucursales mapa, DefaultTableModel modeloTabla) {
 		setBounds(480, 22, 452, 538);
-		setBackground(new Color(255, 255, 128));
+		setBackground(new Color(255, 255, 255));
 
 		tablaOrden.setModel(modeloTabla);
 		tablaOrden.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -43,7 +43,7 @@ public class PanelTablaOrden extends JPanel {
 		tablaOrden.getTableHeader().setForeground(Color.white);
 
 		JButton botonAsignarRuta = new JButton("Asignar ruta");
-		botonAsignarRuta.setBounds(140, 441, 167, 38);
+		botonAsignarRuta.setBounds(33, 489, 167, 38);
 		botonAsignarRuta.setFont(new Font("Dialog", Font.BOLD, 15));
 		botonAsignarRuta.setForeground(new Color(255, 255, 255));
 		botonAsignarRuta.setBackground(new Color(0, 64, 128));
@@ -89,18 +89,27 @@ public class PanelTablaOrden extends JPanel {
 			}
 		});
 		setLayout(null);
+		setLayout(null);
 		add(botonAsignarRuta);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(41, 401, 376, -355);
+		scrollPane.setBounds(0, 0, 452, 478);
 		scrollPane.setViewportView(tablaOrden);
-		setLayout(new BorderLayout());
-		add(scrollPane, BorderLayout.CENTER);
+		add(scrollPane);
+		
+		JButton botonOrdenes = new JButton("Ordenes en Proceso");
+		botonOrdenes.setForeground(Color.WHITE);
+		botonOrdenes.setFont(new Font("Dialog", Font.BOLD, 15));
+		botonOrdenes.setBackground(new Color(0, 64, 128));
+		botonOrdenes.setBounds(232, 489, 196, 38);
+		botonOrdenes.addActionListener(e-> {
+			OrdenesEnProceso.main(null);
+		});
+		add(botonOrdenes);
 
 	}
 
 	public JTable getTablaOrden() {
 		return tablaOrden;
 	}
-
 }

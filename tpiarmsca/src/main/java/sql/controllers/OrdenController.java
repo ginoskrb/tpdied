@@ -84,7 +84,7 @@ public class OrdenController {
 	    try {
 	        Session session = sessionFactory.openSession();
 	        session.beginTransaction();
-	        List<OrdenModel> resultados = session.createQuery("FROM OrdenModel").list();
+	        List<OrdenModel> resultados = session.createQuery("FROM OrdenModel d WHERE d.estadoOrden = 'PENDIENTE'").list();
 	        for (OrdenModel entidad : resultados) {
 	            Object[] fila = { entidad.getId(), entidad.getFechaOrden(), entidad.getSucursalDestino().getNombre(), entidad.getTiempoMaximo(),
 	                    entidad.getEstadoOrden() };
@@ -127,6 +127,27 @@ public class OrdenController {
         }
     }
 	
-	
+	public DefaultTableModel generadorDeTablaProcesos() {
+	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "FECHA", "DESTINO", "TIEMPO MAXIMO", "ESTADO" }) {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+	    try {
+	        Session session = sessionFactory.openSession();
+	        session.beginTransaction();
+	        List<OrdenModel> resultados = session.createQuery("FROM OrdenModel d WHERE d.estadoOrden = 'EN PROCESO'").list();
+	        for (OrdenModel entidad : resultados) {
+	            Object[] fila = { entidad.getId(), entidad.getFechaOrden(), entidad.getSucursalDestino().getNombre(), entidad.getTiempoMaximo(),
+	                    entidad.getEstadoOrden() };
+	            modelo.addRow(fila);
+	        }
+	        return modelo;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return modelo;
+	}
 	
 }
