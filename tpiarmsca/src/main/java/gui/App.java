@@ -22,6 +22,7 @@ import sql.controllers.MapaController;
 import sql.controllers.OrdenController;
 import gui.grafo.MapaSucursales;
 import gui.orden.PanelOrdenProvision;
+import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
 public class App extends JFrame {
@@ -68,12 +69,12 @@ public class App extends JFrame {
 		
 		JPanel header = new JPanel();
 		header.setBackground(new Color(0, 64, 128));
-		header.setBounds(0, 0, 1264, 98);
+		header.setBounds(0, 0, 1264, 99);
 		header.setLayout(new BorderLayout(0, 0));
 		getContentPane().add(header);
 		
 		JLabel Titulo = new JLabel("  SGL");
-		Titulo.setFont(new Font("Microsoft New Tai Lue", Font.PLAIN, 66));
+		Titulo.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 66));
 		Titulo.setForeground(new Color(255, 255, 255));
 		header.add(Titulo, BorderLayout.WEST);
 		//--------------------------------------------//
@@ -96,8 +97,8 @@ public class App extends JFrame {
 		
 		
 		//--------------------------------------------//
-		JButton botonInicio = new JButton("ORDEN");
-		botonInicio.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
+		JButton botonInicio = new JButton("ORDENES");
+		botonInicio.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 31));
 		botonInicio.setBackground(new Color(192, 192, 192));
 		botonInicio.setForeground(Color.black);
 		botonInicio.setFocusPainted(false);
@@ -122,7 +123,7 @@ public class App extends JFrame {
 		
 		//--------------------------------------------//
 		JButton botonSucursales = new JButton("SUCURSALES");
-		botonSucursales.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
+		botonSucursales.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 31));
 		botonSucursales.setBackground(new Color(192, 192, 192));
 		botonSucursales.setFocusPainted(false);
 		botonSucursales.setForeground(Color.black);
@@ -146,7 +147,7 @@ public class App extends JFrame {
 		
 		//--------------------------------------------//
 		JButton botonCaminos = new JButton("CAMINOS");
-		botonCaminos.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
+		botonCaminos.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 31));
 		botonCaminos.setBackground(new Color(192, 192, 192));
 		botonCaminos.setFocusPainted(false);
 		botonCaminos.setForeground(Color.black);
@@ -171,7 +172,7 @@ public class App extends JFrame {
 		
 		//--------------------------------------------//
 		JButton botonProductos = new JButton("PRODUCTOS");
-		botonProductos.setFont(new Font("Microsoft YaHei", Font.PLAIN, 31));
+		botonProductos.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 31));
 		botonProductos.setBackground(new Color(192, 192, 192));
 		botonProductos.setFocusPainted(false);
 		botonProductos.setBorder(new EmptyBorder(0,0,0,0));
