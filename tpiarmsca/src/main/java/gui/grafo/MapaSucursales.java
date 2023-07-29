@@ -20,11 +20,16 @@ import org.jgrapht.graph.SimpleWeightedGraph;
 
 import sql.controllers.CaminoController;
 import sql.controllers.MapaController;
+import sql.controllers.StockController;
+import sql.controllers.SucursalController;
+import sql.models.CaminoModel;
 
 public class MapaSucursales {
 	private Graph<String, DefaultWeightedEdge> mapa;
 	private Map<String, Point> posicionesVertices;
 	private Map<String,Double> capacidadVertices;
+	private SucursalController sc = new SucursalController();
+	private CaminoController cc = new CaminoController();
 
 	public MapaSucursales() {
 		this.mapa = new DefaultDirectedWeightedGraph<>(DefaultWeightedEdge.class);
@@ -87,7 +92,9 @@ public class MapaSucursales {
 		Set<DefaultWeightedEdge> aristas = mapa.outgoingEdgesOf(nombreVertice);
 		for (DefaultWeightedEdge a : aristas) {
 			String verticeDestino = mapa.getEdgeTarget(a);
-			vertices.add(verticeDestino);
+			if(sc.getAtributoSucursal(Integer.parseInt(verticeDestino),"estado")=="OPERATIVO") {
+				vertices.add(verticeDestino);
+			}
 		}
 		return vertices;
 	}
@@ -114,27 +121,30 @@ public class MapaSucursales {
 		List<String> copiaMarcados = null;
 		for (String ady : adyacentes) {
 			copiaMarcados = marcados.stream().collect(Collectors.toList());
-			if (ady.equals(v2)) {
-				tiempoCamino += (int) this.mapa.getEdgeWeight(mapa.getEdge(v1, v2));
-				if (pesoMinimoCamino >= this.getCapacidadVertices().get(v2)) {
-					pesoMinimoCamino = this.getCapacidadVertices().get(v2);
-				}
-				if (tiempoCamino <= tiempoMaximo && pesoMinimoCamino >= pesoOrden) {
-					copiaMarcados.add(v2);
-					todos.add(new ArrayList<String>(copiaMarcados));
-				}
-			} else {
-				if (!copiaMarcados.contains(ady)) {
-					if (pesoMinimoCamino >= this.getCapacidadVertices().get(ady)) {
-						pesoMinimoCamino = this.getCapacidadVertices().get(ady);
+			CaminoModel camino = cc.obtenerCaminoPorSucursales(Integer.parseInt(v1),Integer.parseInt(ady));
+			System.out.println(camino.getEstado());
+			if(camino.getEstado()=="OPERATIVO") {
+				if (ady.equals(v2)) {
+					tiempoCamino += (int) this.mapa.getEdgeWeight(mapa.getEdge(v1, v2));
+					if (pesoMinimoCamino >= this.getCapacidadVertices().get(v2)) {
+						pesoMinimoCamino = this.getCapacidadVertices().get(v2);
 					}
-					tiempoCamino += (int) this.mapa.getEdgeWeight(mapa.getEdge(v1, ady));
-					copiaMarcados.add(ady);
-					this.buscarCaminosAux(ady, v2, copiaMarcados, todos, tiempoMaximo, tiempoCamino, pesoOrden,
-							pesoMinimoCamino);
+					if (tiempoCamino <= tiempoMaximo && pesoMinimoCamino >= pesoOrden) {
+						copiaMarcados.add(v2);
+						todos.add(new ArrayList<String>(copiaMarcados));
+					}
+				} else {
+							if (!copiaMarcados.contains(ady)) {
+								if (pesoMinimoCamino >= this.getCapacidadVertices().get(ady)) {
+									pesoMinimoCamino = this.getCapacidadVertices().get(ady);
+								}
+								tiempoCamino += (int) this.mapa.getEdgeWeight(mapa.getEdge(v1, ady));
+								copiaMarcados.add(ady);
+								this.buscarCaminosAux(ady, v2, copiaMarcados, todos, tiempoMaximo, tiempoCamino, pesoOrden,
+										pesoMinimoCamino);
+							}
+						}
+					}
 				}
 			}
-		}
-	}
-
 }
