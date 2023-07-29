@@ -146,7 +146,6 @@ public class SucursalController {
 		try (Session session = sessionFactory.openSession()) {
 			return session.get(SucursalModel.class, id);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

@@ -129,9 +129,11 @@ public class StockController {
 			List<StockModel> resultados = session.createQuery(hql, StockModel.class).list();
 			for(StockModel entidad : resultados) {
 				HashMap<Integer,Integer> stock = new HashMap<>();
-				for (StockModel entidad2 : resultados) {
-					if(entidad2.getSucursal().getId()==entidad.getSucursal().getId()) {
-						stock.put(entidad2.getProducto().getId(), entidad2.getStock());
+				if(entidad.getSucursal().isEstado() == "OPERATIVO") {
+					for (StockModel entidad2 : resultados) {
+						if(entidad2.getSucursal().getId()==entidad.getSucursal().getId()) {
+							stock.put(entidad2.getProducto().getId(), entidad2.getStock());
+						}
 					}
 				}
 				sucursalesYStock.put(entidad.getSucursal().getId(),stock);
