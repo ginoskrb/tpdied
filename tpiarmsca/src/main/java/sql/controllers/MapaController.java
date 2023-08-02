@@ -33,8 +33,17 @@ public class MapaController {
 			session.beginTransaction();
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel", SucursalModel.class).list();
 			for (SucursalModel entidad : resultados) {
-				mapa.agregarVertice(""+entidad.getId());
-				mapa.posicionInicialVertice(""+entidad.getId());
+				if(entidad.getNombre().equals("CENTRAL")) {
+					mapa.agregarVertice("C");
+					mapa.posicionInicialVertice("C");
+				}else if (entidad.getNombre().equals("PUERTO")){
+					mapa.agregarVertice("P");
+					mapa.posicionInicialVertice("P");
+				} else {
+					mapa.agregarVertice(""+entidad.getId());
+					mapa.posicionInicialVertice(""+entidad.getId());
+				}
+				
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -47,9 +56,19 @@ public class MapaController {
 			session.beginTransaction();
 			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel", CaminoModel.class).list();
 			for (CaminoModel entidad : resultados) {
-				mapa.agregarArista(String.valueOf(entidad.getSucursalOrigen().getId())
-						, String.valueOf(entidad.getSucursalDestino().getId())
-						, Integer.parseInt(entidad.getTiempoTransito().substring(0, 2)));
+				if(entidad.getSucursalOrigen().getNombre().equals("PUERTO")) {
+					mapa.agregarArista("P", String.valueOf(entidad.getSucursalDestino().getId())
+							, Integer.parseInt(entidad.getTiempoTransito().substring(0, 2)));
+				} else if(entidad.getSucursalDestino().getNombre().equals("CENTRAL")) {
+					mapa.agregarArista(String.valueOf(entidad.getSucursalOrigen().getId())
+							, "C"
+							, Integer.parseInt(entidad.getTiempoTransito().substring(0, 2)));
+				}else {
+					mapa.agregarArista(String.valueOf(entidad.getSucursalOrigen().getId())
+							, String.valueOf(entidad.getSucursalDestino().getId())
+							, Integer.parseInt(entidad.getTiempoTransito().substring(0, 2)));
+				}
+				
 			}
 			mapa.generarCapacidadVertices(this.getCapacidad());
 			session.getTransaction().commit();

@@ -194,8 +194,9 @@ public class App extends JFrame {
 		//--------------------------------------------//
 		map.crearVertices();
 		map.crearAristas();
+		mapa.flujoMaximo();
 	}
-	//fg
+
 	private PanelSucursal getPanelSucursal() {
 		if(this.panelSuc==null) this.panelSuc = new PanelSucursal(map);
 		return  panelSuc;

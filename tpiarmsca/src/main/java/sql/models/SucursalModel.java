@@ -74,6 +74,10 @@ public class SucursalModel {
 	public String toString() {
 		return nombre;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -88,10 +88,19 @@ public class Mapa extends JPanel {
 		for(String vertice: mapa.getMapa().vertexSet()) {
 			Point posicionDelVertice = mapa.getPosicionesVertices().get(vertice);
 			
+			if(vertice.equals("C") || vertice.equals("P")) {
+				grafico2d.setColor(Color.orange);
+			}else {
+				grafico2d.setColor(new Color(0,64,128));
+			}
 			
-			grafico2d.setColor(new Color(0,64,128));
 			grafico2d.fillOval(posicionDelVertice.x-10,posicionDelVertice.y-10, 35, 35);
-			grafico2d.setColor(Color.WHITE);
+			
+			if(vertice.equals("C") || vertice.equals("P")) {
+				grafico2d.setColor(Color.BLACK);
+			}else {
+				grafico2d.setColor(Color.WHITE);
+			}
 			grafico2d.setFont(new Font("Dialog", Font.PLAIN, 18));
 			grafico2d.drawString(vertice, posicionDelVertice.x-2, posicionDelVertice.y+15);
 		}

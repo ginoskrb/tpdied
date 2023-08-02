@@ -70,10 +70,14 @@ public class AgregarCamino extends JFrame {
 		JComboBox<SucursalModel> sucDestino = new JComboBox<>();
 		sucDestino.setBounds(100, 128, 135, 22);
 		contentPane.add(sucDestino);
-
+		
 		for (SucursalModel sucursal : sucursales) {
-			sucOrigen.addItem(sucursal);
-			sucDestino.addItem(sucursal);
+			if(!sucursal.getNombre().equals("PUERTO")) {
+				sucDestino.addItem(sucursal);
+			}
+			if(!sucursal.getNombre().equals("CENTRAL")) {
+				sucOrigen.addItem(sucursal);
+			}
 		}
 
 		// array para las horas
@@ -171,7 +175,6 @@ public class AgregarCamino extends JFrame {
 				mapa.crearAristas();
 				dispose();
 			}
-
 		});
 		contentPane.add(botonAgregar);
 

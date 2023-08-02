@@ -13,7 +13,9 @@ import gui.grafo.MapaSucursales;
 import sql.controllers.MapaController;
 import sql.controllers.OrdenController;
 import sql.controllers.ProductoController;
+import sql.controllers.SucursalController;
 import sql.models.OrdenModel;
+import sql.models.SucursalModel;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -56,7 +58,6 @@ public class PanelTablaOrden extends JPanel {
 				destino = new OrdenController().obtenerOrdenPorId(Integer.parseInt(idSeleccionado.toString()));
 				p.listaProductosOrden();
 				p.listaSucursalesStock();
-
 				ArrayList<String> origenes = new ArrayList<>();
 				HashMap<Integer, HashMap<Integer, Integer>> listaSucursalesValidas = p.getSucursales();
 				ArrayList<Integer> keysDelete = new ArrayList<>();
@@ -79,7 +80,13 @@ public class PanelTablaOrden extends JPanel {
 				for (HashMap.Entry<Integer, HashMap<Integer, Integer>> y : listaSucursalesValidas.entrySet()) {
 					origenes.add(String.valueOf(y.getKey()));
 				}
-
+				
+				ArrayList<SucursalModel> sc = (ArrayList) new SucursalController().obtenerTodasLasSucursales();
+				for(SucursalModel suc: sc) {
+					if(suc.getNombre().equals("PUERTO")) {
+						origenes.add(String.valueOf(suc.getId()));
+					}
+				}
 				Integer idOrden = Integer.parseInt(idSeleccionado.toString());
 				new MapaController(mapa).crearAristas();
 				new VentanaCaminosPosibles(mapa, String.valueOf(destino.getSucursalDestino().getId()), origenes,

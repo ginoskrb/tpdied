@@ -60,11 +60,22 @@ public class PanelOpciones extends JPanel {
 		
 		for (int i = 0; i < recorrido.size(); i++) {
 			int x = circulosEnX[i];
-			g2d.setColor(new Color(0, 64, 128));
+			if(recorrido.get(i).equals("9")) {
+				g2d.setColor(Color.orange);
+			}else {
+				g2d.setColor(new Color(0, 64, 128));
+			}
 			g2d.fillOval(x, comienzoY, diametro, diametro);
 			
-			g2d.setColor(Color.white);
-			String nombreVertice = recorrido.get(i);
+			String nombreVertice;
+			if(recorrido.get(i).equals("9")) {
+				g2d.setColor(Color.black);
+				nombreVertice ="P";
+			}else {
+				g2d.setColor(Color.white);
+			    nombreVertice = recorrido.get(i);
+			}
+			
 			FontMetrics fm = g2d.getFontMetrics();
 			int textX = x + (diametro - fm.stringWidth(nombreVertice))/2;
 			int textY = comienzoY + (diametro - fm.getHeight())/2+fm.getAscent();
