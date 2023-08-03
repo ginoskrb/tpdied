@@ -32,7 +32,7 @@ public class PanelSucursal extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelSucursal(MapaController mapa) {
+	public PanelSucursal(MapaController mapa, MapaSucursales map) {
 		setBounds(309, 98, 955, 583);
 		setLayout(null);
 		
@@ -144,7 +144,7 @@ public class PanelSucursal extends JPanel {
 		botonStock.setFocusPainted(false);
 		botonStock.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonStock.setBackground(new Color(0, 64, 128));
-		botonStock.setBounds(318, 465, 237, 51);
+		botonStock.setBounds(193, 465, 237, 51);
 		botonStock.addActionListener(e->{
 			int filaSeleccionada = tablaSucursales.getSelectedRow();
 			if (filaSeleccionada != -1) {
@@ -170,6 +170,18 @@ public class PanelSucursal extends JPanel {
 			}
 		});
 		add(btnGenerarOrdenDe);
+		
+		JButton btnFlujoMaximo_1 = new JButton("Flujo maximo");
+		btnFlujoMaximo_1.setForeground(Color.WHITE);
+		btnFlujoMaximo_1.setFont(new Font("Dialog", Font.BOLD, 15));
+		btnFlujoMaximo_1.setFocusPainted(false);
+		btnFlujoMaximo_1.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnFlujoMaximo_1.setBackground(new Color(0, 64, 128));
+		btnFlujoMaximo_1.setBounds(485, 465, 149, 51);
+		btnFlujoMaximo_1.addActionListener(e->{
+			JOptionPane.showMessageDialog(null, "Valor flujo maximo = " + map.flujoMaximo(), "Flujo maximo", JOptionPane.CLOSED_OPTION);
+		});
+		add(btnFlujoMaximo_1);
 		// ---------------------------------------------------------------//
 
 	}

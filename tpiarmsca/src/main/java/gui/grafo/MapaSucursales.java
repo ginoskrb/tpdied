@@ -212,7 +212,7 @@ public class MapaSucursales {
 		return lista;
 	}
 	
-	public void flujoMaximo() {
+	public Integer flujoMaximo() {
 		List<Camino> listCaminos = this.caminos();
 		Integer total = 0;
 		boolean flag =  false;
@@ -221,7 +221,7 @@ public class MapaSucursales {
 				total += caminoMasPesado(listCaminos);
 				}while (true);
 		} catch (Exception e) {
-			System.out.println(total);
+			return total;
 		}
 	}
 	

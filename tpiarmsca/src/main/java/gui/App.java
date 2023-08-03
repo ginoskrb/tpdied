@@ -197,7 +197,7 @@ public class App extends JFrame {
 	}
 
 	private PanelSucursal getPanelSucursal() {
-		if(this.panelSuc==null) this.panelSuc = new PanelSucursal(map);
+		if(this.panelSuc==null) this.panelSuc = new PanelSucursal(map,mapa);
 		return  panelSuc;
 	}
 	
