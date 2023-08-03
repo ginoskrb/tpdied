@@ -51,10 +51,8 @@ public class VentanaCaminosPosibles extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		setTitle("Recorridos");
-		
-		
+		System.out.println(origenes);
 		Double pesoOrden = new OrdenController().obtenerPesoTotalDeOrden(idOrden);
-		System.out.println(pesoOrden);
 		List<PanelOpciones> opciones = new ArrayList<PanelOpciones>();
 		PanelOpciones op;
 		for(int i = 0; i<origenes.size();i++) {

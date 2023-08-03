@@ -2,6 +2,7 @@ package gui.grafo;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -109,10 +110,10 @@ public class MapaSucursales {
 		List<List<String>> salida = new ArrayList<List<String>>();
 		List<String> marcados = new ArrayList<String>();
 		Integer tiempoCamino = 0;
-		Double pesoMinimoCamino = 10000.0;
+		Double pesoMinimoCamino = 1000000.0;
 		marcados.add(v1);
-		System.out.println("nuevo camino");
 		buscarCaminosAux(v1, v2, marcados, salida, tiempoMaximo, tiempoCamino, pesoOrden, pesoMinimoCamino);
+		System.out.println(marcados);
 		return salida;
 	}
 
@@ -141,6 +142,7 @@ public class MapaSucursales {
 						if (pesoMinimoCamino >= this.getCapacidadVertices().get(v2)) {
 							pesoMinimoCamino = this.getCapacidadVertices().get(v2);
 						}
+						
 						if (tiempoCamino <= tiempoMaximo && pesoMinimoCamino >= pesoOrden) {
 							copiaMarcados.add(v2);
 							todos.add(new ArrayList<String>(copiaMarcados));
@@ -158,6 +160,7 @@ public class MapaSucursales {
 					}
 				}
 			}
+			tiempoCamino = 0;
 		}
 	}
 
@@ -166,7 +169,7 @@ public class MapaSucursales {
 		List<List<String>> salida = new ArrayList<List<String>>();
 		List<String> marcados = new ArrayList<String>();
 		marcados.add("P");
-		puertoACentralAux("P","4",marcados,salida);
+		puertoACentralAux("P","2",marcados,salida);
 		System.out.println(salida);
 	}
 	
@@ -190,7 +193,7 @@ public class MapaSucursales {
 	public List<List<String>> adyacentesConPeso(String v1,List<Camino> caminos) {
 		List<List<String>> lista = new ArrayList<>();
 		List<String> adyacentes;
-		if(v1.equals("2")) {
+		if(v1.equals("1")) {
 			adyacentes = this.verticesAdyacentes("P");
 		}else {
 			adyacentes = this.verticesAdyacentes(v1);
@@ -200,7 +203,7 @@ public class MapaSucursales {
 			ArrayList<String> adyacentePeso = new ArrayList<String>();
 			adyacentePeso.add(ady);
 			if(ady.equals("C")){
-				adyacentePeso.add(this.pesoDeUnCamino(v1, "4",caminos));
+				adyacentePeso.add(this.pesoDeUnCamino(v1, "2",caminos));
 			}else {
 				adyacentePeso.add(this.pesoDeUnCamino(v1, ady,caminos));
 			}
@@ -209,16 +212,16 @@ public class MapaSucursales {
 		return lista;
 	}
 	
-	public void flujoMaximo() {
+	public Integer flujoMaximo() {
 		List<Camino> listCaminos = this.caminos();
 		Integer total = 0;
 		boolean flag =  false;
 		try{
 			do {
 				total += caminoMasPesado(listCaminos);
-			}while (true);
+				}while (true);
 		} catch (Exception e) {
-			System.out.println(total);
+			return total;
 		}
 	}
 	
@@ -226,11 +229,9 @@ public class MapaSucursales {
 	public Integer caminoMasPesado(List<Camino> caminos) {
 		List<String> lista = new ArrayList<>();
 		lista.add("P");
-		Integer pesoMaximo = caminoMasPesadoAux("2",lista,16000,caminos);
+		Integer pesoMaximo = caminoMasPesadoAux("1",lista,16000,caminos);
 		this.actualizarPesos(lista,pesoMaximo,caminos);
-		System.out.println(lista + " " + pesoMaximo);
 		for(Camino x: caminos) {
-			System.out.println(x.getOrigen() + " " + x.getDestino() + " " + x.getPeso());
 		}
 		return pesoMaximo;
 	}
@@ -265,13 +266,13 @@ public class MapaSucursales {
 		for(int i = 0 ; i<ruta.size()-1; i++) {
 			for(Camino x: caminos) {
 				if(ruta.get(i).equals("P")) {
-					if(x.getOrigen().equals("2") && x.getDestino().equals(ruta.get(i+1))) {
+					if(x.getOrigen().equals("1") && x.getDestino().equals(ruta.get(i+1))) {
 						System.out.println(pesoMaximo);
 						x.setPeso(String.valueOf(Integer.parseInt(x.getPeso())-pesoMaximo));
 						break;
 					}
 				}else if(ruta.get(i+1).equals("C")) {
-					if(x.getOrigen().equals(ruta.get(i)) && x.getDestino().equals("4")) {
+					if(x.getOrigen().equals(ruta.get(i)) && x.getDestino().equals("2")) {
 						x.setPeso(String.valueOf(Integer.parseInt(x.getPeso())-pesoMaximo));
 						break;
 					}
@@ -299,7 +300,7 @@ public class MapaSucursales {
 	
 	public String pesoDeUnCamino(String origen, String Destino, List<Camino>caminos) {
 		if(origen.equals("P")) {
-			origen = "2";
+			origen = "1";
 		}
 		for(Camino x: caminos) {
 			if(x.getOrigen().equals(origen) && x.getDestino().equals(Destino)) return x.getPeso();

@@ -60,7 +60,7 @@ public class PanelOpciones extends JPanel {
 		
 		for (int i = 0; i < recorrido.size(); i++) {
 			int x = circulosEnX[i];
-			if(recorrido.get(i).equals("9")) {
+			if(recorrido.get(i).equals("1")) {
 				g2d.setColor(Color.orange);
 			}else {
 				g2d.setColor(new Color(0, 64, 128));
@@ -68,7 +68,7 @@ public class PanelOpciones extends JPanel {
 			g2d.fillOval(x, comienzoY, diametro, diametro);
 			
 			String nombreVertice;
-			if(recorrido.get(i).equals("9")) {
+			if(recorrido.get(i).equals("1")) {
 				g2d.setColor(Color.black);
 				nombreVertice ="P";
 			}else {
