@@ -93,12 +93,12 @@ public class EditarSucursal extends JFrame {
 
 		JComboBox<String> comboHoras2 = new JComboBox<>(horas);
 		comboHoras2.setFont(new Font("Dialog", Font.PLAIN, 15));
-		comboHoras2.setBounds(70, 227, 42, 22);
+		comboHoras2.setBounds(70, 214, 42, 22);
 		contentPane.add(comboHoras2);
 
 		JComboBox<String> comboMinutos2 = new JComboBox<>(minutos);
 		comboMinutos2.setFont(new Font("Dialog", Font.PLAIN, 15));
-		comboMinutos2.setBounds(122, 227, 47, 22);
+		comboMinutos2.setBounds(122, 214, 47, 22);
 		contentPane.add(comboMinutos2);
 
 		final String[] horaCierre = { "00:00" };
@@ -122,21 +122,22 @@ public class EditarSucursal extends JFrame {
 		JLabel horarioCierre = new JLabel("Horario cierre");
 		horarioCierre.setForeground(new Color(255, 255, 255));
 		horarioCierre.setFont(new Font("Dialog", Font.BOLD, 15));
-		horarioCierre.setBounds(70, 202, 129, 14);
+		horarioCierre.setBounds(70, 189, 129, 14);
 		contentPane.add(horarioCierre);
 
 		JLabel estado = new JLabel("Estado");
 		estado.setForeground(new Color(255, 255, 255));
 		estado.setFont(new Font("Dialog", Font.BOLD, 15));
-		estado.setBounds(70, 278, 78, 14);
+		estado.setBounds(70, 265, 78, 14);
 		contentPane.add(estado);
 
 		JComboBox<String> estadoTipo = new JComboBox<String>();
 		estadoTipo.setFont(new Font("Dialog", Font.PLAIN, 15));
-		estadoTipo.setBounds(70, 303, 95, 22);
+		estadoTipo.setBounds(70, 290, 129, 22);
 		estadoTipo.addItem("Operativo");
 		estadoTipo.addItem("No operativo");
 		contentPane.add(estadoTipo);
+		establecerEstado(sucEditar.getAtributoSucursal(id, "estado"),estadoTipo);
 
 		JButton botonEditar = new JButton("Editar");
 		botonEditar.setBackground(new Color(255, 255, 255));
@@ -189,6 +190,14 @@ public class EditarSucursal extends JFrame {
 	        comboHoras.setSelectedIndex(horaSeleccionadaIndex);
 	        comboMinutos.setSelectedIndex(minutosSeleccionadosIndex);
 	    }
+	}
+	
+	private void establecerEstado(String estadoActual, JComboBox<String> estadoTipo) {
+		if(estadoActual.equals("OPERATIVO")) {
+			estadoTipo.setSelectedIndex(0);
+		} else if (estadoActual.equals("NO OPERATIVO")){
+			estadoTipo.setSelectedIndex(1);
+		}
 	}
 
 }

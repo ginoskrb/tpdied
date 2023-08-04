@@ -107,12 +107,14 @@ public class EditarCamino extends JFrame {
 		establecerHora(camEditar.getAtributoCamino(id, "tiempoTransito"), tHoras, tMinutos, horas, minutos);
 
 		JComboBox<String> estadoTipo = new JComboBox<String>();
-		estadoTipo.setBounds(100, 315, 95, 22);
+		estadoTipo.setBounds(100, 315, 122, 22);
 		estadoTipo.addItem("Operativo");
 		estadoTipo.addItem("No operativo");
 		contentPane.add(estadoTipo);
-
-		establecerEstado(Boolean.parseBoolean(camEditar.getAtributoCamino(id, "estado")),estadoTipo);
+		
+		establecerEstado(camEditar.getAtributoCamino(id, "estado"),estadoTipo);
+		
+		
 		
 		JSlider capMaxima = new JSlider(0, 5000, 100);
 		capMaxima.setBounds(100, 243, 95, 26);
@@ -236,10 +238,10 @@ public class EditarCamino extends JFrame {
 		}
 	}
 	
-	private void establecerEstado(boolean estadoActual, JComboBox<String> estadoTipo) {
-		if(estadoActual) {
+	private void establecerEstado(String estadoActual, JComboBox<String> estadoTipo) {
+		if(estadoActual.equals("OPERATIVO")) {
 			estadoTipo.setSelectedIndex(0);
-		} else {
+		} else if (estadoActual.equals("NO OPERATIVO")){
 			estadoTipo.setSelectedIndex(1);
 		}
 	}

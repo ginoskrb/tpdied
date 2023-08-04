@@ -2,7 +2,6 @@ package gui.grafo;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +39,6 @@ public class MapaSucursales {
 
 	public void eliminarArista(String idOrigen, String idDestino) {
 		this.mapa.removeEdge(idOrigen, idDestino);
-	}
-
-	public void eliminarTodasLasAristas(Collection listaAristas) {
-		this.mapa.removeAllEdges(listaAristas);
 	}
 
 	public void agregarArista(String nombreVerticeA, String nombreVerticeB, int peso) {

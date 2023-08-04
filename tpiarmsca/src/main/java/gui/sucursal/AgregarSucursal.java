@@ -79,12 +79,12 @@ public class AgregarSucursal extends JFrame {
 		//--------------------------------------------//
 		JComboBox<String> comboHoras = new JComboBox<>(horas);
 		comboHoras.setFont(new Font("Dialog", Font.PLAIN, 15));
-		comboHoras.setBounds(70, 138, 42, 22);
+		comboHoras.setBounds(70, 131, 42, 22);
 		contentPane.add(comboHoras);
 		
 		JComboBox<String> comboMinutos = new JComboBox<>(minutos);
 		comboMinutos.setFont(new Font("Dialog", Font.PLAIN, 15));
-		comboMinutos.setBounds(122, 138, 47, 22);
+		comboMinutos.setBounds(122, 131, 47, 22);
 		contentPane.add(comboMinutos);
 		
 		final String[] horaApertura = { "00:00" };
@@ -94,12 +94,12 @@ public class AgregarSucursal extends JFrame {
 		
 		JComboBox<String> comboHoras2 = new JComboBox<>(horas);
 		comboHoras2.setFont(new Font("Dialog", Font.PLAIN, 15));
-		comboHoras2.setBounds(70, 225, 42, 22);
+		comboHoras2.setBounds(70, 200, 42, 22);
 		contentPane.add(comboHoras2);
 		
 		JComboBox<String> comboMinutos2 = new JComboBox<>(minutos);
 		comboMinutos2.setFont(new Font("Dialog", Font.PLAIN, 15));
-		comboMinutos2.setBounds(122, 225, 47, 22);
+		comboMinutos2.setBounds(122, 200, 47, 22);
 		contentPane.add(comboMinutos2);
 		
 		final String[] horaCierre = { "00:00" };
@@ -115,24 +115,24 @@ public class AgregarSucursal extends JFrame {
 		JLabel horarioApertura = new JLabel("Horario apertura");
 		horarioApertura.setForeground(new Color(255, 255, 255));
 		horarioApertura.setFont(new Font("Dialog", Font.BOLD, 15));
-		horarioApertura.setBounds(70, 113, 141, 14);
+		horarioApertura.setBounds(70, 106, 141, 14);
 		contentPane.add(horarioApertura);
 		
 		JLabel horarioCierre = new JLabel("Horario cierre");
 		horarioCierre.setForeground(new Color(255, 255, 255));
 		horarioCierre.setFont(new Font("Dialog", Font.BOLD, 15));
-		horarioCierre.setBounds(70, 190, 114, 14);
+		horarioCierre.setBounds(70, 175, 114, 14);
 		contentPane.add(horarioCierre);
 		
 		JLabel estado = new JLabel("Estado");
 		estado.setForeground(new Color(255, 255, 255));
 		estado.setFont(new Font("Dialog", Font.BOLD, 15));
-		estado.setBounds(70, 270, 90, 14);
+		estado.setBounds(70, 233, 90, 14);
 		contentPane.add(estado);
 		
 		JComboBox<String> estadoTipo = new JComboBox<String>();
 		estadoTipo.setFont(new Font("Dialog", Font.PLAIN, 15));
-		estadoTipo.setBounds(70, 295, 95, 22);
+		estadoTipo.setBounds(70, 258, 114, 22);
 		estadoTipo.addItem("Operativo");
 		estadoTipo.addItem("No operativo");
 		contentPane.add(estadoTipo);

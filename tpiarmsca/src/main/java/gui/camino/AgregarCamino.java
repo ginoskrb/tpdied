@@ -106,7 +106,7 @@ public class AgregarCamino extends JFrame {
 		tMinutos.addActionListener(e -> actualizarHora(tiempo, tHoras, tMinutos));
 
 		JComboBox<String> estadoTipo = new JComboBox<String>();
-		estadoTipo.setBounds(100, 315, 95, 22);
+		estadoTipo.setBounds(100, 315, 122, 22);
 		estadoTipo.addItem("Operativo");
 		estadoTipo.addItem("No operativo");
 		contentPane.add(estadoTipo);

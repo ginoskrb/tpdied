@@ -86,10 +86,7 @@ public class PanelTablaOrden extends JPanel {
 				Integer idOrden = Integer.parseInt(idSeleccionado.toString());
 				new MapaController(mapa).crearAristas();
 				
-				new VentanaCaminosPosibles(mapa, String.valueOf(destino.getSucursalDestino().getId()), origenes,
-						destino.getTiempoMaximo(), idOrden,tablaOrden).main(null, mapa,
-								String.valueOf(destino.getSucursalDestino().getId()), origenes,
-								destino.getTiempoMaximo(), idOrden,tablaOrden);
+				VentanaCaminosPosibles.main(null, mapa, String.valueOf(destino.getSucursalDestino().getId()), origenes, destino.getTiempoMaximo(), idOrden,tablaOrden);
 			}
 		});
 		setLayout(null);
