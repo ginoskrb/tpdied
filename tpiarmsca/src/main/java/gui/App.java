@@ -228,4 +228,8 @@ public class App extends JFrame {
 		contentPane.validate();
 		contentPane.repaint();
 	}
+	
+	public MapaSucursales getMapa() {
+		return this.mapa;
+	}
 }

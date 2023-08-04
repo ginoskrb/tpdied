@@ -77,13 +77,13 @@ public class MapaController {
 		}
 	}
 	
-	public HashMap<String,Double> getCapacidad() {
-		HashMap<String,Double> capacidades = new HashMap<>();
+	public HashMap<Integer,Double> getCapacidad() {
+		HashMap<Integer,Double> capacidades = new HashMap<>();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
 			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel", CaminoModel.class).list();
 			for (CaminoModel entidad : resultados) {
-				capacidades.put(String.valueOf(entidad.getSucursalDestino().getId()),(double)entidad.getCapacidadMaxima());
+				capacidades.put(entidad.getId(),(double)entidad.getCapacidadMaxima());
 			}
 			session.getTransaction().commit();
 		} catch (Exception e) {
