@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 
 import gui.camino.PanelCamino;
@@ -22,7 +21,7 @@ import sql.controllers.MapaController;
 import sql.controllers.OrdenController;
 import gui.grafo.MapaSucursales;
 import gui.orden.PanelOrdenProvision;
-import java.awt.SystemColor;
+
 
 @SuppressWarnings("serial")
 public class App extends JFrame {

@@ -9,16 +9,12 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JToggleButton;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 
 import java.awt.Font;
 import sql.controllers.ProductoController;
-import sql.controllers.SucursalController;
-import sql.models.ProductoModel;
 
+@SuppressWarnings("serial")
 public class EditarProducto extends JFrame {
 
 	private JPanel contentPane;
@@ -63,21 +59,21 @@ public class EditarProducto extends JFrame {
 		campoNombre = new JTextField();
 		campoNombre.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoNombre.setColumns(10);
-		campoNombre.setBounds(80, 79, 171, 20);
+		campoNombre.setBounds(70, 79, 171, 20);
 		campoNombre.setText(prodEditar.getAtributoProducto(id, "nombre"));
 		contentPane.add(campoNombre);
 		
 		campoPrecioUnitario = new JTextField();
 		campoPrecioUnitario.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoPrecioUnitario.setColumns(10);
-		campoPrecioUnitario.setBounds(80, 256, 171, 20);
+		campoPrecioUnitario.setBounds(70, 256, 171, 20);
 		campoPrecioUnitario.setText(prodEditar.getAtributoProducto(id, "precio_unitario"));
 		contentPane.add(campoPrecioUnitario);
 		
 		campoPesoKilogramos = new JTextField();
 		campoPesoKilogramos.setFont(new Font("Dialog", Font.PLAIN, 15));
 		campoPesoKilogramos.setColumns(10);
-		campoPesoKilogramos.setBounds(80, 312, 171, 20);
+		campoPesoKilogramos.setBounds(70, 312, 171, 20);
 		campoPesoKilogramos.setText(prodEditar.getAtributoProducto(id, "peso_kg"));
 		contentPane.add(campoPesoKilogramos);
 		
@@ -89,7 +85,7 @@ public class EditarProducto extends JFrame {
 		
 		JTextArea campoDescripcion = new JTextArea();
 		campoDescripcion.setFont(new Font("Dialog", Font.PLAIN, 15));
-		campoDescripcion.setBounds(80, 135, 171, 75);
+		campoDescripcion.setBounds(70, 135, 171, 75);
 		campoDescripcion.setLineWrap(true);
 		campoDescripcion.setWrapStyleWord(true);
 		campoDescripcion.setText(prodEditar.getAtributoProducto(id, "descripcion"));

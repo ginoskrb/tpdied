@@ -8,8 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import sql.models.ProductoModel;
-import sql.models.OrdenModel;
+
 
 @Entity
 @Table(name = "detalle_orden_provision")

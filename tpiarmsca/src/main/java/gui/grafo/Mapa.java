@@ -14,9 +14,9 @@ import java.awt.geom.GeneralPath;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
-import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultWeightedEdge;
 
+@SuppressWarnings("serial")
 public class Mapa extends JPanel {
 
 	private String verticeSeleccionado;

@@ -1,7 +1,6 @@
 package gui.orden;
 
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,10 +12,9 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Canvas;
 
+@SuppressWarnings("serial")
 public class PanelOpciones extends JPanel {
 	private boolean seleccionado;
 	private List<String> recorrido;

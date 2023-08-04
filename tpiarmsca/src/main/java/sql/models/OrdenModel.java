@@ -18,7 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import sql.models.DetalleOrdenModel;
+
 
 @Entity
 @Table(name = "orden_provision")

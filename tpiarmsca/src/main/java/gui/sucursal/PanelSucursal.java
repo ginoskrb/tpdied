@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -144,7 +143,7 @@ public class PanelSucursal extends JPanel {
 		botonStock.setFocusPainted(false);
 		botonStock.setBorder(new EmptyBorder(0, 0, 0, 0));
 		botonStock.setBackground(new Color(0, 64, 128));
-		botonStock.setBounds(193, 465, 237, 51);
+		botonStock.setBounds(275, 465, 237, 51);
 		botonStock.addActionListener(e->{
 			int filaSeleccionada = tablaSucursales.getSelectedRow();
 			if (filaSeleccionada != -1) {
@@ -160,7 +159,7 @@ public class PanelSucursal extends JPanel {
 		btnGenerarOrdenDe.setFocusPainted(false);
 		btnGenerarOrdenDe.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnGenerarOrdenDe.setBackground(new Color(0, 64, 128));
-		btnGenerarOrdenDe.setBounds(697, 465, 149, 51);
+		btnGenerarOrdenDe.setBounds(750, 465, 149, 51);
 		btnGenerarOrdenDe.addActionListener(e -> {
 			int filaSeleccionada = tablaSucursales.getSelectedRow();
 			if (filaSeleccionada != -1) {
@@ -177,7 +176,7 @@ public class PanelSucursal extends JPanel {
 		btnFlujoMaximo_1.setFocusPainted(false);
 		btnFlujoMaximo_1.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnFlujoMaximo_1.setBackground(new Color(0, 64, 128));
-		btnFlujoMaximo_1.setBounds(485, 465, 149, 51);
+		btnFlujoMaximo_1.setBounds(556, 465, 149, 51);
 		btnFlujoMaximo_1.addActionListener(e->{
 			JOptionPane.showMessageDialog(null, "Valor flujo maximo = " + map.flujoMaximo(), "Flujo maximo", JOptionPane.CLOSED_OPTION);
 		});

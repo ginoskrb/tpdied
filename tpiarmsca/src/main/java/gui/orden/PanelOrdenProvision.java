@@ -1,19 +1,15 @@
 package gui.orden;
 
-import javax.swing.*;
+
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 import gui.grafo.MapaSucursales;
 import gui.grafo.Mapa;
 
+@SuppressWarnings("serial")
 public class PanelOrdenProvision extends JPanel {
 	
 	/**

@@ -1,6 +1,5 @@
 package gui.orden;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -12,20 +11,17 @@ import javax.swing.table.DefaultTableModel;
 import gui.grafo.MapaSucursales;
 import sql.controllers.MapaController;
 import sql.controllers.OrdenController;
-import sql.controllers.ProductoController;
 import sql.controllers.SucursalController;
 import sql.models.OrdenModel;
 import sql.models.SucursalModel;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@SuppressWarnings("serial")
 public class PanelTablaOrden extends JPanel {
 
 	private JTable tablaOrden = new JTable();
@@ -81,7 +77,7 @@ public class PanelTablaOrden extends JPanel {
 					origenes.add(String.valueOf(y.getKey()));
 				}
 				
-				ArrayList<SucursalModel> sc = (ArrayList) new SucursalController().obtenerTodasLasSucursales();
+				ArrayList<SucursalModel> sc = (ArrayList<SucursalModel>) new SucursalController().obtenerTodasLasSucursales();
 				for(SucursalModel suc: sc) {
 					if(suc.getNombre().equals("PUERTO")) {
 						origenes.add(String.valueOf(suc.getId()));
@@ -89,10 +85,8 @@ public class PanelTablaOrden extends JPanel {
 				}
 				Integer idOrden = Integer.parseInt(idSeleccionado.toString());
 				new MapaController(mapa).crearAristas();
-				new VentanaCaminosPosibles(mapa, String.valueOf(destino.getSucursalDestino().getId()), origenes,
-						destino.getTiempoMaximo(), idOrden,tablaOrden).main(null, mapa,
-								String.valueOf(destino.getSucursalDestino().getId()), origenes,
-								destino.getTiempoMaximo(), idOrden,tablaOrden);
+				
+				VentanaCaminosPosibles.main(null, mapa, String.valueOf(destino.getSucursalDestino().getId()), origenes, destino.getTiempoMaximo(), idOrden,tablaOrden);
 			}
 		});
 		setLayout(null);

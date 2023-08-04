@@ -8,13 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import sql.controllers.OrdenController;
-import sql.controllers.ProductoController;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class OrdenesEnProceso extends JFrame {
 
 	private JPanel contentPane;
