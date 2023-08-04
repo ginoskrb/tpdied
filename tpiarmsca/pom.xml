@@ -6,7 +6,8 @@
 	<artifactId>tpiarmsca</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tpidied2023</name>
-
+	
+    
 	<dependencies>
 		<!--https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
 		<dependency>
@@ -36,5 +37,13 @@
     		<version>1.5.2</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.13.2</version>
+		    <scope>test</scope>
+		</dependency>
+				
 	</dependencies>
 </project>
