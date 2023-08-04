@@ -2,7 +2,6 @@ package gui.grafo;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -12,16 +11,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jgrapht.Graph;
-import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultDirectedWeightedGraph;
-import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultWeightedEdge;
-import org.jgrapht.graph.SimpleGraph;
-import org.jgrapht.graph.SimpleWeightedGraph;
 
 import sql.controllers.CaminoController;
-import sql.controllers.MapaController;
-import sql.controllers.StockController;
 import sql.controllers.SucursalController;
 import sql.models.CaminoModel;
 
@@ -215,7 +208,7 @@ public class MapaSucursales {
 	public Integer flujoMaximo() {
 		List<Camino> listCaminos = this.caminos();
 		Integer total = 0;
-		boolean flag =  false;
+		
 		try{
 			do {
 				total += caminoMasPesado(listCaminos);
@@ -231,8 +224,7 @@ public class MapaSucursales {
 		lista.add("P");
 		Integer pesoMaximo = caminoMasPesadoAux("1",lista,16000,caminos);
 		this.actualizarPesos(lista,pesoMaximo,caminos);
-		for(Camino x: caminos) {
-		}
+		
 		return pesoMaximo;
 	}
 	

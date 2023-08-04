@@ -10,23 +10,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import gui.sucursal.EditarSucursal;
-import gui.sucursal.PanelSucursal;
 import sql.controllers.StockController;
-import sql.controllers.SucursalController;
-import sql.models.SucursalModel;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class StockSucursal extends JFrame {
 
 	private JPanel contentPane;

@@ -1,7 +1,6 @@
 package gui.orden;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -18,12 +17,11 @@ import gui.grafo.MapaSucursales;
 import sql.controllers.OrdenController;
 import sql.models.OrdenModel;
 
+@SuppressWarnings("serial")
 public class VentanaCaminosPosibles extends JFrame {
 
 	private JPanel contentPane;
 	private PanelOpciones panelSeleccionado = null;
-	private ArrayList<String> origenes;
-	private String destino;
 	/**
 	 * Launch the application.
 	 */
@@ -44,8 +42,7 @@ public class VentanaCaminosPosibles extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaCaminosPosibles(MapaSucursales mapa, String destino, ArrayList<String> origenes,Integer tiempoMaximo,Integer idOrden, JTable tablaOrden) {
-		this.origenes = origenes;
-		this.destino = destino;
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

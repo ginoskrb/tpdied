@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import sql.controllers.ProductoController;
+
 import sql.controllers.StockController;
 import sql.models.StockModel;
 
@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class EditarStock extends JFrame {
 
 	private JPanel contentPane;

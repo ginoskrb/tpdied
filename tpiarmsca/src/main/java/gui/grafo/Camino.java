@@ -1,12 +1,5 @@
 package gui.grafo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import sql.controllers.CaminoController;
-import sql.models.CaminoModel;
-
 public class Camino {
 	
 	private String origen;

@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,11 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import sql.controllers.ProductoController;
-import sql.controllers.SucursalController;
 
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 
+@SuppressWarnings("serial")
 public class AgregarProducto extends JFrame {
 
 	private JPanel contentPane;

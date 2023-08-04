@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,8 +18,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import sql.controllers.ProductoController;
-import sql.controllers.SucursalController;
 
+@SuppressWarnings("serial")
 public class PanelProducto extends JPanel {
 	private JTextField Buscador;
 	private JTable tablaProductos = new JTable();

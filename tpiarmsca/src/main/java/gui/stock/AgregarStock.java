@@ -11,7 +11,7 @@ import sql.controllers.ProductoController;
 import sql.controllers.StockController;
 import sql.controllers.SucursalController;
 import sql.models.ProductoModel;
-import sql.models.SucursalModel;
+
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -21,6 +21,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class AgregarStock extends JFrame {
 
 	private JPanel contentPane;

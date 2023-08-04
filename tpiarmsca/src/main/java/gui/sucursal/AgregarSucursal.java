@@ -7,12 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.grafo.MapaSucursales;
+
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -20,8 +18,8 @@ import java.awt.Font;
 
 import sql.controllers.MapaController;
 import sql.controllers.SucursalController;
-import sql.models.SucursalModel;
 
+@SuppressWarnings("serial")
 public class AgregarSucursal extends JFrame {
 
 	private JPanel contentPane;

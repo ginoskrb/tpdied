@@ -9,16 +9,12 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JToggleButton;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 
 import java.awt.Font;
 import sql.controllers.ProductoController;
-import sql.controllers.SucursalController;
-import sql.models.ProductoModel;
 
+@SuppressWarnings("serial")
 public class EditarProducto extends JFrame {
 
 	private JPanel contentPane;
