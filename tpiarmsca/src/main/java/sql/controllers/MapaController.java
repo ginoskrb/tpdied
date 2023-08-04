@@ -3,12 +3,9 @@ package sql.controllers;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.jgrapht.graph.DefaultEdge;
 
 import gui.grafo.MapaSucursales;
 import sql.models.CaminoModel;

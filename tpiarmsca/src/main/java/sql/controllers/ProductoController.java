@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import sql.models.ProductoModel;
-import sql.models.SucursalModel;
 
 @SuppressWarnings("serial")
 public class ProductoController {
@@ -18,6 +17,7 @@ public class ProductoController {
 			.addAnnotatedClass(ProductoModel.class)
 			.buildSessionFactory();
 
+	@SuppressWarnings("deprecation")
 	public void createProducto(String nombre, String descripcion, float precioUnitario, float pesoKg) {
 		try (Session session = sessionFactory.openSession()) {
 			ProductoModel producto = new ProductoModel(nombre, descripcion, precioUnitario, pesoKg);
@@ -31,6 +31,7 @@ public class ProductoController {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void deleteProducto(int id) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -44,6 +45,7 @@ public class ProductoController {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void updateProducto(int id, Object[] valores) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -83,6 +85,7 @@ public class ProductoController {
 		return modelo;
 	}
 
+	@SuppressWarnings("unchecked")
 	public DefaultTableModel filtrarTablaPorNombre(String nombre) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
 				new String[] {  "ID", "NOMBRE", "DESCRIPCION", "PRECIO UNITARIO", "PESO EN KG" }) {
@@ -93,6 +96,7 @@ public class ProductoController {
 		};
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
+			@SuppressWarnings("deprecation")
 			List<ProductoModel> resultados = session.createQuery("FROM ProductoModel WHERE nombre LIKE :nombre")
 					.setParameter("nombre", "%" + nombre + "%")
 					.list();

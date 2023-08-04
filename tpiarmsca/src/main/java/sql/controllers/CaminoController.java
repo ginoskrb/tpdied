@@ -16,6 +16,7 @@ public class CaminoController {
 	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
 			.addAnnotatedClass(CaminoModel.class).buildSessionFactory();
 
+	@SuppressWarnings("deprecation")
 	public void createCamino(SucursalModel sucursalOrigen, SucursalModel sucursalDestino, String tiempoTransito,
 			int capacidadMaxima, boolean estado) {
 		try (Session session = sessionFactory.openSession()) {
@@ -30,6 +31,7 @@ public class CaminoController {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void deleteCamino(int id) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -41,6 +43,7 @@ public class CaminoController {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void updateCamino(int id, SucursalModel sucursalOrigen, SucursalModel sucursalDestino, String tiempoTransito,
 			int capacidadMaxima, boolean estado) {
 		try (Session session = sessionFactory.openSession()) {
@@ -60,6 +63,7 @@ public class CaminoController {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public DefaultTableModel generadorDeTabla() {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "ID", "ORIGEN", "DESTINO", "DURACION", "CAPACIDAD (KG)", "ESTADO" }) {
@@ -70,6 +74,7 @@ public class CaminoController {
 		};
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
+			@SuppressWarnings("unchecked")
 			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel").list();
 			for (CaminoModel entidad : resultados) {
 				Object[] fila = { entidad.getId(), entidad.getSucursalOrigen().getNombre(),
@@ -84,6 +89,7 @@ public class CaminoController {
 		return modelo;
 	}
 
+	@SuppressWarnings("deprecation")
 	public DefaultTableModel filtrarTablaPorNombre(String nombre) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "ID", "ORIGEN", "DESTINO", "DURACION", "CAPACIDAD (KG)", "ESTADO" }) {
@@ -94,6 +100,7 @@ public class CaminoController {
 		};
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
+			@SuppressWarnings("unchecked")
 			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel").list();
 			int tamNombre = nombre.length();
 			for (CaminoModel entidad : resultados) {
@@ -134,10 +141,12 @@ public class CaminoController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public CaminoModel obtenerCaminoPorSucursales(Integer v1, Integer v2) {
 		try(Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
 			CaminoModel camino = new CaminoModel();
+			@SuppressWarnings("deprecation")
 			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel").list();
 			for (CaminoModel entidad : resultados) {
 				if(entidad.getSucursalDestino().getId()==v2 && entidad.getSucursalOrigen().getId()==v1) {
@@ -151,6 +160,7 @@ public class CaminoController {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public DefaultTableModel editarFilaTablaCamino(int id, int idSucursalOrigen, int idSucursalDestino,
 			String tiempoTransito, int capacidadMaxima, boolean estado) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
@@ -162,6 +172,7 @@ public class CaminoController {
 		};
 		try(Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
+			@SuppressWarnings("deprecation")
 			List<CaminoModel> resultados = session.createQuery("FROM CaminoModel").list();
 			SucursalModel suc_origen = new SucursalController().obtenerSucursalPorId(idSucursalOrigen);
 			SucursalModel suc_destino = new SucursalController().obtenerSucursalPorId(idSucursalDestino);

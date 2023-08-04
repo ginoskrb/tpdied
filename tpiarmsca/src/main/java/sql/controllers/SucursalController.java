@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import gui.grafo.MapaSucursales;
 import sql.models.SucursalModel;
 
 @SuppressWarnings("serial")
@@ -20,6 +19,7 @@ public class SucursalController {
 			.addAnnotatedClass(SucursalModel.class)
 			.buildSessionFactory();
 
+	@SuppressWarnings("deprecation")
 	public void createSucursal(String nombre, String hapertura, String hcierre, boolean estado) {
 		try (Session session = sessionFactory.openSession()) {
 			SucursalModel sucursal = new SucursalModel(nombre, hapertura, hcierre, estado);
@@ -32,6 +32,7 @@ public class SucursalController {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void deleteSucursal(int id) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -45,6 +46,7 @@ public class SucursalController {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void updateSucursal(int id, String[] valores) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -109,6 +111,7 @@ public class SucursalController {
 		return modelo;
 	}
 
+	@SuppressWarnings("unchecked")
 	public DefaultTableModel filtrarTablaPorNombre(String nombre) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
 				new String[] { "ID", "NOMBRE", "HORARIO APERTURA", "HORARIO CIERRE", "ESTADO" }) {
@@ -119,6 +122,7 @@ public class SucursalController {
 		};
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
+			@SuppressWarnings("deprecation")
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel WHERE nombre LIKE :nombre")
 					.setParameter("nombre", "%" + nombre + "%")
 					.list();
@@ -152,6 +156,7 @@ public class SucursalController {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public DefaultTableModel editarFilaTablaSucursal(int id, String nombre, String hapertura, String hcierre,
 			boolean estado) {
 		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
@@ -163,6 +168,7 @@ public class SucursalController {
 		};
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
+			@SuppressWarnings("deprecation")
 			List<SucursalModel> resultados = session.createQuery("FROM SucursalModel").list();
 			this.updateSucursal(id, new String[] { nombre, hapertura, hcierre, String.valueOf(estado) });
 			for (SucursalModel entidad : resultados) {

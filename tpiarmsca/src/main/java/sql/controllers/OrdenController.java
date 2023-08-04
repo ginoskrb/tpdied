@@ -1,7 +1,6 @@
 package sql.controllers; //OrdenController
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,11 +13,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import jakarta.persistence.TypedQuery;
-import sql.models.CaminoModel;
 import sql.models.DetalleOrdenModel;
 import sql.models.OrdenModel;
-import sql.models.ProductoModel;
-//import sql.models.ProductoModel;
 import sql.models.SucursalModel;
 
 
@@ -27,6 +23,7 @@ public class OrdenController {
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(OrdenModel.class)
 			.buildSessionFactory();
+	@SuppressWarnings("deprecation")
 	public OrdenModel createOrden(Timestamp fechaOrden, SucursalModel sucDestino, int tiempoEstimado, String estadoOrden) {
 		OrdenModel orden = new OrdenModel(fechaOrden, sucDestino, tiempoEstimado, estadoOrden);
 		try (Session session = sessionFactory.openSession()) {
@@ -41,6 +38,7 @@ public class OrdenController {
 		return orden;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void updateOrden(OrdenModel orden) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -74,8 +72,10 @@ public class OrdenController {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public DefaultTableModel generadorDeTabla() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "FECHA", "DESTINO", "TIEMPO MAXIMO", "ESTADO" }) {
+	    @SuppressWarnings("serial")
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "FECHA", "DESTINO", "TIEMPO MAXIMO", "ESTADO" }) {
 	        @Override
 	        public boolean isCellEditable(int row, int column) {
 	            return false;
@@ -84,7 +84,8 @@ public class OrdenController {
 	    try {
 	        Session session = sessionFactory.openSession();
 	        session.beginTransaction();
-	        List<OrdenModel> resultados = session.createQuery("FROM OrdenModel d WHERE d.estadoOrden = 'PENDIENTE'").list();
+	        @SuppressWarnings("deprecation")
+			List<OrdenModel> resultados = session.createQuery("FROM OrdenModel d WHERE d.estadoOrden = 'PENDIENTE'").list();
 	        for (OrdenModel entidad : resultados) {
 	            Object[] fila = { entidad.getId(), entidad.getFechaOrden(), entidad.getSucursalDestino().getNombre(), entidad.getTiempoMaximo(),
 	                    entidad.getEstadoOrden() };
@@ -127,8 +128,10 @@ public class OrdenController {
         }
     }
 	
+	@SuppressWarnings("unchecked")
 	public DefaultTableModel generadorDeTablaProcesos() {
-	    DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "FECHA", "DESTINO", "TIEMPO MAXIMO", "ESTADO" }) {
+	    @SuppressWarnings("serial")
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {}, new String[] { "ID", "FECHA", "DESTINO", "TIEMPO MAXIMO", "ESTADO" }) {
 	        @Override
 	        public boolean isCellEditable(int row, int column) {
 	            return false;
@@ -137,7 +140,8 @@ public class OrdenController {
 	    try {
 	        Session session = sessionFactory.openSession();
 	        session.beginTransaction();
-	        List<OrdenModel> resultados = session.createQuery("FROM OrdenModel d WHERE d.estadoOrden = 'EN PROCESO'").list();
+	        @SuppressWarnings("deprecation")
+			List<OrdenModel> resultados = session.createQuery("FROM OrdenModel d WHERE d.estadoOrden = 'EN PROCESO'").list();
 	        for (OrdenModel entidad : resultados) {
 	            Object[] fila = { entidad.getId(), entidad.getFechaOrden(), entidad.getSucursalDestino().getNombre(), entidad.getTiempoMaximo(),
 	                    entidad.getEstadoOrden() };

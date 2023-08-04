@@ -1,10 +1,7 @@
 package sql.controllers;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,8 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import jakarta.persistence.TypedQuery;
-import sql.models.DetalleOrdenModel;
 import sql.models.ProductoModel;
 import sql.models.StockModel;
 import sql.models.SucursalModel;
@@ -24,6 +19,7 @@ public class StockController {
 	private static final SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml")
 			.addAnnotatedClass(SucursalModel.class).buildSessionFactory();
 
+	@SuppressWarnings("deprecation")
 	public void createStock(ProductoModel producto, SucursalModel sucursal, Integer stock) {
 		try (Session session = sessionFactory.openSession()) {
 			StockModel productoStock = new StockModel(producto, sucursal, stock);
@@ -61,6 +57,7 @@ public class StockController {
 		return modelo;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void deleteStock(int id) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
@@ -74,6 +71,7 @@ public class StockController {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void updateStock(int id, int cantidad) {
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
